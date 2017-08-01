@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Register</title>
+    <style>
+    table, tr, td{
+      border-collapse:collapse;
+
+      border:1px solid black;
+
+    }
+    form{
+      padding:10px;
+    }
+    input, select{
+      margin:1%;
+    }
+    /*#user_reg_first_name{
+      width:172px;
+      font-size:18px;
+      padding: 8px 10px;
+      margin-bottom:5px;
+    }
+    #user_reg_last_name{
+      width:172px;
+      font-size:18px;
+      padding: 8px 10px;
+      margin-bottom:5px;
+    }
+    #user_reg_email{
+      width:377px;
+      font-size:18px;
+      padding: 8px 10px;
+      margin-bottom:5px;
+    }
+    #user_reg_password{
+      width:377px;
+      font-size:18px;
+      padding: 8px 10px;
+      margin-bottom:5px;
+    }
+    #user_reg_confirm_password{
+      width:377px;
+      font-size:18px;
+      padding: 8px 10px;
+      margin-bottom:5px;
+    }*/
+    </style>
+  </head>
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+      <script>
+        alert('{{message}}');
+      </script>
+      {% endfor %}
+    {% endif %}
+
+    <table>
+      <tr>
+        <td>
+          <form class="user" action="/user_register" method="post">
+            <h1>User Register</h1>
+            {% csrf_token %}
+            <input id="user_reg_first_name" type="text" placeholder="First name" name="user_reg_first_name" required minlength="2">
+            <input id="user_reg_last_name" type="text" placeholder="Last name" name="user_reg_last_name" required minlength="2">
+            <br>
+            <input id="user_reg_email" type="email" placeholder="Email" name="user_reg_email" required minlength="1">
+            <br>
+            <input id="user_reg_password" type="password" placeholder="Password" name="user_reg_password" required minlength="8">
+            <input id="user_reg_confirm_password" type="password" placeholder="Re-enter password" name="user_reg_confirm_password" required minlength="8">
+            <input type="submit" value="Register">
+          </form>
+        </td>
+        <td>
+          <form class="business" action="/business_register" method="post">
+            <h1>Business Register</h1>
+            {% csrf_token %}
+            <input type="text" name="business_reg_name" placeholder="Business Name" required minlength="1">
+            <br>
+            <input type="email" name="business_reg_email" placeholder="Email" required minlength="1">
+            <br>
+            <input type="text" name="business_reg_city" placeholder="City" required minlength="1">
+            <Select name="business_reg_state" required minlength="2">
+              <option value="">State</option>
+              <option value="AL">AL</option>
+              <option value="AK">AK</option>
+              <option value="AZ">AZ</option>
+              <option value="AR">AR</option>
+              <option value="CA">CA</option>
+              <option value="CO">CO</option>
+              <option value="CT">CT</option>
+              <option value="DE">DE</option>
+              <option value="FL">FL</option>
+              <option value="GA">GA</option>
+              <option value="HI">HI</option>
+              <option value="ID">ID</option>
+              <option value="IL">IL</option>
+              <option value="IN">IN</option>
+              <option value="IA">IA</option>
+              <option value="KS">KS</option>
+              <option value="KY">KY</option>
+              <option value="LA">LA</option>
+              <option value="ME">ME</option>
+              <option value="MD">MD</option>
+              <option value="MA">MA</option>
+              <option value="MI">MI</option>
+              <option value="MN">MN</option>
+              <option value="MS">MS</option>
+              <option value="MO">MO</option>
+              <option value="MT">MT</option>
+              <option value="NE">NE</option>
+              <option value="NV">NV</option>
+              <option value="NH">NH</option>
+              <option value="NJ">NJ</option>
+              <option value="NM">NM</option>
+              <option value="NY">NY</option>
+              <option value="NC">NC</option>
+              <option value="ND">ND</option>
+              <option value="OH">OH</option>
+              <option value="OK">OK</option>
+              <option value="OR">OR</option>
+              <option value="PA">PA</option>
+              <option value="RI">RI</option>
+              <option value="SC">SC</option>
+              <option value="SD">SD</option>
+              <option value="TN">TN</option>
+              <option value="TX">TX</option>
+              <option value="UT">UT</option>
+              <option value="VT">VT</option>
+              <option value="VA">VA</option>
+              <option value="WA">WA</option>
+              <option value="WV">WV</option>
+              <option value="WI">WI</option>
+              <option value="WY">WY</option>
+            </select>
+            <br>
+            <input type="password" name="business_reg_password" placeholder="Password" required minlength="8">
+            <input type="password" name="business_reg_confirm_password" placeholder="Re-enter password" required minlength="8">
+            <input type="submit" value="Register">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form class="user" action="/user_login" method="post">
+            <h1>User Login</h1>
+            {% csrf_token %}
+            <input type="text" name="user_login_email" placeholder="Email">
+            <input type="password" name="user_login_password" placeholder="Password">
+            <input type="submit" value="Login">
+          </form>
+        </td>
+        <td>
+          <form class="business" action="/business_login" method="post">
+            <h1>Business Login</h1>
+            {% csrf_token %}
+            <input type="text" name="business_login_email" placeholder="Email">
+            <input type="password" name="business_login_password" placeholder="Password">
+            <input type="submit" value="Login">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="navbar">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#1a1a1a; color:#e4e4e4;">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+              <li><a href="/logout" style="color:skyblue;">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1>{{this_meetup.eventname}}</h1>
+    <h2>{{this_meetup.user.first_name}}</h2>
+  </body>
+</html>

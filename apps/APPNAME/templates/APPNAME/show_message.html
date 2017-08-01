@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{this_message.title}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/navbar.css">
+  </head>
+  <body>
+    <div class="navbar">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+              <li><a href="/logout" style="color:skyblue;">Logout</a></li>
+              <li><div class="dropdown">
+                    <img class="dropbtn" src="../../static/images/portrait.png" alt="">
+                    <div class="dropdown-content">
+                      <a href="#">Account Overview</a>
+                      <a href="#">My Deals</a>
+                      <a href="#">Settings</a>
+                      <a href="#">Log Out</a>
+                    </div>
+                  </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="wrapper" style="margin-left:1%;">
+      <div class="message_wrapper" style="background-color:#dedede; display:table; min-width:50%;">
+        <div class="message_header" style="background-color:#dedede; display:block; margin:auto;">
+          <a id="like_button" href="/messageboard/{{this_message.id}}/like_process"><button>Like</button></a>
+          <a id="unlike_button" href="/messageboard/{{this_message.id}}/unlike_process"><button>Unlike</button></a>
+          <a id="bookmark_button" href="/messageboard/{{this_message.id}}/bookmark_process"><button>Bookmark</button></a>
+          <a id="unbookmark_button" href="/messageboard/{{this_message.id}}/unbookmark_process"><button>Remove Bookmark</button></a>
+          <script>
+            var my_like=0;
+            var my_bookmark=0;
+            like_button = document.getElementById('like_button')
+            unlike_button = document.getElementById('unlike_button')
+            bookmark_button = document.getElementById('bookmark_button')
+            unbookmark_button = document.getElementById('unbookmark_button')
+          </script>
+          {% for like in this_message.messageboard_message_likes.all %}
+            {% if like.user.id == request.session.user_id %}
+              <script>
+                my_like++;
+                like_button.innerHTML='';
+              </script>
+            {% endif %}
+          {% endfor %}
+          <script>
+            if(my_like==0){
+              unlike_button.innerHTML='';
+            }
+          </script>
+          {% for bookmark in this_message.messageboard_message_bookmarks.all %}
+            {% if bookmark.user.id == request.session.user_id %}
+              <script>
+                my_bookmark++;
+                bookmark_button.innerHTML='';
+              </script>
+            {% endif %}
+          {% endfor %}
+          <script>
+            if(my_bookmark==0){
+              unbookmark_button.innerHTML='';
+            }
+          </script>
+
+
+
+          <a href="/messageboard/{{this_message.id}}" style="font-size:2em;text-decoration-line:none;display:table;">{{this_message.title}}</a>
+          <p>submitted on {{this_message.created_at}} by <a href="/users/{{this_message.user.id}}">{{this_message.user.first_name}} {{this_message.user.last_name}}</a></p>
+        </div>
+        {% if this_message.image %}
+          <img src="{{this_message.image.url}}" style="margin-top:10px; height:300px; width:300px;">
+        {% endif %}
+        <h4>{{this_message.message}}</h4>
+      </div>
+
+      <form action="/messageboard/{{this_message.id}}/comment/process" method="post" style="margin-bottom:10px;">
+        {% csrf_token %}
+        <textarea name="comment" placeholder="Comment" rows="3" cols="60"></textarea>
+        <input type="submit" value="Comment">
+      </form>
+
+      {% for comment in this_message.messageboard_comments.all %}
+        <div style="background-color:yellow; display:table; width:500px; margin-bottom:5px; margin-left:5px; padding-bottom:10px; border:1px solid black;">
+          <div style="margin-left:5px; margin-top:5px;">
+            <p>{{comment.comment}}</p>
+            {% if comment.user.image %}
+              <img src="{{comment.user.image.url}}" style="width:30px; height:30px;">
+            {% else %}
+              <img src="../../static/images/blankpic.jpg" style="height:30px; width:30px;">
+            {% endif %}
+            <a href="/users/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a> - {{comment.created_at}}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+
+  </body>
+</html>

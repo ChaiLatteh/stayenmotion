@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <title>Pick Business page</title>
+    <link rel="stylesheet" href="../../static/css/pickbusiness.css">
+  </head>
+  <body>
+    <div class="top_image">
+      <div class="navbar" style="background-color:#1a1a1a; border:none;">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#1a1a1a; color:#e4e4e4;">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+                <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+                <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+                <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+                <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <li><a href="/logout" style="color:skyblue;">Logout</a></li>
+                <li><div class="dropdown">
+                      <img class="dropbtn" src="../../static/images/portrait.png" alt="">
+                      <div class="dropdown-content">
+                        <a href="#">Account Overview</a>
+                        <a href="#">My Deals</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Log Out</a>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="meetupsback">
+        <div class="container dealsconainter">
+          <h3 class="dealheader" >Businesses</h3>
+          <div class="row">
+            {% for business in thedata.businesses %}
+
+            <div class="col-md-3 thedeal" style="padding:0px;">
+              <div class="imageicon">
+                  <img class="image" src="{{business.image_url}}" alt="">
+                  </div>
+                  <div class="overlay">
+                    <h1 class="">{{ business.name }}</h1>
+                    <form class="overlaybutton" action='/form' method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="name" value="{{business.name}}">
+                      <input type="hidden" name="address1" value="{{business.location.address1}}">
+                      <input type="hidden" name="city" value="{{business.location.city}}">
+                      <input type="hidden" name="state" value="{{business.location.state}}">
+                      <input type="hidden" name="image" value="{{business.image_url}}">
+                      <input type="submit" name="" value="{{business.name}}">
+                    </form>
+                  </div>
+                  <h4>{{ business.name }}</h4>
+                  <p class="eventname">{{ business.location.address1 }}</p>
+                  <p class="city"> {{ business.location.city }}</p>
+                  <p class ="eventlocation">{{ business.location.state }}</p>
+                  <p class="description">Description: {{ meetups.0.description }}</p>
+                  <p class="details">Zip Code: {{ business.location.zip_code }}</p>
+                </div>
+
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

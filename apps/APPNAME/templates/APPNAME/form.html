@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <title>Pick Business page</title>
+    <link rel="stylesheet" href="../../static/css/form.css">
+    <meta charset="utf-8">
+    <title>Finish Form</title>
+  </head>
+  <body>
+    <div class="top_image">
+      <div class="navbar" style="background-color:#1a1a1a; border:none;">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#1a1a1a; color:#e4e4e4;">
+          <div class="container" style="display:block; text-align:center;">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+                <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+                <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+                <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+                <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <li><a href="/logout" style="color:skyblue;">Logout</a></li>
+                <li><div class="dropdown">
+                      <img class="dropbtn" src="../../static/images/portrait.png" alt="">
+                      <div class="dropdown-content">
+                        <a href="#">Account Overview</a>
+                        <a href="#">My Deals</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Log Out</a>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="banner_top">
+        <h3 class="pagetitle">Submit a deal</h3>
+        <h5 class="titledesc">Market your business to a wide range of fitness enthusiasts.</h5>
+      </div>
+      <p class="toptext">Do you have a great deal to offer our members?  This is a great way for you to reach many indivduals that value fitness.  Our users love to spread the word on great businesses, add a deal today to to reach our users.</p>
+      <form class="form" action="index.html" method="post">
+
+        <img class="businessimage" src="{{theimage}}" alt="">
+      <div class="container">
+        <div class="row" style="width:100%;">
+          <div class="col-md-2">
+            <div class="form_left bothforms">
+              <label for="name">Name: </label>
+              <br>
+              <input type="text" name="name" value="{{ name }}">
+              <label for="address">Address:</label>
+              <input type="text" name="address" value="{{ address }}"><br>
+              <label for="city">City:</label><br>
+              <input type="text" name="city" value="{{ city }}">
+              <br>
+              <label for="state">State:</label>
+              <input type="text" name="state" value="{{ state }}">
+              <label for="contact_email">Contact Email:</label>
+              <input type="email" name="contact_email" placeholder="Email">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form_right bothforms">
+              <label for="dealtype">Deal Type: </label>
+              <br>
+              <select name="dealtype">
+                <option value="trial">Trial</option>
+                <option value="coupon">Coupon</option>
+                <option value="rebate">Rebate</option>
+                <option value="discount">Descount</option>
+              </select>
+              <br>
+              <label for="start_date">Start date:</label>
+              <br>
+              <input type="date" name="start_date">
+              <br>
+              <label for="end_date">End date:</label>
+              <br>
+              <input type="date" name="end_date">
+              <br>
+              <label for="details">Deal details: </label>
+              <textarea name="description" rows="8" cols="40" placeholder="Deal details"></textarea>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input class="submitbutton" type="submit" name="" value="submit">
+  </form>
+
+  <div class="footer">
+    <div class="conatiner">
+      <div class="row">
+        <div class="col-md-3">
+          <h4 class="footerheader">Company</h5>
+            <a class="linkcont" href="/aboutus">About us</a>
+            <a class="linkcont" href="/careers">Careers</a>
+          </div>
+          <div class="col-md-3">
+            <h4 class="footerheader">Support</h4>
+            <a class="linkcont" href="/contact">Contact</a>
+          </div>
+          <div class="col-md-3">
+            <h4 class="footerheader">Partners</h4>
+            <a  class="linkcont" href="gyms">Gyms</a>
+          </div>
+          <div class="col-md-3">
+            <h4 class="footerheader">Community</h4>
+            <a class="linkcont" href="Blog">Blog</a>
+          </div>
+        </div>
+      </div>
+      <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+      <div class="appstorelink">
+        <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+      </div>
+
+    </div>
+
+  </body>
+</html>

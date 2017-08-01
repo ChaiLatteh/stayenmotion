@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/landing.css">
+    <title></title>
+  </head>
+  <body>
+    <div class="top_image" style="margin-bottom:0;">
+      <div class="navbar" style="background-color:#FFFFFF; border:none;">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#FFFFFF; color:#e4e4e4;">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse" style="background-color: #FFFFFF;">
+              <h3 style="color:#18233E; vertical-align:top; display:inline-block;">GymFinder</h3>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" style="color:#18233E;">Why GymFinder</a></li>
+                <li><a href="/meetups" style="color:#18233E;">Explore</a></li>
+                <li><a href="/messageboard" style="color:#18233E;">How it work</a></li>
+                <li><a href="/social" style="color:#18233E;">Social Mention</a></li>
+                <li><a href="/deals" style="color:#18233E;">Community</a></li>
+                <li><a class="join" href="/"><span class="jointext">Join</span></a></li>
+                <!-- <li><div class="dropdown">
+                      <img class="dropbtn" src="../../static/images/portrait.png" alt="">
+                      <div class="dropdown-content">
+                        <a href="#">Account Overview</a>
+                        <a href="#">My Deals</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Log Out</a>
+                      </div>
+                    </div>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="intro">
+        <A NAME="top"></A>
+        <h3>Fitness under your finger</h3>
+        <p>Finally a resource that allows you to exercise the way you want.  Find a great in home routine from our resource page, or join a group, your fitness is in your hands!</p>
+        <form class="" action="#intro2" method="post">
+          {% csrf_token %}
+          <input class="button" type="submit" name="" value="Learn More">
+        </form>
+      </div>
+
+        <div class="downarrow">
+          <A style="transform: rotate();"href="#intro1"><img style="margin-left:12%;margin-top:30%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+        </div>
+        <A NAME="intro1"></A>
+    </div>
+    <div class="intro2">
+
+      <div class="intro2desc" style="margin-top:0">
+        <h4>Find workout groups near you!</h4>
+        <p>90% of Americans want to be more active, we are here to help!</p>
+      </div>
+      <div class="introimage">
+      </div>
+      <div class="downarrow">
+        <A href="#intro2"><img style="margin-left:12%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+      </div>
+      <A NAME="intro2"></A>
+    </div>
+
+    <div class="whyjoin">
+      <div class="textintro">
+      </div>
+      <div class="messageboardintro">
+        <div class="messintrotext">
+          <h2 class="onestop">Your one stop for all your fitness needs</h4>
+          <div class="jointhecomm">
+            <h4>Join the community and access all the goodies GymFinder can offer you! From meetups to deals on some of the hottest fitness centers, we put the ball in your court.</h1>
+          </div>
+          <div class="downarrow">
+            <A href="#intro3"><img style="margin-left:12%;margin-top:25%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+          </div>
+        </div>
+        <A NAME="intro3"></A>
+        <div class="messboard">
+          <div class="messagetext">
+            <h1>MessageBoard</h1>
+            <h4>Our intuative message board, allows you to find other likeminded people to talk about obsticles and solutions to reach your fitness goals.</h4>
+          </div>
+          <div class="messageimage">
+          </div>
+          <div class="downarrow">
+            <A href="#intro4"><img style="margin-left:12%;margin-top:5%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+          </div>
+        </div>
+      </div>
+      <A NAME="intro4"></A>
+      <div class="deals">
+        <div class="dealstext">
+          <h4>Deals to some of the best Gyms</h4>
+          <h5>Sometimes it is so hard to find the right gym or fitness center.  Use our deals section to try new gyms in your area, and find the one that works for you!</h5>
+        </div>
+        <div class="dealsimg">
+        </div>
+        <div class="downarrow">
+          <A href="#intro4"><img style="margin-left:12%;margin-top:10%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+        </div>
+      </div>
+      <div class="meetups">
+      <div class="meetupstext">
+        <h4>We know everyone exercises differently, so we want you to find the best solutions!</h4>
+        <h5>Our members love getting together for activities to promote healthy living.  Just visit our meetups page and create or particupate in an event near you!</h5>
+      </div>
+      <div class="meetupsimg">
+      </div>
+      <A style="margin-left:46%;position:relative; top:10px; width:30px; height:30px;" href="#top">Back to top</A>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="conatiner">
+      <div class="row">
+        <div class="col-md-3">
+          <h4 class="footerheader">Company</h3>
+          <a class="linkcont"  style="display:block;" href="/aboutus">About us</a>
+          <a class="linkcont" style="display:block;" href="/careers">Careers</a>
+        </div>
+        <div class="col-md-3">
+          <h4 class="footerheader">Support</h3>
+          <a class="linkcont" href="/contact">Contact</a>
+        </div>
+        <div class="col-md-3">
+          <h4 class="footerheader">Partners</h3>
+          <a  class="linkcont" href="gyms">Gyms</a>
+        </div>
+        <div class="col-md-3">
+          <h4 class="footerheader">Community</h3>
+          <a  class="linkcont" href="Blog">Blog</a>
+        </div>
+      </div>
+    </div>
+    <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+    <div class="appstorelink">
+      <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+    </div>
+
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,360 @@
+a{
+  text-decoration: none;
+}
+input{
+  background-color: grey;
+
+}
+.locationpic{
+  height: 100px;
+  width: 100px;
+  display: inline;
+  position: relative;
+  left: 390px;
+  bottom: 230px;
+}
+.topimage{
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+.logregbox{
+  display: inline;
+  position: relative;
+  background-size:auto;
+  background-color: #1c4e51;
+  left: 20%;
+}
+.background{
+  width: 100%;
+  height: 2000px;
+  background-color: #92c749;
+  margin: 0 auto;
+}
+.login{
+  position: relative;
+  top: 710px;
+  background-color: grey;
+  height: 300px;
+}
+.thebottombutt{
+  position: relative;
+  bottom: 580px;
+  left: 870px;
+  color: #962525;
+  font-size: 20px;
+}
+.readpublic{
+  position: relative;
+  bottom: 580px;
+  left: 880px;
+  color: #962525;
+  font-size: 20px;
+}
+
+
+.register{
+position: fixed;
+/*bottom: 300px;
+left: 300px;*/
+left: 65%;
+top: 25%;
+}
+.steps{
+  width: 250px;
+  height: 200px;
+}
+.howitworks{
+  margin-left: 50px;
+  position: relative;
+  bottom: 50px;
+}
+.howitworkstitle{
+  margin-left: 400px;
+  margin-bottom: 150px;
+}
+.nameinput{
+  color: #a9dddd;
+}
+.aliasinput{
+  color: #a9dddd;
+}
+.emailinput{
+  color: #a9dddd;
+}
+.passwordinput{
+  color: #a9dddd;
+}
+.confirminput{
+  color: #a9dddd;
+}
+.dobinput{
+  color: #a9dddd;
+}
+.registerheader{
+  color: #a9dddd;
+}
+.title{
+  position: relative;
+  left: 100px;
+  bottom: 400px;
+  font-size: 50px;
+  color: #a9dddd;
+}
+.loginbutton{
+  color: white;
+}
+.instagram-media{
+  width: 100px;
+  height: 150px;
+}
+.backgroundimg img{
+  height:100%;
+  width:100%;
+  position: fixed;
+  *{
+    margin:auto;
+  }
+}
+.parallax{
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.thesecs{
+  height: 300px;
+}
+.meetupcontains{
+  margin-top: 8%;
+  margin-right: 3%;
+  /*background-color: blue;*/
+  opacity: 0.9;
+  padding-top: 0;
+  margin-top: 0;
+  width: 100%;
+  height:600px;
+  background-color: white;
+
+}
+.meetupsub{
+
+}
+.imageicon{
+  text-align: center;
+  border-radius:50%;
+  margin-top: 10%;
+}
+.booger{
+  margin: 10px;
+}
+.eventname{
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.eventlocation{
+  text-align: center;
+}
+.description{
+  text-align: center;
+}
+.details{
+  text-align: center;
+  margin: 10px;
+}
+.button{
+  text-align: center;
+}
+.thesecs{
+  background-color: #e0e2e1;
+  opacity:0.7;
+  margin:10px;
+  margin-left:70px;
+  border-radius:2%;
+}
+.thesecs:hover {
+  background-color: #e0e2e1;
+  opacity:0.7;
+  margin:10px;
+  margin-left:70px;
+
+
+}
+.meetupheader{
+  text-align: center;
+  /*display: inline-block;*/
+  color: black;
+}
+.meetupsback{
+  background-color: white;
+}
+.meetupsub{
+  background-color: black;
+}
+.meetupcontent{
+  text-align: center;
+  margin-left: 2%;
+}
+.top_image{
+background: url("../images/workoutpic1.jpg") fixed 100%;
+-o-background-size: cover;
+position:relative;
+width: 100%;
+height:750px;
+/*bottom: 20px;*/
+}
+.allmeetupslink{
+  text-align: right;
+  display:block;
+}
+
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:grey;
+  transition: .5s;
+  opacity: 0;
+}
+.overlay:hover{
+  opacity: 0.9
+}
+.detailsbutt{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+}
+.dropdown{
+  opacity: 1
+}
+.dropdown:hover{
+  opacity: 1;
+}
+.dropbtn {
+    /*background-color: #4CAF50;*/
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    width:60px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+.dropdown-content:hover a{
+  background-color: white;
+  opacity: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  opacity: 1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.thenav{
+  background-color:#1a1a1a;
+  border:none;
+  color:#e4e4e4;
+  opacity: .9;
+}
+.navlinks{
+  color:#e4e4e4;
+}
+.navlinks:hover{
+  color: teal;
+}
+.navbar-default .navbar-nav>li>a {
+  color:#e4e4e4;
+}
+
+.detailscont{
+  color: white;
+}
+
+.message{
+  background-color: teal;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.messbackground{
+  background: url("../images/workoutpic2.jpg")fixed 100%
+}
+.messarea{
+  width: 60%;
+
+  opacity: 0.9;
+  margin-left: 20%;
+  text-align: center;
+}
+.boardtitle{
+  margin:0;
+}
+.footer{
+  height: 300px;
+  background-color: #151E35;
+}
+.row{
+  margin-left: 7%;
+
+}
+.footerheader{
+  color: white;
+  margin-top: 10%;
+}
+.linkcont{
+  color: #A3A7B2;
+  display:table;
+}
+.appstorehead{
+  color: white;
+}
+.appstore{
+  width: 100px;
+  height: 45px;
+  margin-left: 8%
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>WELCOME</title>
+    <link rel="stylesheet" href="../../static/css/home.css">
+  </head>
+  <body>
+    <div class="top_image">
+      <div class="navbar">
+        <nav class="navbar navbar-default navbar-fixed-top thenav">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              {% if request.session.user_id %}
+                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{this_user.first_name}}</a>!</h3>
+              {% elif request.session.business_id %}
+                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/business/{{request.session.business_id}}" style="color:darkblue;">{{this_business.name}}</a>!</h3>
+              {% endif %}
+              <ul class="nav navbar-nav navbar-right">
+                <li><a class="navlinks" href="/">Home</a></li>
+                <li><a class="navlinks" href="/meetups">Meetups</a></li>
+                <li><a class="navlinks" href="/messageboard">Message Board</a></li>
+                <li><a class="navlinks" href="/social">Social</a></li>
+                <li><a class="navlinks" href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <li>
+                  <div class="dropdown">
+                    {% if request.session.user_id %}
+                      {% if this_user.image %}
+                        <img class="dropbtn" src="{{this_user.image.url}}" alt="">
+                      {% else %}
+                        <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                      {% endif %}
+                    {% elif request.session.business_id %}
+                      {% if this_business.image %}
+                        <img class="dropbtn" src="{{this_business.image.url}}" alt="">
+                      {% else %}
+                        <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                      {% endif %}
+                    {% endif %}
+                    <div class="dropdown-content">
+                      <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                      <a href="#">My Deals</a>
+                      <a href="#">Settings</a>
+                      <a href="/logout">Log Out</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <h1 style="font-weight:bold; font-size:140px; color:white; text-align:center; margin-top:50px;">YOUR ONLY LIMIT IS YOU</h1>
+    </div>
+   <!-- <div id="image">
+     <div>
+     </div>
+   </div>
+  <script>
+    var images = ["<img src='../../static/images/gym0.jpg'>", "<img src='../../static/images/gym1.jpg'>", "<img src='../../static/images/gym2.jpg'>", "<img src='../../static/images/gym3.jpg'>", "<img src='../../static/images/gym4.jpg'>"];
+    el = document.getElementById('image');
+    image_counter = 0;
+    function updateImage(){
+      el.innerHTML = images[image_counter++];
+      if(image_counter == images.length){
+        image_counter = 0;
+      }
+    }
+    updateImage();
+    setInterval(updateImage, 5000);
+  </script> -->
+    <div class="meetupsback">
+      <div class="container meetupcontains">
+        <h3 class="meetupheader" >Meetups</h3>
+        <a class="allmeetupslink" href="/meetups">View all Meetups</a>
+        <div class="row meetupsub">
+          <div class="meetupcontent">
+
+              <div class="col-md-3 thesecs">
+                <div class="imageicon">
+                  <img src="../../static/images/wierdladyportrait.png" alt="">
+                </div>
+                <div class="overlay">
+                  <h1 class="deatilscont">Details</h1>
+                  <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
+                </div>
+                <h4 class="eventname">{{meetups.0.eventname}}</h4>
+                <p class ="eventlocation">Location: {{ meetups.0.location }}</p>
+                <p class="description">Description: {{ meetups.0.description }}</p>
+                <p class="details">Details: {{ meetup.0.details }}</p>
+              </div>
+
+            <div class="col-md-3 thesecs">
+              <div class="overlay">
+                <h1>Details</h1>
+                <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
+              </div>
+              <h4 class="eventname">{{meetups.1.eventname}}</h4>
+              <p class ="eventlocation">Location: {{ meetups.1.location }}</p>
+              <p class="description">Description: {{ meetups.1.description }}</p>
+              <p class="details">Details: {{ meetup.1.details }}</p>
+            </div>
+
+              <div class="col-md-3 thesecs">
+                <div class="overlay">
+                  <h1>Details</h1>
+                  <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
+                </div>
+                <h4 class="eventname">{{meetups.2.eventname}}</h4>
+                <p class ="eventlocation">Location: {{ meetups.2.location }}</p>
+                <p class="description">Description: {{ meetups.2.description }}</p>
+                <p class="details">Details: {{ meetup.2.details }}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main_messageboard">
+      <script>
+       var message_index=0;
+       var my_like=0;
+       like = document.getElementsByClassName('like_button');
+       unlike = document.getElementsByClassName('unlike_button');
+      </script>
+
+      <div class="messbackground">
+
+        <div class="messarea">
+          <h3 class="boardtitle">Message Board</h3>
+          {% for message in messages_list %}
+           <div class="message">
+             <p>User:<a class="name" href="/users/{{message.user.id}}" style="font-size:18px;">{{message.user.first_name}} {{message.user.last_name}}</a> On:{{message.created_at}}</p>
+             <h4>Message: {{message.message}}</h4>
+             <p style="display:inline-table; margin-right:20px;">{{message.messageboard_message_likes.count}} Likes</p>
+
+             <a class="like_button" style="display:inline-table;" href="/home/message/{{message.id}}/like">Like</a>
+             <a class="unlike_button" style="display:inline-table;" href="/home/message/{{message.id}}/unlike">Unlike</a>
+
+             {% for like in message.messageboard_message_likes.all %}
+               {% if like.user == this_user %}
+                 <script>
+                   my_like++;
+                   like[message_index].innerHTML='';
+                 </script>
+               {% endif %}
+             {% endfor %}
+             <script>
+               if(my_like==0){
+                 unlike[message_index].innerHTML='';
+               }
+             </script>
+        </div>
+         {% endfor %}
+     </div>
+   </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-md-4">
+
+       </div>
+
+     </div>
+
+   </div>
+
+   <div class="footer">
+     <div class="conatiner">
+       <div class="row">
+         <div class="col-md-3">
+           <h4 class="footerheader">Company</h5>
+             <a class="linkcont" href="/aboutus">About us</a>
+             <a class="linkcont" href="/careers">Careers</a>
+           </div>
+           <div class="col-md-3">
+             <h4 class="footerheader">Support</h4>
+             <a class="linkcont" href="/contact">Contact</a>
+           </div>
+           <div class="col-md-3">
+             <h4 class="footerheader">Partners</h4>
+             <a  class="linkcont" href="gyms">Gyms</a>
+           </div>
+           <div class="col-md-3">
+             <h4 class="footerheader">Community</h4>
+             <a class="linkcont" href="Blog">Blog</a>
+           </div>
+         </div>
+       </div>
+       <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+       <div class="appstorelink">
+         <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+       </div>
+
+     </div>
+
+
+  </body>
+</html>

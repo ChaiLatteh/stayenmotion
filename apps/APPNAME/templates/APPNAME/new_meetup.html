@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/navbar.css">
+    <meta charset="utf-8">
+    <title>Create Meetups</title>
+    <style>
+      label{
+        display:table;
+        font-weight:normal;
+      }
+    </style>
+  </head>
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+        <p style="color:red;">{{message}}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div class="navbar">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{request.session.first_name}}</a>!</h3>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+              <li>
+                <div class="dropdown">
+                  {% if this_user.image %}
+                    <img class="dropbtn" src="{{this_user.image.url}}" alt="">
+                  {% else %}
+                    <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                  {% endif %}
+                  <div class="dropdown-content">
+                    <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                    <a href="#">My Deals</a>
+                    <a href="#">Settings</a>
+                    <a href="/logout">Log Out</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <h4>Create New Meetup</h4>
+    <form action="/meetups/new/process" method="post">
+      {% csrf_token %}
+      <label>Event Name: <input type="text" name="eventname" required minlength="3"></label>
+      <label>Location: <input type="text" name="location" required minlength="1"></label>
+      <label>Description: <input type="text" name="description" required minlength="1"></label>
+      <label>Date: <input type="date" name="date" required minlength="1"></label>
+      <label>Details: <textarea name="details" placeholder="Details" rows="4" cols="60" required minlength="1"></textarea></label>
+      <input type="submit" value="Submit">
+    </form>
+
+  </body>
+</html>

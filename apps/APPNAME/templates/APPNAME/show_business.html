@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{a_business.name}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/messageboard.css">
+  </head>
+  <body>
+    <div class="navbar">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:darkblue;">{{request.session.name}}</a>!</h3>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
+              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
+              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
+              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
+              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+              <li>
+                <div class="dropdown">
+                  {% if this_business.image %}
+                    <img class="dropbtn" src="{{this_business.image.url}}" alt="">
+                  {% else %}
+                    <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                  {% endif %}
+                  <div class="dropdown-content">
+                    <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
+                    <a href="#">My Deals</a>
+                    <a href="#">Settings</a>
+                    <a href="/logout">Log Out</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+
+    <div class="wrapper">
+      {% if a_business.id == request.session.business_id %}
+        <div>
+          <a style="display:inline-table;" href="/uploadpicture"><button>Upload Profile Picture</button></a>
+          <a style="display:inline-table;" href="/removepicture"><button>Remove Profile Picture</button></a>
+        </div>
+      {% endif %}
+      {% if a_business.image %}
+        <img src="{{a_business.image.url}}" style="height:75px; width:75px; border-radius:25%;">
+      {% else %}
+        <img src="../../static/images/blankpic.jpg" style="height:75px; width:75px;border-radius:25%">
+      {% endif %}
+      <h1 style="display:inline-table;">{{a_business.name}}</h1>
+      <!-- <h3>Total Messages: {{a_business.messageboard_messages.count}}</h3>
+      <h3>Total Comments: {{a_business.messageboard_comments.count}}</h3> -->
+
+    </div>
+  </body>
+</html>
