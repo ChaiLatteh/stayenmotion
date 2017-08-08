@@ -55,6 +55,8 @@
         <div>
           <a style="display:inline-table;" href="/uploadpicture"><button>Upload Profile Picture</button></a>
           <a style="display:inline-table;" href="/removepicture"><button>Remove Profile Picture</button></a>
+          <a href="/updateprofile"><button>Update Business Information</button></a>
+          <a href="/changepassword"><button>Change Password</button></a>
         </div>
       {% endif %}
       {% if a_business.image %}
@@ -63,9 +65,13 @@
         <img src="../../static/images/blankpic.jpg" style="height:75px; width:75px;border-radius:25%">
       {% endif %}
       <h1 style="display:inline-table;">{{a_business.name}}</h1>
-      <!-- <h3>Total Messages: {{a_business.messageboard_messages.count}}</h3>
-      <h3>Total Comments: {{a_business.messageboard_comments.count}}</h3> -->
 
+      <h1>Business Name:</h1>
+      <h1>{{a_business.name}}</h1>
+      <br>
+      <h1>Address:</h1>
+      <h1>{{a_business.address}}</h1>
+      <h1>{{a_business.city}}, {{a_business.state}} {{a_business.zipcode}}</h1>
     </div>
   </body>
 </html>

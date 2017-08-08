@@ -54,7 +54,9 @@
       </nav>
     </div>
 
-    <a href="/messageboard/new"><button>New Message</button></a>
+    {% if request.session.user_id %}
+      <a href="/messageboard/new"><button>New Message</button></a>
+    {% endif %}
     <div class="pagetop" style="text-align:center;">
       <h1 class="pagetitle">The Message Board</h1>
     </div>
