@@ -16,11 +16,17 @@ urlpatterns = [
     url(r'^landing$',views.landing),
 
     url(r'^users/(?P<user_id>\d+)$', views.show_user),
+
+    url(r'^businesses/(?P<business_id>\d+)$', views.show_business),
+
     url(r'^uploadpicture$', views.upload_picture),
     url(r'^update$', views.upload_picture_process),
     url(r'^removepicture$', views.remove_picture_process),
+    url(r'^updateprofile$', views.updateprofile),
+    url(r'^updateprofile/process$', views.updateprofile_process),
+    url(r'^changepassword$', views.changepassword),
+    url(r'^changepassword/process$', views.changepassword_process),
 
-    url(r'^businesses/(?P<business_id>\d+)$', views.show_business),
 
     url(r'^meetups$', views.meetups),
     url(r'^meetups/new$', views.new_meetup),
@@ -43,6 +49,12 @@ urlpatterns = [
     url(r'^messageboard/(?P<message_id>\d+)/comment/process$', views.new_comment_process),
     url(r'^messageboard/(?P<message_id>\d+)/bookmark_process$', views.bookmark_message_process),
     url(r'^messageboard/(?P<message_id>\d+)/unbookmark_process$', views.unbookmark_message_process),
+
+    url(r'^aboutus$', views.aboutus),
+    url(r'^contact$', views.contact),
+    url(r'^gyms$', views.gyms),
+    url(r'^careers$', views.careers),
+
 
     url(r'^logout$', views.logout),
 

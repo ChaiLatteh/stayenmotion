@@ -12,17 +12,25 @@ from yelp.oauth1_authenticator import Oauth1Authenticator
 def index(request):
     meetups_list=[]
     messages_list=[]
+
     for message in Messageboard_Message.objects.all().order_by('-created_at'):
         messages_list.append(message)
     for meetup in Meetup.objects.all():
         meetups_list.append(meetup)
 
+
+
     if 'user_id' in request.session:
         this_user = User.objects.get(id=request.session['user_id'])
+        liked_messages_list=[]
+        for like in Messageboard_Message_Like.objects.filter(user=this_user).order_by('-created_at'):
+            liked_messages_list.append(Messageboard_Message.objects.get(id=like.messageboard_message.id))
+        liked_messages_list=liked_messages_list[:3]
         data={
         "this_user":this_user,
         "messages_list":messages_list,
         "meetups_list":meetups_list,
+        "liked_messages_list":liked_messages_list,
         }
         return render(request, 'APPNAME/home.html', data)
 
@@ -81,8 +89,10 @@ def user_login(request):
 def business_register(request):
     data = {
     'name':request.POST['business_reg_name'],
+    'address':request.POST['business_reg_address'],
     'city':request.POST['business_reg_city'],
     'state':request.POST['business_reg_state'],
+    'zipcode':request.POST['business_reg_zipcode'],
     'email':request.POST['business_reg_email'],
     'password':request.POST['business_reg_password'],
     'confirm_password':request.POST['business_reg_confirm_password'],
@@ -155,36 +165,171 @@ def upload_picture(request):
     return render(request, 'APPNAME/upload_picture.html', data)
 
 def upload_picture_process(request):
-    this_user = User.objects.get(id=request.session['user_id'])
-    if request.POST:
-        form = UploadFileForm(request.POST, request.FILES, instance=this_user)
-        if form.is_valid():
-            this_user = form.save(commit=False)
-            this_user.save()
-            print this_user.image
-        else:
-            form = UploadFileForm()
-    return redirect('/users/'+str(this_user.id))
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        if request.POST:
+            form = UploadFileForm(request.POST, request.FILES, instance=this_user)
+            if form.is_valid():
+                this_user = form.save(commit=False)
+                this_user.save()
+            else:
+                form = UploadFileForm()
+        return redirect('/users/'+str(this_user.id))
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        if request.POST:
+            form = UploadFileForm(request.POST, request.FILES, instance=this_business)
+            if form.is_valid():
+                this_business = form.save(commit=False)
+                this_business.save()
+            else:
+                form = UploadFileForm()
+        return redirect('/businesses/'+str(this_business.id))
+
+    else:
+        return redirect('/')
 
 def remove_picture_process(request):
-    this_user = User.objects.get(id=request.session['user_id'])
-    this_user.image=""
-    this_user.save()
-    return redirect('/users/'+str(this_user.id))
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        this_user.image=""
+        this_user.save()
+        return redirect('/users/'+str(this_user.id))
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        this_business.image=""
+        this_business.save()
+        return redirect('/businesses/'+str(this_business.id))
+
+    else:
+        return redirect('/')
+
+def updateprofile(request):
+    if 'user_id' in request.session:
+        data={
+        'this_user':User.objects.get(id=request.session['user_id']),
+        }
+        return render(request, 'APPNAME/updateprofile.html', data)
+
+    elif 'business_id' in request.session:
+        data={
+        'this_business':Business.objects.get(id=request.session['business_id']),
+        }
+        return render(request, 'APPNAME/updateprofile.html', data)
+
+    else:
+        return redirect('/')
+
+def updateprofile_process(request):
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        # if form is valid
+        if request.POST['user_first_name']!="" and request.POST['user_last_name']!="":
+            this_user.first_name=request.POST['user_first_name']
+            this_user.last_name=request.POST['user_last_name']
+            this_user.save()
+            return redirect('/users/'+str(request.session['user_id']))
+        # if form is NOT valid
+        else:
+            messages.add_message(request, messages.ERROR, "ERROR")
+            return redirect('/updateprofile')
+
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        if request.POST['business_name']!="" and request.POST['business_address']!="" and request.POST['business_city']!="" and len(request.POST['business_state'])==2 and len(request.POST['business_zipcode'])==5:
+            this_business.name=request.POST['business_name']
+            this_business.address=request.POST['business_address']
+            this_business.city=request.POST['business_city']
+            this_business.state=request.POST['business_state']
+            this_business.zipcode=request.POST['business_zipcode']
+            this_business.save()
+            return redirect('/businesses/'+str(request.session['business_id']))
+        else:
+            messages.add_message(request, messages.ERROR, "ERROR")
+            return redirect('/updateprofile')
+
+    else:
+        return redirect('/')
+
+def changepassword(request):
+    return render(request, 'APPNAME/changepassword.html')
+
+def changepassword_process(request):
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        data = {
+        'this_user':this_user,
+        'current_password':request.POST['current_password'],
+        'new_password':request.POST['new_password'],
+        'confirm_password':request.POST['confirm_password'],
+        }
+        user = User.objects.changepassword(data)
+        if user['errors_list']:
+            for error in user['errors_list']:
+                messages.add_message(request, messages.ERROR, error)
+            return redirect('/changepassword')
+        else:
+            messages.add_message(request,messages.ERROR, "Successfully changed password!")
+            return redirect('/users/'+str(request.session['user_id']))
+
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        data = {
+        'this_business':this_business,
+        'current_password':request.POST['current_password'],
+        'new_password':request.POST['new_password'],
+        'confirm_password':request.POST['confirm_password'],
+        }
+        business = Business.objects.changepassword(data)
+        if business['errors_list']:
+            for error in business['errors_list']:
+                messages.add_message(request, messages.ERROR, error)
+            return redirect('/changepassword')
+        else:
+            messages.add_message(request,messages.ERROR, "Successfully changed password!")
+            return redirect('/businesses/'+str(request.session['business_id']))
+    else:
+        return redirect('/')
+
+
+    # elif 'business_id' in request.session:
+    #     this_business=Business.objects.get(id=request.session['business_id'])
+    #     if this_business.password == bcrypt.hashpw(request.POST['current_password'].encode('utf-8')):
+    #         if request.POST['new_password'] == request.POST['confirm_password']:
+    #             this_business.password = bcrypt.hashpw(request.POST['new_password'].encode('utf-8'))
+    #             this_business.save()
+    #             return redirect('/businesses/'+str(request.session['business_id']))
+    #         else:
+    #             message.add_message(request, messages.ERROR, "New password and confirm password do not match.")
+    #             return redirect('/changepassword')
+    #     else:
+    #         message.add_message(request, messages.ERROR, "Your input and current password do not match.")
+    #         return redirect('/changepassword')
+
 
 def messageboard(request):
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     messages_list=[]
     for message in Messageboard_Message.objects.all().order_by('-created_at'):
         messages_list.append(message)
-    data={
-    "this_user":this_user,
-    "messages_list":messages_list,
-    }
-    return render(request, 'APPNAME/messageboard.html', data)
+
+    if 'user_id' in request.session:
+        data={
+        "this_user":User.objects.get(id=request.session['user_id']),
+        "messages_list":messages_list,
+        }
+        return render(request, 'APPNAME/messageboard.html', data)
+
+    elif 'business_id' in request.session:
+        data={
+        "this_business":Business.objects.get(id=request.session['business_id']),
+        "messages_list":messages_list,
+        }
+        return render(request, 'APPNAME/messageboard.html', data)
+    else:
+        return redirect('/')
 
 def new_message(request):
     if 'user_id' not in request.session:
@@ -294,19 +439,25 @@ def unbookmark_message_process(request, message_id):
 
 
 def meetups(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     meetups_list=[]
     for meetup in Meetup.objects.all():
         meetups_list.append(meetup)
 
-    data={
-    "this_user":this_user,
-    "meetups_list":meetups_list,
-    }
-    return render(request, 'APPNAME/meetups.html', data)
+    if 'user_id' in request.session:
+        data={
+        "this_user":User.objects.get(id=request.session['user_id']),
+        "meetups_list":meetups_list,
+        }
+        return render(request, 'APPNAME/meetups.html', data)
+    elif 'business_id' in request.session:
+        data={
+        "this_business":Business.objects.get(id=request.session['business_id']),
+        "meetups_list":meetups_list,
+        }
+        return render(request, 'APPNAME/meetups.html', data)
+    else:
+        return redirect('/')
+
 
 def new_meetup(request):
     if 'user_id' not in request.session:
@@ -430,6 +581,20 @@ def pickbusiness(request):
     }
     return render(request, 'APPNAME/pickbusiness.html', data)
 
+def aboutus(request):
+    return render(request, 'APPNAME/aboutus.html')
+
+def contact(request):
+    return render(request, 'APPNAME/contact.html')
+
+def gyms(request):
+    return render(request, 'APPNAME/gyms.html')
+
+def careers(request):
+    return render(request, 'APPNAME/careers.html')
+
+
+
 
 def logout(request):
     request.session.clear()
@@ -453,8 +618,8 @@ def form(request):
 #     messages_list=[]
 #     comments_list=[]
 #     likes_list=[]
-#     for message in Messageboard_Message.objects.all().order_by('-created_at'):
-#         messages_list.append(message)
+    # for message in Messageboard_Message.objects.all().order_by('-created_at'):
+    #     messages_list.append(message)
 #     for comment in Messageboard_Comment.objects.all():
 #         comments_list.append(comment)
 #     for like in Messageboard_Message_Like.objects.all():

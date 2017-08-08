@@ -61,7 +61,10 @@
         <input placeholder="search..." name="search_box" type="text" required minlength="1">
         <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
       </form>
-      <button><a href="/meetups/new">Create Meetup</a></button>
+
+      {% if request.session.user_id %}
+        <button><a href="/meetups/new">Create Meetup</a></button>
+      {% endif %}
       <!-- <a onClick="javascript:history.go(-1);" href="#">Previous Page</a> -->
     </div>
 

@@ -79,7 +79,7 @@
             {% csrf_token %}
             <input type="text" name="business_reg_name" placeholder="Business Name" required minlength="1">
             <br>
-            <input type="email" name="business_reg_email" placeholder="Email" required minlength="1">
+            <input type="text" name="business_reg_address" placeholder="Address" required minlength="1">
             <br>
             <input type="text" name="business_reg_city" placeholder="City" required minlength="1">
             <Select name="business_reg_state" required minlength="2">
@@ -135,6 +135,9 @@
               <option value="WI">WI</option>
               <option value="WY">WY</option>
             </select>
+            <input type="text" name="business_reg_zipcode" placeholder="Zip Code">
+            <br>
+            <input type="email" name="business_reg_email" placeholder="Email" required minlength="1">
             <br>
             <input type="password" name="business_reg_password" placeholder="Password" required minlength="8">
             <input type="password" name="business_reg_confirm_password" placeholder="Re-enter password" required minlength="8">
