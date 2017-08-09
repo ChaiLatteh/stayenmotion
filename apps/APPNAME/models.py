@@ -20,8 +20,7 @@ class UserManager(models.Manager):
         if data['email']=="":
             errors.append("Email address may not be blank.")
         try:
-            User.objects.get(email=data['email'])
-            Business.objects.get(email=data['email'])
+            User.objects.get(email=data['email']) or Business.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
         except:
             pass
@@ -65,20 +64,46 @@ class UserManager(models.Manager):
             'errors_list':None,
             }
 
+    def changepassword(self, data):
+        errors = []
+        this_user = data['this_user']
+        if bcrypt.hashpw(data['current_password'].encode('utf-8'), this_user.password.encode('utf-8')) != this_user.password.encode('utf-8'):
+            errors.append("Current password and input do not match.")
+        if data['new_password']!=data['confirm_password']:
+            errors.append("New password and confirm password do not match")
+        if len(data['new_password'])<8:
+            errors.append("New password must be 8 characters or longer.")
+
+        if len(errors)>0:
+            return{
+            'user':None,
+            'errors_list':errors,
+            }
+        else:
+            this_user.password = bcrypt.hashpw(data['new_password'].encode('utf-8'), bcrypt.gensalt())
+            this_user.save()
+            return{
+            'user':this_user,
+            'errors_list':None,
+            }
+
 class BusinessManager(models.Manager):
     def register(self, data):
         errors = []
         if data['name']=="":
             errors.append("Business name may not be blank.")
+        if data['address']=="":
+            errors.append("Address may not be blank.")
         if data['city']=="":
             errors.append("City may not be blank.")
         if data['state']=="":
             errors.append("State may not be blank.")
+        if data['zipcode']=="":
+            errors.append("Zip code may not be blank.")
         if data['email']=="":
             errors.append("Email address may not be blank.")
         try:
-            User.objects.get(email=data['email'])
-            Business.objects.get(email=data['email'])
+            User.objects.get(email=data['email']) or Business.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
         except:
             pass
@@ -96,7 +121,7 @@ class BusinessManager(models.Manager):
             }
         else:
             data['password']=bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
-            new_business=Business.objects.create(name=data['name'], city=data["city"], state=data['state'], email=data['email'], password=data['password'])
+            new_business=Business.objects.create(name=data['name'], address=data['address'], city=data['city'], state=data['state'], zipcode=data['zipcode'], email=data['email'], password=data['password'])
             return{
             'new':new_business,
             'errors_list':None,
@@ -119,6 +144,28 @@ class BusinessManager(models.Manager):
         else:
             return{
             'logged_business':found_business,
+            'errors_list':None,
+            }
+
+    def changepassword(self, data):
+        errors = []
+        this_business = data['this_business']
+        if bcrypt.hashpw(data['current_password'].encode('utf-8'), this_business.password.encode('utf-8')) != this_business.password.encode('utf-8'):
+            errors.append("Current password and input do not match.")
+        if data['new_password']!=data['confirm_password']:
+            errors.append("New password and confirm password do not match")
+        if len(data['new_password'])<8:
+            errors.append("New password must be 8 characters or longer.")
+        if len(errors)>0:
+            return{
+            'business':None,
+            'errors_list':errors,
+            }
+        else:
+            this_business.password = bcrypt.hashpw(data['new_password'].encode('utf-8'), bcrypt.gensalt())
+            this_business.save()
+            return{
+            'business':this_business,
             'errors_list':None,
             }
 
@@ -201,8 +248,10 @@ class User(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
+    zipcode = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     image=models.FileField(upload_to="business_picture", null=True, blank=False)
@@ -223,6 +272,12 @@ class Meetup(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     user=models.ForeignKey(User, related_name="meetups")
     objects=MeetupManager()
+
+class Meetup_Bookmark(models.Model):
+    user=models.ForeignKey(User, related_name="meetup_bookmarks")
+    meetup=models.ForeignKey(Meetup, related_name="meetup_bookmarks")
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
 class Meetup_Like(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
@@ -250,7 +305,11 @@ class Messageboard_Message_Like(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-
+class Messageboard_Message_Bookmark(models.Model):
+    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks")
+    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_bookmarks")
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
 class Messageboard_Comment(models.Model):
     comment=models.CharField(max_length=255)
@@ -265,14 +324,22 @@ class Messageboard_Message_View(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_views")
 
-class Messageboard_Message_Bookmark(models.Model):
-    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks")
-    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_bookmarks")
+
+
+class Deal(models.Model):
+    business=models.ForeignKey(Business, related_name="deals")
+    user=models.ForeignKey(User, related_name="deals")
+
+    deal_type=models.CharField(max_length=255)
+    contact_email=models.CharField(max_length=255)
+    title=models.CharField(max_length=255)
+    fine_print=models.CharField(max_length=255)
+    price=models.IntegerField(null=False)
+    start_date=models.CharField(max_length=255)
+    end_date=models.CharField(max_length=255)
+
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-
-# class Deal(models.Model):
-#     pass
 
 
 

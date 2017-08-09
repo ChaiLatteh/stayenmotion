@@ -64,12 +64,30 @@
     <h4>Create New Meetup</h4>
     <form action="/meetups/new/process" method="post">
       {% csrf_token %}
+      <!-- <label>Category: <select name="category" required minlength="1">
+        <option value="">Select</option>
+        <option value="basketball">Basketball</option>
+        <option value="football">Football</option>
+        <option value="soccer">Soccer</option>
+        <option value="tennis">Tennis</option>
+        <option value="baseball">Baseball</option>
+        <option value="golf">Golf</option>
+        <option value="boxing">Boxing</option>
+        <option value="volleyball">Volleyball</option>
+        <option value="bowling">Bowling</option>
+        <option value="archery">Archery</option>
+        <option value="snowboarding">Snowboarding</option>
+        <option value="badminton">Badminton</option>
+        <option value="watersports">Water Sports</option>
+        <option value="etc">etc.</option>
+      </select></label> -->
       <label>Event Name: <input type="text" name="eventname" required minlength="3"></label>
       <label>Location: <input type="text" name="location" required minlength="1"></label>
       <label>Description: <input type="text" name="description" required minlength="1"></label>
       <label>Date: <input type="date" name="date" required minlength="1"></label>
       <label>Details: <textarea name="details" placeholder="Details" rows="4" cols="60" required minlength="1"></textarea></label>
       <input type="submit" value="Submit">
+      <a href="/meetups">Cancel</a>
     </form>
 
   </body>
