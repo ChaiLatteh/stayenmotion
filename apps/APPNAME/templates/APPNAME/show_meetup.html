@@ -33,7 +33,38 @@
         </div>
       </nav>
     </div>
-    <h1>{{this_meetup.eventname}}</h1>
-    <h2>{{this_meetup.user.first_name}}</h2>
+
+    <div class="wrapper" style="margin-left:1%">
+      <div class="meetup_wrapper" style="background-color:#dedede; display:table; min-width:50%;">
+        <div class="meetup_header" style="background-color:#dedede; display:block; margin:auto;">
+          <a id="bookmark_button" href="/meetups/{{this_meetup.id}}/bookmark_process"><button>Bookmark</button></a>
+          <a id="unbookmark_button" href="/meetups/{{this_meetup.id}}/unbookmark_process"><button>Remove Bookmark</button></a>
+          <script>
+            var my_bookmark=0;
+            bookmark_button = document.getElementById('bookmark_button')
+            unbookmark_button = document.getElementById('unbookmark_button')
+          </script>
+          {% for bookmark in this_meetup.meetup_bookmarks.all %}
+            {% if bookmark.user.id == request.session.user_id %}
+              <script>
+                my_bookmark++;
+                bookmark_button.innerHTML='';
+              </script>
+            {% endif %}
+          {% endfor %}
+          <script>
+            if(my_bookmark==0){
+              unbookmark_button.innerHTML='';
+            }
+          </script>
+          <h1>{{this_meetup.eventname}}</h1>
+        </div>
+        <h2>{{this_meetup.user.first_name}}</h2>
+        <h2>{{this_meetup.description}}</h2>
+        <h2>{{this_meetup.details}}</h2>
+        <h2>{{this_meetup.location}}</h2>
+        <h2>{{this_meetup.date}}</h2>
+      </div>
+    </div>
   </body>
 </html>

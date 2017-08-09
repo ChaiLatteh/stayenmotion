@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
-from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager
+from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark
 from .forms import UploadFileForm, Messageboard_MessageForm
 import datetime, random, requests, json
 from yelp.client import Client
@@ -295,20 +295,30 @@ def changepassword_process(request):
         return redirect('/')
 
 
-    # elif 'business_id' in request.session:
-    #     this_business=Business.objects.get(id=request.session['business_id'])
-    #     if this_business.password == bcrypt.hashpw(request.POST['current_password'].encode('utf-8')):
-    #         if request.POST['new_password'] == request.POST['confirm_password']:
-    #             this_business.password = bcrypt.hashpw(request.POST['new_password'].encode('utf-8'))
-    #             this_business.save()
-    #             return redirect('/businesses/'+str(request.session['business_id']))
-    #         else:
-    #             message.add_message(request, messages.ERROR, "New password and confirm password do not match.")
-    #             return redirect('/changepassword')
-    #     else:
-    #         message.add_message(request, messages.ERROR, "Your input and current password do not match.")
-    #         return redirect('/changepassword')
+def bookmarks(request):
+    messages_list=[]
+    meetups_list=[]
+    this_user = User.objects.get(id=request.session['user_id'])
+    for message in Messageboard_Message.objects.all():
+        try:
+            Messageboard_Message_Bookmark.objects.get(user=this_user, messageboard_message=message)
+            messages_list.append(message)
+        except:
+            pass
 
+    for meetup in Meetup.objects.all():
+        try:
+            Meetup_Bookmark.objects.get(user=this_user, meetup=meetup)
+            meetups_list.append(meetup)
+        except:
+            pass
+
+    data = {
+    "messages_list":messages_list,
+    "meetups_list":meetups_list,
+    }
+
+    return render(request, 'APPNAME/bookmarks.html', data)
 
 def messageboard(request):
     messages_list=[]
@@ -504,6 +514,30 @@ def show_meetup(request, meetup_id):
     "this_user":this_user,
     }
     return render(request, 'APPNAME/show_meetup.html', data)
+
+def bookmark_meetup_process(request, meetup_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+
+    this_user=User.objects.get(id=request.session['user_id'])
+    this_meetup=Meetup.objects.get(id=meetup_id)
+    try:
+        Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user)
+    except:
+        Meetup_Bookmark.objects.create(meetup=this_meetup, user=this_user)
+    return redirect('/meetups/'+meetup_id)
+
+def unbookmark_meetup_process(request, meetup_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+
+    this_user=User.objects.get(id=request.session['user_id'])
+    this_meetup=Meetup.objects.get(id=meetup_id)
+    try:
+        Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user).delete()
+    except:
+        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+    return redirect('/meetups/'+meetup_id)
 
 
 def search_meetup(request):
