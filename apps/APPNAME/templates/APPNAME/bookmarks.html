@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bookmarks</title>
+    <style>
+      table, tr, th, td{
+        border-collapse:collapse;
+        border:1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Bookmarked Messages</h1>
+    {% if messages_list %}
+      <table>
+        <thead>
+          <tr>
+            <th>Posted On</th>
+            <th>Title</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messages_list %}
+            <tr>
+              <td>{{message.created_at}}</td>
+              <td><a href="/messageboard/{{message.id}}">{{message.title}}</a></td>
+              <td><a href="/users/{{message.user.id}}">{{message.user.first_name}} {{message.user.last_name}}</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+
+    <h1>My Bookmarked Meetups</h1>
+    {% if meetups_list %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event Name</th>
+            <th>Location</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for meetup in meetups_list %}
+          <tr>
+            <td>{{meetup.date}}</td>
+            <td><a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a></td>
+            <td>{{meetup.location}}</td>
+            <td><a href="/users/{{meetup.user.id}}">{{meetup.user.first_name}} {{meetup.user.last_name}}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </body>
+</html>

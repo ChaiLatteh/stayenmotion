@@ -273,6 +273,12 @@ class Meetup(models.Model):
     user=models.ForeignKey(User, related_name="meetups")
     objects=MeetupManager()
 
+class Meetup_Bookmark(models.Model):
+    user=models.ForeignKey(User, related_name="meetup_bookmarks")
+    meetup=models.ForeignKey(Meetup, related_name="meetup_bookmarks")
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
 class Meetup_Like(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -299,7 +305,11 @@ class Messageboard_Message_Like(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
-
+class Messageboard_Message_Bookmark(models.Model):
+    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks")
+    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_bookmarks")
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
 class Messageboard_Comment(models.Model):
     comment=models.CharField(max_length=255)
@@ -314,11 +324,7 @@ class Messageboard_Message_View(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_views")
 
-class Messageboard_Message_Bookmark(models.Model):
-    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks")
-    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_bookmarks")
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+
 
 class Deal(models.Model):
     business=models.ForeignKey(Business, related_name="deals")
