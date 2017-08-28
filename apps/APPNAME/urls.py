@@ -6,14 +6,15 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^register$', views.register),
     url(r'^user_register$', views.user_register),
     url(r'^user_login$', views.user_login),
 
     url(r'^business_register$', views.business_register),
     url(r'^business_login$', views.business_login),
 
-    url(r'^landing$',views.landing),
+    url(r'^$',views.index),
+    url(r'^prospectmeetups$',views.prospectmeetups),
 
     url(r'^users/(?P<user_id>\d+)$', views.show_user),
     url(r'^uploadpicture$', views.upload_picture),

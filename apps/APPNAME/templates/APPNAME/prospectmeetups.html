@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../static/css/navbar.css">
     <meta charset="utf-8">
     <title>Meetups page</title>
-    <link rel="stylesheet" href="../../static/css/meetups.css">
+    <link rel="stylesheet" href="../../static/css/prospectmeetups.css">
   </head>
   <body>
     <div class="navbar">
@@ -25,10 +25,10 @@
             <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{request.session.first_name}}</a>!</h3>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/" style="color:#e4e4e4;">Home</a></li>
-              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
-              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
-              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
-              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
+              <li><a href="/register" style="color:#e4e4e4;">Meetups</a></li>
+              <li><a href="/register" style="color:#e4e4e4;">Message Board</a></li>
+              <li><a href="/register" style="color:#e4e4e4;">Social</a></li>
+              <li><a href="/register" style="color:#e4e4e4;">Deals</a></li>
               <li>
                 <div class="dropdown">
                   {% if this_user.image %}
@@ -80,7 +80,7 @@
 
     <div class="content">
       <ul class="meetups_list" style="list-style:none;">
-        {% for meetup in search_list %}
+        {% for meetup in meetups_list %}
 
         <div class="meetupdiv">
           <li>

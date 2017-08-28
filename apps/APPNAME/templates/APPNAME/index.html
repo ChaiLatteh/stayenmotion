@@ -16,36 +16,7 @@
     input, select{
       margin:1%;
     }
-    /*#user_reg_first_name{
-      width:172px;
-      font-size:18px;
-      padding: 8px 10px;
-      margin-bottom:5px;
-    }
-    #user_reg_last_name{
-      width:172px;
-      font-size:18px;
-      padding: 8px 10px;
-      margin-bottom:5px;
-    }
-    #user_reg_email{
-      width:377px;
-      font-size:18px;
-      padding: 8px 10px;
-      margin-bottom:5px;
-    }
-    #user_reg_password{
-      width:377px;
-      font-size:18px;
-      padding: 8px 10px;
-      margin-bottom:5px;
-    }
-    #user_reg_confirm_password{
-      width:377px;
-      font-size:18px;
-      padding: 8px 10px;
-      margin-bottom:5px;
-    }*/
+
     </style>
   </head>
   <body>
@@ -142,26 +113,7 @@
           </form>
         </td>
       </tr>
-      <tr>
-        <td>
-          <form class="user" action="/user_login" method="post">
-            <h1>User Login</h1>
-            {% csrf_token %}
-            <input type="text" name="user_login_email" placeholder="Email">
-            <input type="password" name="user_login_password" placeholder="Password">
-            <input type="submit" value="Login">
-          </form>
-        </td>
-        <td>
-          <form class="business" action="/business_login" method="post">
-            <h1>Business Login</h1>
-            {% csrf_token %}
-            <input type="text" name="business_login_email" placeholder="Email">
-            <input type="password" name="business_login_password" placeholder="Password">
-            <input type="submit" value="Login">
-          </form>
-        </td>
-      </tr>
+      
     </table>
   </body>
 </html>

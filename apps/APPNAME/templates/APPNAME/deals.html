@@ -6,6 +6,8 @@
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <meta charset="utf-8">
     <title>DEALS</title>
+    <link rel="stylesheet" href="../../static/css/deals.css">
+    <link rel="stylesheet" href="../../static/css/navbar.css">
   </head>
   <body>
     <div class="navbar">
@@ -22,12 +24,7 @@
           <div id="navbar" class="collapse navbar-collapse">
             <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
             <ul class="nav navbar-nav navbar-right">
-              <!-- <li><div style="display:inline-block; margin-top:20px; margin-right:150px;">
-                <form action="/" method="post">
-                  {% csrf_token %}
-                  <input type="text" placeholder="Search..." style="color:black; width:300px;">
-                </form>
-              </div></li> -->
+
               <li><a href="/" style="color:#e4e4e4;">Home</a></li>
               <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
               <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
@@ -47,8 +44,15 @@
       </form>
     {% endif %}
       <div class="">
-
         <h1>This is Deals Template</h1>
+        <div class="container">
+          <div class="row">
+            <!-- for loop through content -->
+            <div class="col-md-3">
+              <h1></h1>
+            </div>
+          </div>
+        </div>
       </div>
 
     <div class="footer">

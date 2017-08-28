@@ -127,21 +127,7 @@ top: 25%;
 .thesecs{
   height: 300px;
 }
-.meetupcontains{
-  margin-top: 8%;
-  margin-right: 3%;
-  /*background-color: blue;*/
-  opacity: 0.9;
-  padding-top: 0;
-  margin-top: 0;
-  width: 100%;
-  height:600px;
-  background-color: white;
 
-}
-.meetupsub{
-
-}
 .imageicon{
   text-align: center;
   border-radius:50%;
@@ -154,48 +140,66 @@ top: 25%;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
+  color: white;
 }
 
 .eventlocation{
   text-align: center;
+  color: white;
 }
 .description{
   text-align: center;
+  color: white;
 }
 .details{
   text-align: center;
   margin: 10px;
+  color:white;
 }
 .button{
   text-align: center;
 }
 .thesecs{
-  background-color: #e0e2e1;
+  background-color: #181918;
   opacity:0.7;
   margin:10px;
-  margin-left:70px;
+  margin-left:50px;
   border-radius:2%;
 }
 .thesecs:hover {
   background-color: #e0e2e1;
   opacity:0.7;
   margin:10px;
-  margin-left:70px;
+  margin-left:50px;
 
 
 }
-.meetupheader{
+.dealscontains{
+  margin-top: 8%;
+  margin-right: 3%;
+  /*background-color: blue;*/
+  opacity: 0.9;
+  padding-top: 0;
+  margin-top: 0;
+  width: 100%;
+  height:500px;
+  background-color: #4a5950;
+
+
+}
+.dealsheader{
   text-align: center;
   /*display: inline-block;*/
   color: black;
 }
-.meetupsback{
-  background-color: white;
+.dealsback{
+  background-color:#4a5950;
+
 }
-.meetupsub{
-  background-color: black;
+.dealssub{
+  background-color:#4a5950;
 }
-.meetupcontent{
+.dealscontent{
   text-align: center;
   margin-left: 2%;
 }
@@ -207,7 +211,7 @@ width: 100%;
 height:750px;
 /*bottom: 20px;*/
 }
-.allmeetupslink{
+.dealslink{
   text-align: right;
   display:block;
 }
@@ -319,14 +323,15 @@ height:750px;
 .message{
   background-color: teal;
   text-align: center;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
 }
 .messbackground{
-  background: url("../images/workoutpic2.jpg")fixed 100%
+  background: url("../images/running.jpg")fixed 100%;
+  height: 500px;
+  heig
 }
 .messarea{
   width: 60%;
-
   opacity: 0.9;
   margin-left: 20%;
   text-align: center;
@@ -334,27 +339,10 @@ height:750px;
 .boardtitle{
   margin:0;
 }
-.footer{
-  height: 300px;
-  background-color: #151E35;
+.meetupsbackground{
+  background-color: #586b5b;
+  height: 100px;
 }
-.row{
-  margin-left: 7%;
-
-}
-.footerheader{
-  color: white;
-  margin-top: 10%;
-}
-.linkcont{
-  color: #A3A7B2;
-  display:table;
-}
-.appstorehead{
-  color: white;
-}
-.appstore{
-  width: 100px;
-  height: 45px;
-  margin-left: 8%
+.meetuptext{
+  margin: none;
 }

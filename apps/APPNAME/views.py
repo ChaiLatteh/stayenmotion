@@ -9,7 +9,7 @@ from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 
 # Create your views here.
-def index(request):
+def register(request):
     meetups_list=[]
     messages_list=[]
     for message in Messageboard_Message.objects.all().order_by('-created_at'):
@@ -373,8 +373,43 @@ def search_meetup(request):
         }
         return render(request, 'APPNAME/search_meetup.html', data)
 
-def landing(request):
-    return render(request, 'APPNAME/landing.html')
+def index(request):
+    meetups_list=[]
+    messages_list=[]
+    for message in Messageboard_Message.objects.all().order_by('-created_at'):
+        messages_list.append(message)
+    for meetup in Meetup.objects.all():
+        meetups_list.append(meetup)
+
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        data={
+        "this_user":this_user,
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        }
+        return render(request, 'APPNAME/home.html', data)
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        data={
+        "this_business":this_business,
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        }
+        return render(request, 'APPNAME/home.html', data)
+
+
+        # random.shuffle(meetupname)
+        # try:
+        # this_user=User.objects.get(id=request.session['user_id'])
+
+        # for like in Messageboard_Message_Like.objects.all():
+        #     likes_list.append(like)
+
+
+    else:
+        return render(request, 'APPNAME/landing.html')
 
 
 def deals(request):
@@ -403,7 +438,7 @@ def getting(request):
 
     return render(request, 'APPNAME/createdeal.html', data)
 def pickbusiness(request):
-    r = requests.post('https://api.yelp.com/oauth2/token', data={'grant_type':"client_credentials", "client_id":"REPLACE","client_secret":"REPLACE"})
+    r = requests.post('https://api.yelp.com/oauth2/token', data={'grant_type':"client_credentials", "client_id":"YFwchaLGlVSnFPeQXIEvjQ","client_secret":"RoVIIt9dAifYUKD1a8GyIMwKdzqGHrHqHsiACGh5BLEwuMa2xLo4hYvEoB2rdtfG"})
 
     tokendata = json.loads(r.text)
     print(tokendata, "**************")
@@ -445,7 +480,17 @@ def form(request):
     }
     return render(request, 'APPNAME/form.html', data)
 
+def prospectmeetups(request):
 
+    meetups_list=[]
+    for meetup in Meetup.objects.all():
+        meetups_list.append(meetup)
+
+    data={
+
+    "meetups_list":meetups_list,
+    }
+    return render(request, 'APPNAME/prospectmeetups.html', data)
 
 #NO LONGER IN USE
 # def messageboard(request):
