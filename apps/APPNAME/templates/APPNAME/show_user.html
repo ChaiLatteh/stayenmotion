@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="../../static/css/messageboard.css">
   </head>
   <body>
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          alert('{{message}}');
+        </script>
+      {% endfor %}
+    {% endif %}
     <div class="navbar">
       <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
         <div class="container">
@@ -55,6 +62,9 @@
         <div>
           <a style="display:inline-table;" href="/uploadpicture"><button>Upload Profile Picture</button></a>
           <a style="display:inline-table;" href="/removepicture"><button>Remove Profile Picture</button></a>
+          <a href="/updateprofile"><button>Update Profile</button></a>
+          <a href="/changepassword"><button>Change Password</button></a>
+          <a href="/bookmarks"><button>Bookmarks</button></a>
         </div>
       {% endif %}
       {% if a_user.image %}

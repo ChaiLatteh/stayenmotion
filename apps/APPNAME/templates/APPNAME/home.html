@@ -25,7 +25,7 @@
               {% if request.session.user_id %}
                 <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{this_user.first_name}}</a>!</h3>
               {% elif request.session.business_id %}
-                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/business/{{request.session.business_id}}" style="color:darkblue;">{{this_business.name}}</a>!</h3>
+                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:darkblue;">{{this_business.name}}</a>!</h3>
               {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 <li><a class="navlinks" href="/">Home</a></li>
@@ -128,39 +128,15 @@
       </div>
     </div>
     <div class="main_messageboard">
-      <script>
-       var message_index=0;
-       var my_like=0;
-       like = document.getElementsByClassName('like_button');
-       unlike = document.getElementsByClassName('unlike_button');
-      </script>
-
       <div class="messbackground">
 
         <div class="messarea">
           <h3 class="boardtitle">Message Board</h3>
-          {% for message in messages_list %}
+          {% for message in liked_messages_list %}
            <div class="message">
              <p>User:<a class="name" href="/users/{{message.user.id}}" style="font-size:18px;">{{message.user.first_name}} {{message.user.last_name}}</a> On:{{message.created_at}}</p>
-             <h4>Message: {{message.message}}</h4>
-             <p style="display:inline-table; margin-right:20px;">{{message.messageboard_message_likes.count}} Likes</p>
+             <h3><a style="color:white; margin:0px;" href="/messageboard/{{message.id}}">{{message.title}}</a></h3>
 
-             <a class="like_button" style="display:inline-table;" href="/home/message/{{message.id}}/like">Like</a>
-             <a class="unlike_button" style="display:inline-table;" href="/home/message/{{message.id}}/unlike">Unlike</a>
-
-             {% for like in message.messageboard_message_likes.all %}
-               {% if like.user == this_user %}
-                 <script>
-                   my_like++;
-                   like[message_index].innerHTML='';
-                 </script>
-               {% endif %}
-             {% endfor %}
-             <script>
-               if(my_like==0){
-                 unlike[message_index].innerHTML='';
-               }
-             </script>
         </div>
          {% endfor %}
      </div>

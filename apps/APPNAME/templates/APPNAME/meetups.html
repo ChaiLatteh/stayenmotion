@@ -72,7 +72,20 @@
           </div>
         </div>
 
+<<<<<<< HEAD
       </div>
+=======
+    <div class="header">
+      <form action="/meetups/search" style="display:inline-table;" method="GET">
+        {% csrf_token %}
+        <input placeholder="search..." name="search_box" type="text" required minlength="1">
+        <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
+      </form>
+
+      {% if request.session.user_id %}
+        <a href="/meetups/new"><button>Create Meetup</button></a>
+      {% endif %}
+>>>>>>> 11b8e1447bdec5755f1122d10684dfb0cb17a144
       <!-- <a onClick="javascript:history.go(-1);" href="#">Previous Page</a> -->
     </div>
 
