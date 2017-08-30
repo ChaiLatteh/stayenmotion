@@ -30,7 +30,6 @@ urlpatterns = [
 
     url(r'^bookmarks$', views.bookmarks),
 
-
     url(r'^meetups$', views.meetups),
     url(r'^meetups/new$', views.new_meetup),
     url(r'^meetups/new/process$', views.new_meetup_process),
@@ -59,7 +58,6 @@ urlpatterns = [
     url(r'^contact$', views.contact),
     url(r'^gyms$', views.gyms),
     url(r'^careers$', views.careers),
-
 
     url(r'^logout$', views.logout),
 
