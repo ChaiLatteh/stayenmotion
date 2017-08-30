@@ -48,7 +48,11 @@
                       {% endif %}
                     {% endif %}
                     <div class="dropdown-content">
-                      <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                      {% if request.session.user_id %}
+                        <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                      {% elif request.session.business_id %}
+                        <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
+                      {% endif %}
                       <a href="#">My Deals</a>
                       <a href="#">Settings</a>
                       <a href="/logout">Log Out</a>
