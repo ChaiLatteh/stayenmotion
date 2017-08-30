@@ -120,6 +120,7 @@ class BusinessManager(models.Manager):
             'errors_list':errors,
             }
         else:
+            print data['address']
             data['password']=bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
             new_business=Business.objects.create(name=data['name'], address=data['address'], city=data['city'], state=data['state'], zipcode=data['zipcode'], email=data['email'], password=data['password'])
             return{
@@ -200,7 +201,12 @@ class MessageboardManager(models.Manager):
             'errors_list':errors,
             }
         else:
-            new_comment=Messageboard_Comment.objects.create(comment=data['comment'], messageboard_message=data['this_message'], user=data['this_user'])
+            try:
+                if data['this_user']:
+                    new_comment=Messageboard_Comment.objects.create(comment=data['comment'], messageboard_message=data['this_message'], user=data['this_user'])
+            except:
+                if data['this_business']:
+                    new_comment=Messageboard_Comment.objects.create(comment=data['comment'], messageboard_message=data['this_message'], business=data['this_business'])
             return{
             'new':new_comment,
             'errors_list':None,
@@ -274,16 +280,18 @@ class Meetup(models.Model):
     objects=MeetupManager()
 
 class Meetup_Bookmark(models.Model):
-    user=models.ForeignKey(User, related_name="meetup_bookmarks")
+    user=models.ForeignKey(User, related_name="meetup_bookmarks", null=True)
+    business=models.ForeignKey(Business, related_name="meetup_bookmarks", null=True)
     meetup=models.ForeignKey(Meetup, related_name="meetup_bookmarks")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
 class Meetup_Like(models.Model):
+    user=models.ForeignKey(User, related_name="meetup_likes", null=True)
+    business=models.ForeignKey(Business, related_name="meetup_likes", null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     meetup=models.ForeignKey(Meetup, related_name="meetup_likes")
-    user=models.ForeignKey(User, related_name="meetup_likes")
 
 class Meetup_Comment(models.Model):
     comment=models.CharField(max_length=255)
@@ -300,23 +308,26 @@ class Messageboard_Message(models.Model):
     objects=MessageboardManager()
 
 class Messageboard_Message_Like(models.Model):
-    user=models.ForeignKey(User, related_name="messageboard_message_likes")
+    user=models.ForeignKey(User, related_name="messageboard_message_likes", null=True)
+    business=models.ForeignKey(Business, related_name="messageboard_message_likes", null=True)
     messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_likes")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
 class Messageboard_Message_Bookmark(models.Model):
-    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks")
+    user=models.ForeignKey(User, related_name="messageboard_message_bookmarks", null=True)
+    business=models.ForeignKey(Business, related_name="messageboard_message_bookmarks", null=True)
     messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_message_bookmarks")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
 class Messageboard_Comment(models.Model):
+    user=models.ForeignKey(User, related_name="messageboard_comments", null=True)
+    business=models.ForeignKey(Business, related_name="messageboard_comments", null=True)
+    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_comments")
     comment=models.CharField(max_length=255)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    user=models.ForeignKey(User, related_name="messageboard_comments")
-    messageboard_message=models.ForeignKey(Messageboard_Message, related_name="messageboard_comments")
     objects=MessageboardManager()
 
 class Messageboard_Message_View(models.Model):
