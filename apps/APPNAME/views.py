@@ -298,27 +298,52 @@ def changepassword_process(request):
 def bookmarks(request):
     messages_list=[]
     meetups_list=[]
-    this_user = User.objects.get(id=request.session['user_id'])
-    for message in Messageboard_Message.objects.all():
-        try:
-            Messageboard_Message_Bookmark.objects.get(user=this_user, messageboard_message=message)
-            messages_list.append(message)
-        except:
-            pass
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        for message in Messageboard_Message.objects.all():
+            try:
+                Messageboard_Message_Bookmark.objects.get(user=this_user, messageboard_message=message)
+                messages_list.append(message)
+            except:
+                pass
 
-    for meetup in Meetup.objects.all():
-        try:
-            Meetup_Bookmark.objects.get(user=this_user, meetup=meetup)
-            meetups_list.append(meetup)
-        except:
-            pass
+        for meetup in Meetup.objects.all():
+            try:
+                Meetup_Bookmark.objects.get(user=this_user, meetup=meetup)
+                meetups_list.append(meetup)
+            except:
+                pass
 
-    data = {
-    "messages_list":messages_list,
-    "meetups_list":meetups_list,
-    }
+        data = {
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        }
 
-    return render(request, 'APPNAME/bookmarks.html', data)
+        return render(request, 'APPNAME/bookmarks.html', data)
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        for message in Messageboard_Message.objects.all():
+            try:
+                Messageboard_Message_Bookmark.objects.get(business=this_business, messageboard_message=message)
+                messages_list.append(message)
+            except:
+                pass
+
+        for meetup in Meetup.objects.all():
+            try:
+                Meetup_Bookmark.objects.get(business=this_business, meetup=meetup)
+                meetups_list.append(meetup)
+            except:
+                pass
+
+        data = {
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        }
+
+        return render(request, 'APPNAME/bookmarks.html', data)
+
 
 def messageboard(request):
     messages_list=[]
@@ -371,82 +396,128 @@ def new_message_process(request):
             return redirect('/messageboard/new')
 
 def show_message(request, message_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
     this_message=Messageboard_Message.objects.get(id=message_id)
     Messageboard_Message_View.objects.create(messageboard_message=this_message)
-    print this_message.image
-    data={
-    "this_message":this_message,
-    }
+    if 'user_id' in request.session:
+        data={
+        "this_user":User.objects.get(id=request.session['user_id']),
+        "this_message":this_message,
+        }
+        return render(request, 'APPNAME/show_message.html', data)
 
-    return render(request, 'APPNAME/show_message.html', data)
+    elif 'business_id' in request.session:
+        data={
+        "this_Business":Business.objects.get(id=request.session['business_id']),
+        "this_message":this_message,
+        }
+        return render(request, 'APPNAME/show_message.html', data)
+    else:
+        return redirect('/')
 
 def new_comment_process(request, message_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
     this_message = Messageboard_Message.objects.get(id=message_id)
-    this_user = User.objects.get(id=request.session['user_id'])
-    data={
-    'comment':request.POST['comment'],
-    'this_message':this_message,
-    'this_user':this_user,
-    }
-    new_comment=Messageboard_Comment.objects.comment(data)
-    return redirect('/messageboard/'+message_id)
+
+    if 'user_id' in request.session:
+        data={
+        'comment':request.POST['comment'],
+        'this_message':this_message,
+        'this_user':User.objects.get(id=request.session['user_id']),
+        }
+        new_comment=Messageboard_Comment.objects.comment(data)
+        return redirect('/messageboard/'+message_id)
+    elif 'business_id' in request.session:
+        data={
+        'comment':request.POST['comment'],
+        'this_message':this_message,
+        'this_business':Business.objects.get(id=request.session['business_id']),
+        }
+        new_comment=Messageboard_Comment.objects.comment(data)
+        return redirect('/messageboard/'+message_id)
+    else:
+        return redirect('/')
 
 def like_message_process(request, message_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     this_message=Messageboard_Message.objects.get(id=message_id)
-    try:
-        Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user)
-        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-    except:
-        Messageboard_Message_Like.objects.create(messageboard_message=this_message, user=this_user)
-    return redirect('/messageboard/'+message_id)
+
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user)
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        except:
+            Messageboard_Message_Like.objects.create(messageboard_message=this_message, user=this_user)
+        return redirect('/messageboard/'+message_id)
+
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Messageboard_Message_Like.objects.get(messageboard_message=this_message, business=this_business)
+        except:
+            Messageboard_Message_Like.objects.create(messageboard_message=this_message, business=this_business)
+        return redirect('/messageboard/'+message_id)
+    else:
+        return redirect('/')
 
 def unlike_message_process(request, message_id):
-    if 'user_id' not in request.session:
+    this_message=Messageboard_Message.objects.get(id=message_id)
+
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/messageboard/'+message_id)
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Messageboard_Message_Like.objects.get(messageboard_message=this_message, business=this_business).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/messageboard/'+message_id)
+    else:
         return redirect('/')
 
-    this_user=User.objects.get(id=request.session['user_id'])
-    this_message=Messageboard_Message.objects.get(id=message_id)
-    try:
-        Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user).delete()
-    except:
-        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-    return redirect('/messageboard/'+message_id)
 
 def bookmark_message_process(request, message_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     this_message=Messageboard_Message.objects.get(id=message_id)
-    try:
-        Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, user=this_user)
-    except:
-        Messageboard_Message_Bookmark.objects.create(messageboard_message=this_message, user=this_user)
-    return redirect('/messageboard/'+message_id)
+
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, user=this_user)
+        except:
+            Messageboard_Message_Bookmark.objects.create(messageboard_message=this_message, user=this_user)
+        return redirect('/messageboard/'+message_id)
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, business=this_business)
+        except:
+            Messageboard_Message_Bookmark.objects.create(messageboard_message=this_message, business=this_business)
+        return redirect('/messageboard/'+message_id)
+    else:
+        return redirect('/')
 
 def unbookmark_message_process(request, message_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     this_message=Messageboard_Message.objects.get(id=message_id)
-    try:
-        Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, user=this_user).delete()
-    except:
-        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-    return redirect('/messageboard/'+message_id)
 
-
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, user=this_user).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/messageboard/'+message_id)
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Messageboard_Message_Bookmark.objects.get(messageboard_message=this_message, business=this_business).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/messageboard/'+message_id)
+    else:
+        return redirect('/')
 
 def meetups(request):
     meetups_list=[]
@@ -504,59 +575,85 @@ def new_meetup_process(request):
 
 
 def show_meetup(request, meetup_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     this_meetup = Meetup.objects.get(id=meetup_id)
-    data={
-    'this_meetup':this_meetup,
-    "this_user":this_user,
-    }
-    return render(request, 'APPNAME/show_meetup.html', data)
+
+    if 'user_id' in request.session:
+        data={
+        "this_user":User.objects.get(id=request.session['user_id']),
+        'this_meetup':this_meetup,
+        }
+        return render(request, 'APPNAME/show_meetup.html', data)
+    elif 'business_id' in request.session:
+        data={
+        "this_business":Business.objects.get(id=request.session['business_id']),
+        "this_meetup":this_meetup,
+        }
+        return render(request, 'APPNAME/show_meetup.html', data)
+    else:
+        return redirect('/')
 
 def bookmark_meetup_process(request, meetup_id):
-    if 'user_id' not in request.session:
+    this_meetup=Meetup.objects.get(id=meetup_id)
+
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user)
+        except:
+            Meetup_Bookmark.objects.create(meetup=this_meetup, user=this_user)
+        return redirect('/meetups/'+meetup_id)
+    elif 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Meetup_Bookmark.objects.get(meetup=this_meetup, business=this_business)
+        except:
+            Meetup_Bookmark.objects.create(meetup=this_meetup, business=this_business)
+        return redirect('/meetups/'+meetup_id)
+    else:
         return redirect('/')
 
-    this_user=User.objects.get(id=request.session['user_id'])
-    this_meetup=Meetup.objects.get(id=meetup_id)
-    try:
-        Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user)
-    except:
-        Meetup_Bookmark.objects.create(meetup=this_meetup, user=this_user)
-    return redirect('/meetups/'+meetup_id)
 
 def unbookmark_meetup_process(request, meetup_id):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
-    this_user=User.objects.get(id=request.session['user_id'])
     this_meetup=Meetup.objects.get(id=meetup_id)
-    try:
-        Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user).delete()
-    except:
-        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-    return redirect('/meetups/'+meetup_id)
+
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=request.session['user_id'])
+        try:
+            Meetup_Bookmark.objects.get(meetup=this_meetup, user=this_user).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/meetups/'+meetup_id)
+    if 'business_id' in request.session:
+        this_business=Business.objects.get(id=request.session['business_id'])
+        try:
+            Meetup_Bookmark.objects.get(meetup=this_meetup, business=this_business).delete()
+        except:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/meetups/'+meetup_id)
+
 
 
 def search_meetup(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
-
     if request.method == 'GET':
-        this_user=User.objects.get(id=request.session['user_id'])
-
         search_query = request.GET.get('search_box', None)
         print search_query
         search_list=[]
         for meetup in Meetup.objects.filter(eventname__contains=search_query):
             search_list.append(meetup)
-        data={
-        'search_list':search_list,
-        "this_user":this_user,
-        }
-        return render(request, 'APPNAME/search_meetup.html', data)
+        if 'user_id' in request.session:
+            data={
+            "this_user":User.objects.get(id=request.session['user_id']),
+            'search_list':search_list,
+            }
+            return render(request, 'APPNAME/search_meetup.html', data)
+        elif 'business_id' in request.session:
+            data={
+            "this_business":Business.objects.get(id=request.session['business_id']),
+            'search_list':search_list,
+            }
+            return render(request, 'APPNAME/search_meetup.html', data)
+        else:
+            return redirect('/')
 
 def index(request):
     meetups_list=[]
@@ -592,7 +689,6 @@ def index(request):
         # for like in Messageboard_Message_Like.objects.all():
         #     likes_list.append(like)
 
-
     else:
         return render(request, 'APPNAME/landing.html')
 
@@ -609,6 +705,8 @@ def deals(request):
         "this_business":Business.objects.get(id=request.session['business_id']),
         }
         return render(request, 'APPNAME/deals.html', data)
+    else:
+        return redirect('/')
 
 def createdeal(request):
     if 'business_id' not in request.session:

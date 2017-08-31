@@ -29,7 +29,7 @@
         <title>Amoeba free one page responsive bootstrap site template</title>
         <meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />	
+		<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
 		<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.css">
@@ -68,7 +68,11 @@
                       {% endif %}
                     {% endif %}
                     <div class="dropdown-content">
-                      <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                      {% if request.session.user_id %}
+                        <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                      {% elif request.session.business_id %}
+                        <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
+                      {% endif %}
                       <a href="#">My Deals</a>
                       <a href="#">Settings</a>
                       <a href="/logout">Log Out</a>
@@ -111,7 +115,7 @@
                 <div class="imageicon">
                   <img src="../../static/images/wierdladyportrait.png" alt="">
                 </div>
-                <div class="overlay">
+                <div class="overlay1">
                   <h1 class="deatilscont">Details</h1>
                   <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
                 </div>
@@ -122,7 +126,7 @@
               </div>
 
             <div class="col-md-3 thesecs">
-              <div class="overlay">
+              <div class="overlay1">
                 <h1>Details</h1>
                 <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
               </div>
@@ -133,7 +137,7 @@
             </div>
 
               <div class="col-md-3 thesecs">
-                <div class="overlay">
+                <div class="overlay1">
                   <h1>Details</h1>
                   <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
                 </div>
@@ -146,31 +150,170 @@
         </div>
       </div>
     </div>
+
     <div class="main_messageboard">
       <div class="messbackground">
 
         <div class="messarea">
           <h3 class="boardtitle">Message Board</h3>
-          {% for message in liked_messages_list %}
-           <div class="message">
-             <p>User:<a class="name" href="/users/{{message.user.id}}" style="font-size:18px;">{{message.user.first_name}} {{message.user.last_name}}</a> On:{{message.created_at}}</p>
-             <h3><a style="color:white; margin:0px;" href="/messageboard/{{message.id}}">{{message.title}}</a></h3>
+          <!-- <div class="container"> -->
+            <div class="themessage">
+             <div class="col-md-2">
+               <img class="image" src="../../static/images/blankpic.jpg" alt="">
+             </div>
+             <div class="col-md-3">
+               <span class="message_details">Title here</span>
+               <span class="message_details">Author</span>
+               <span class="message_details">Creation Date</span>
+             </div>
+             <div class="col-md-2">
+               <span>views:#</span>
+             </div>
+             <div class="col-md-5">
+               <span>message content</span>
+             </div>
+           </div>
+           <div class="themessage">
+            <div class="col-md-2">
+              <img class="image" src="../../static/images/blankpic.jpg" alt="">
+            </div>
+            <div class="col-md-3">
+              <span class="message_details">Title here</span>
+              <span class="message_details">Author</span>
+              <span class="message_details">Creation Date</span>
+            </div>
+            <div class="col-md-2">
+              <span>views:#</span>
+            </div>
+            <div class="col-md-5">
+              <span>message content</span>
+            </div>
+          </div>
+          <div class="themessage">
+           <div class="col-md-2">
+             <img class="image" src="../../static/images/blankpic.jpg" alt="">
+           </div>
+           <div class="col-md-3">
+             <span class="message_details">Title here</span>
+             <span class="message_details">Author</span>
+             <span class="message_details">Creation Date</span>
+           </div>
+           <div class="col-md-2">
+             <span>views:#</span>
+           </div>
+           <div class="col-md-5">
+             <span>message content</span>
+           </div>
+         </div>
 
-        </div>
-         {% endfor %}
+       <!-- </div> -->
+
+
      </div>
    </div>
-   <div class="meetupsbackground">
+ </div>
+ <section class="probootstrap-section-bg overlay" style="background-image: url(../../assets/images/snails.jpg);" data-stellar-background-ratio="0.5" data-section="specialties">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12 text-center probootstrap-animate">
+         <div class="probootstrap-heading">
+           <h2 class="primary-heading">Discover</h2>
+           <h3 class="secondary-heading">Our Meetups</h3>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="probootstrap-cell-retro">
+          <div class="half">
+
+            <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <!-- "./../../assets/images/{{post.filename}}" -->
+              <div class="text text-center">
+                <h3>{{meetups_list.0.eventname}}</h3>
+                <p>{{meetups_list.0.description}}</p>
+                <p>{{meetups_list.0.location}}</p>
+                <p>{{meetups_list.0.date}}</p>
+                <a href="/meetups/{{meetups_list.0.id}}">more details</a>
+              </div>
+            </div>
+            <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <div class="text text-center">
+                  <h3>topPosts[1].name</h3>
+                  <p>topPosts[1].description</p>
+                  <p>by: topPosts[1].user.username</p>
+                  <p>topPosts[1].filename|json</p>
+                  <a href="/postview/meetups[1].id">more details</a>
+              </div>
+            </div>
+            <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <!-- "./../../assets/images/{{post.filename}}" -->
+              <div class="text text-center">
+                <h3>topPosts[2].name</h3>
+                <p>topPosts[2].description</p>
+                <p>by:topPosts[2].user.username</p>
+                <p>topPosts[2].filename|json</p>
+                <a href="/postview/topPosts[2]._id">more details</a>
+              </div>
+            </div>
+
+          </div>
+          <div class="half">
+
+            <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <!-- "./../../assets/images/{{post.filename}}" -->
+              <div class="text text-center">
+                <h3>topPosts[3].name</h3>
+                <p>topPosts[3].description</p>
+                <p>by:topPosts[3].user.username</p>
+                <p>topPosts[3].filename</p>
+                <a href="/postview/topPosts[3]._id">more details</a>
+              </div>
+            </div>
+            <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <!-- "./../../assets/images/{{post.filename}}" -->
+              <div class="text text-center">
+                <h3>topPosts[4].name</h3>
+                <p>topPosts[4].description</p>
+                <p>by:topPosts[4].user.username</p>
+                <p>topPosts[4].filename|json</p>
+                <a href="/postview/topPosts[4]._id">more details</a>
+              </div>
+            </div>
+            <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              <!-- "./../../assets/images/{{post.filename}}" -->
+              <div class="text text-center">
+                <h3>topPosts[5].name</h3>
+                <p>topPosts[5].description</p>
+                <p>by:topPosts[5].user.username</p>
+                <p>topPosts[5].filename|json</p>
+                <a href="/postview/topPosts[5]._id}}">more details</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   <!-- <div class="meetupsbackground">
      <div class="meetuparea">
        <p class="meetuptext">Meetups</p>
-       <!-- forloop here -->
        <div class="meetup">
         <p class="meetuptitle">title</p>
         <p class=""></p>
        </div>
-      <!-- endfor -->
      </div>
-   </div>
+   </div> -->
 
    <div class="footer">
      <div class="conatiner">

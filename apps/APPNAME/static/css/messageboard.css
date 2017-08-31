@@ -148,11 +148,12 @@ body{
   margin-left: 8%
 }
 .footer{
-  position: fixed;
-  bottom: 0px;
+  position: realtive;
+  bottom: 0;
   width: 100%;
-  height: 300px;
+  height: auto;
   background-color: #151E35;
+
 }
 .row{
   margin-left: 7%;

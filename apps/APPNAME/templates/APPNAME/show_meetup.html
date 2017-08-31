@@ -20,7 +20,7 @@
             </button>
           </div>
           <div id="navbar" class="collapse navbar-collapse">
-            <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+            <h3 style="vertical-align:top; display:inline-block;">Welcome {{this_user.first_name}}!</h3>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/" style="color:#e4e4e4;">Home</a></li>
               <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
@@ -50,6 +50,11 @@
                 my_bookmark++;
                 bookmark_button.innerHTML='';
               </script>
+            {% elif bookmark.business.id == request.session.business_id %}
+            <script>
+              my_bookmark++;
+              bookmark_button.innerHTML='';
+            </script>
             {% endif %}
           {% endfor %}
           <script>

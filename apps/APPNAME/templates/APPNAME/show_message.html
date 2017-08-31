@@ -66,6 +66,11 @@
                 my_like++;
                 like_button.innerHTML='';
               </script>
+            {% elif like.business.id == request.session.business_id %}
+              <script>
+              my_like++;
+              like_button.innerHTML='';
+              </script>
             {% endif %}
           {% endfor %}
           <script>
@@ -75,6 +80,11 @@
           </script>
           {% for bookmark in this_message.messageboard_message_bookmarks.all %}
             {% if bookmark.user.id == request.session.user_id %}
+              <script>
+                my_bookmark++;
+                bookmark_button.innerHTML='';
+              </script>
+            {% elif bookmark.business.id == request.session.business_id %}
               <script>
                 my_bookmark++;
                 bookmark_button.innerHTML='';
@@ -105,17 +115,31 @@
       </form>
 
       {% for comment in this_message.messageboard_comments.all %}
-        <div style="background-color:yellow; display:table; width:500px; margin-bottom:5px; margin-left:5px; padding-bottom:10px; border:1px solid black;">
+        {% if comment.user %}
+          <div style="background-color:yellow; display:table; width:500px; margin-bottom:5px; margin-left:5px; padding-bottom:10px; border:1px solid black;">
+            <div style="margin-left:5px; margin-top:5px;">
+              <p>{{comment.comment}}</p>
+              {% if comment.user.image %}
+                <img src="{{comment.user.image.url}}" style="width:30px; height:30px;">
+              {% else %}
+                <img src="../../static/images/blankpic.jpg" style="height:30px; width:30px;">
+              {% endif %}
+              <a href="/users/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a> - {{comment.created_at}}
+            </div>
+          </div>
+        {% elif comment.business %}
+        <div style="background-color:skyblue; display:table; width:500px; margin-bottom:5px; margin-left:5px; padding-bottom:10px; border:1px solid black;">
           <div style="margin-left:5px; margin-top:5px;">
             <p>{{comment.comment}}</p>
-            {% if comment.user.image %}
-              <img src="{{comment.user.image.url}}" style="width:30px; height:30px;">
+            {% if comment.business.image %}
+              <img src="{{comment.business.image.url}}" style="width:30px; height:30px;">
             {% else %}
               <img src="../../static/images/blankpic.jpg" style="height:30px; width:30px;">
             {% endif %}
-            <a href="/users/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a> - {{comment.created_at}}
+            <a href="/businesses/{{comment.business.id}}">{{comment.business.name}}</a> - {{comment.created_at}}
           </div>
         </div>
+        {% endif %}
       {% endfor %}
     </div>
 

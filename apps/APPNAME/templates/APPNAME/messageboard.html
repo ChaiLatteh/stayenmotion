@@ -53,6 +53,7 @@
         </div>
       </nav>
     </div>
+    <div class="">
 
     {% if request.session.user_id %}
       <a href="/messageboard/new"><button>New Message</button></a>
@@ -60,6 +61,7 @@
     <div class="pagetop" style="text-align:center;">
       <h1 class="pagetitle">The Message Board</h1>
     </div>
+
       <div class="messagedisplayarea">
         {% for message in messages_list %}
         <div class="message">
@@ -91,34 +93,40 @@
         {% endfor %}
 
       </div>
+    </div>
 
-      <div class="footer">
-          <div class="conatiner">
+      <div class="footer" style="margin-top:10%;">
+          <div class="container">
             <div class="row">
+
               <div class="col-md-3">
                 <h4 class="footerheader">Company</h5>
                   <a class="linkcont" href="/aboutus">About us</a>
                   <a class="linkcont" href="/careers">Careers</a>
                 </div>
+
                 <div class="col-md-3">
                   <h4 class="footerheader">Support</h4>
                   <a class="linkcont" href="/contact">Contact</a>
                 </div>
+
                 <div class="col-md-3">
                   <h4 class="footerheader">Partners</h4>
                   <a  class="linkcont" href="gyms">Gyms</a>
                 </div>
+
                 <div class="col-md-3">
                   <h4 class="footerheader">Community</h4>
                   <a class="linkcont" href="Blog">Blog</a>
                 </div>
+
               </div>
             </div>
             <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
             <div class="appstorelink">
               <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
             </div>
-    
+
           </div>
   </body>
 </html>
