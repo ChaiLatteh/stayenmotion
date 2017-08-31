@@ -306,7 +306,6 @@ def bookmarks(request):
                 messages_list.append(message)
             except:
                 pass
-
         for meetup in Meetup.objects.all():
             try:
                 Meetup_Bookmark.objects.get(user=this_user, meetup=meetup)
@@ -329,7 +328,6 @@ def bookmarks(request):
                 messages_list.append(message)
             except:
                 pass
-
         for meetup in Meetup.objects.all():
             try:
                 Meetup_Bookmark.objects.get(business=this_business, meetup=meetup)

@@ -45,16 +45,20 @@
             unbookmark_button = document.getElementById('unbookmark_button')
           </script>
           {% for bookmark in this_meetup.meetup_bookmarks.all %}
-            {% if bookmark.user.id == request.session.user_id %}
+            {% if request.session.user_id %}
+              {% if bookmark.user.id == request.session.user_id %}
+                <script>
+                  my_bookmark++;
+                  bookmark_button.innerHTML='';
+                </script>
+              {% endif %}
+            {% elif request.session.business_id %}
+              {% if bookmark.business.id == request.session.business_id %}
               <script>
                 my_bookmark++;
                 bookmark_button.innerHTML='';
               </script>
-            {% elif bookmark.business.id == request.session.business_id %}
-            <script>
-              my_bookmark++;
-              bookmark_button.innerHTML='';
-            </script>
+              {% endif %}
             {% endif %}
           {% endfor %}
           <script>

@@ -61,16 +61,20 @@
             unbookmark_button = document.getElementById('unbookmark_button')
           </script>
           {% for like in this_message.messageboard_message_likes.all %}
-            {% if like.user.id == request.session.user_id %}
-              <script>
+            {% if request.session.user_id %}
+              {% if like.user.id == request.session.user_id %}
+                <script>
+                  my_like++;
+                  like_button.innerHTML='';
+                </script>
+              {% endif %}
+            {% elif request.session.business_id %}
+              {% if like.business.id == request.session.business_id %}
+                <script>
                 my_like++;
                 like_button.innerHTML='';
-              </script>
-            {% elif like.business.id == request.session.business_id %}
-              <script>
-              my_like++;
-              like_button.innerHTML='';
-              </script>
+                </script>
+              {% endif %}
             {% endif %}
           {% endfor %}
           <script>
@@ -79,16 +83,20 @@
             }
           </script>
           {% for bookmark in this_message.messageboard_message_bookmarks.all %}
-            {% if bookmark.user.id == request.session.user_id %}
-              <script>
-                my_bookmark++;
-                bookmark_button.innerHTML='';
-              </script>
-            {% elif bookmark.business.id == request.session.business_id %}
-              <script>
-                my_bookmark++;
-                bookmark_button.innerHTML='';
-              </script>
+            {% if request.session.user_id %}
+              {% if bookmark.user.id == request.session.user_id %}
+                <script>
+                  my_bookmark++;
+                  bookmark_button.innerHTML='';
+                </script>
+              {% endif %}
+            {% elif request.session.business_id %}
+              {% if bookmark.business.id == request.session.business_id %}
+                <script>
+                  my_bookmark++;
+                  bookmark_button.innerHTML='';
+                </script>
+              {% endif %}
             {% endif %}
           {% endfor %}
           <script>
