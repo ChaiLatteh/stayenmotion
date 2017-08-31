@@ -22,9 +22,9 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
               {% if request.session.user_id %}
-                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{this_user.first_name}}</a>!</h3>
+                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:skyblue;">{{this_user.first_name}}</a>!</h3>
               {% elif request.session.business_id %}
-                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:darkblue;">{{this_business.name}}</a>!</h3>
+                <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:skyblue;">{{this_business.name}}</a>!</h3>
               {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 <li><a class="navlinks" href="/">Home</a></li>

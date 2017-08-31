@@ -20,9 +20,14 @@ class UserManager(models.Manager):
         if data['email']=="":
             errors.append("Email address may not be blank.")
         try:
-            User.objects.get(email=data['email']) or Business.objects.get(email=data['email'])
+            User.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
         except:
+            try:
+                Business.objects.get(email=data['email'])
+                errors.append("Entered email already exists.")
+            except:
+                pass
             pass
         if not EMAIL_REGEX.match(data['email']):
             errors.append("Please enter a valid email address.")
@@ -103,9 +108,14 @@ class BusinessManager(models.Manager):
         if data['email']=="":
             errors.append("Email address may not be blank.")
         try:
-            User.objects.get(email=data['email']) or Business.objects.get(email=data['email'])
+            User.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
         except:
+            try:
+                Business.objects.get(email=data['email'])
+                errors.append("Entered email already exists.")
+            except:
+                pass
             pass
         if not EMAIL_REGEX.match(data['email']):
             errors.append("Please enter a valid email address.")
