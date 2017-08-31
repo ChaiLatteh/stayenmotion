@@ -38,9 +38,7 @@
                   {% endif %}
                   <div class="dropdown-content">
                     <a href="/users/{{request.session.user_id}}">Account Overview</a>
-                    <a href="#">My Deals</a>
-                    <a href="#">Settings</a>
-                    <a href="/logout">Log Out</a>
+                    <a href="/register">register</a>
                   </div>
                 </div>
               </li>
@@ -50,20 +48,33 @@
       </nav>
     </div>
 
-    {% if messages %}
-      {% for message in messages %}
-      <script>
-        alert('{{message}}')
-      </script>
-      {% endfor %}
-    {% endif %}
-
-    <div class="sidebar">
+    <!-- <div class="sidebar">
       <h3 style="color:blue;">HIHIASHFISDIHF</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
+      <p>
 
-    <div class="header">
+      </p> -->
+    <!-- </div> -->
+
+    <div class="searchbar">
+      <div class="searcharea">
+        <form action="/meetups/search" method="GET" class="searchbarform">
+          {% csrf_token %}
+          <input placeholder="search..." name="search_box" type="text" required minlength="1">
+          <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
+        </form>
+        <button><a href="/meetups/new">Create Meetup</a></button>
+        <div class="dropdown">
+          <p class="dropbtn">Sort</p>
+          <div class="dropdown-content">
+            <a href="/users/{{request.session.user_id}}">by:Members Going</a>
+            <a href="#">by: Interest</a>
+            <a href="#">Views</a>
+          </div>
+        </div>
+
+      </div>
+
+    <!-- <div class="header">
       <form action="/meetups/search" style="display:inline-table;" method="GET">
         {% csrf_token %}
         <input placeholder="search..." name="search_box" type="text" required minlength="1">
@@ -73,72 +84,56 @@
       {% if request.session.user_id %}
         <a href="/meetups/new"><button>Create Meetup</button></a>
       {% endif %}
-      <!-- <a onClick="javascript:history.go(-1);" href="#">Previous Page</a> -->
-    </div>
+      <a onClick="javascript:history.go(-1);" href="#">Previous Page</a>
+    </div> -->
 
     <div class="content">
       <ul class="meetups_list" style="list-style:none;">
         {% for meetup in meetups_list %}
-        <li>
-          <p>{{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
-        </li>
+
+        <div class="meetupdiv">
+          <li>
+            <p>Date of Meetup: {{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
+          </li>
+          <p class="going">members going: 15</p>
+          <p class="interested">Interested Members: 8</p>
+        </div>
+          <!-- <div class="overlay">
+        </div> -->
 
         {% endfor %}
       </ul>
     </div>
+  </div>
+
     <div class="footer">
-      <div class="back_to_top" style="display:inline-table;">
-        <a onclick="document.body.scrollTop = 0;" href="#">Back to top</a>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <div class="container">
-      {% if meetups_list.0 %}
+      <div class="conatiner">
         <div class="row">
-          <div style="margin:10px; margin-left:14px" class="col-md-3 bg-warning booger">
-            <h4 class="eventname">{{meetups_list.0.eventname}}</h4>
-            <p class ="eventlocation">Location: {{ meetups_list.0.location }}</p>
-            <p>Description: {{ meetups_list.0.description }}</p>
-            <p>Date: {{meetups_list.0.date }}</p>
-            <p>Details: {{ meetups_list.0.details }}</p>
-            <button><a href="/meetups/{{meetups_list.0.id}}">Details</a></button>
-          </div>
-        {% endif %}
-        {% if meetups_list.1 %}
-          <div class="row">
-            <div style="margin:10px; margin-left:14px" class="col-md-3 bg-warning booger">
-              <h4 class="eventname">{{meetups_list.1.eventname}}</h4>
-              <p class ="eventlocation">Location: {{ meetups_list.1.location }}</p>
-              <p>Description: {{ meetups_list.1.description }}</p>
-              <p>Date: {{meetups_list.1.date}}</p>
-              <p>Details: {{ meetups_list.1.details }}</p>
-              <button><a href="/meetups/{{meetups_list.1.id}}">Details</a></button>
+          <div class="col-md-3">
+            <h4 class="footerheader">Company</h5>
+              <a class="linkcont" href="/aboutus">About us</a>
+              <a class="linkcont" href="/careers">Careers</a>
             </div>
-          {% endif %}
-          {% if meetups_list.2 %}
-            <div class="row">
-              <div style="margin:10px; margin-left:14px" class="col-md-3 bg-warning booger">
-                <h4 class="eventname">{{meetups_list.2.eventname}}</h4>
-                <p class ="eventlocation">Location: {{ meetups_list.2.location }}</p>
-                <p>Description: {{ meetups_list.2.description }}</p>
-                <p>Date: {{meetups_list.1.details}}</p>
-                <p>Details: {{ meetups_list.2.details }}</p>
-                <button><a href="/meetups/{{meetups_list.2.id}}">Details</a></button>
-              </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Support</h4>
+              <a class="linkcont" href="/contact">Contact</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Partners</h4>
+              <a  class="linkcont" href="gyms">Gyms</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Community</h4>
+              <a class="linkcont" href="Blog">Blog</a>
+            </div>
+          </div>
         </div>
-      {% endif %}
-    </div> -->
+        <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+        <div class="appstorelink">
+          <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+        </div>
+
+      </div>
 
   </body>
 </html>

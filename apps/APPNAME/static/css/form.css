@@ -33,7 +33,7 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    /*background-color: #f9f9f9;*/
+    background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -114,10 +114,10 @@
   width: 45%;
   margin-left: 28%
 }
-.form_cont{
+/*.form_cont{
 
   text-align: center;
-}
+}*/
 .form{
   margin-top:5%;
   width: 78%;
@@ -127,18 +127,17 @@ body{
   background-color: #EBECF0;
 }
 .form_left{
-/*margin-left: 60%;*/
+margin-left: 5%
 }
 .form_right{
-margin-left: 100%
+margin-left: 150%
 }
 .navbar-default{
   border: none;
   margin-bottom: none;
 }
 .bothforms{
-position:relative;
-left: 80%;
+  /*margin-left: 10%;*/
 }
 .navbar{
   margin-bottom: 0px;

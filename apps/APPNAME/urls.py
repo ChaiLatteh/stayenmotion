@@ -6,14 +6,15 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^register$', views.register),
     url(r'^user_register$', views.user_register),
     url(r'^user_login$', views.user_login),
 
     url(r'^business_register$', views.business_register),
     url(r'^business_login$', views.business_login),
 
-    url(r'^landing$',views.landing),
+    url(r'^$',views.index),
+    url(r'^prospectmeetups$',views.prospectmeetups),
 
     url(r'^users/(?P<user_id>\d+)$', views.show_user),
 
@@ -28,7 +29,6 @@ urlpatterns = [
     url(r'^changepassword/process$', views.changepassword_process),
 
     url(r'^bookmarks$', views.bookmarks),
-
 
     url(r'^meetups$', views.meetups),
     url(r'^meetups/new$', views.new_meetup),
@@ -58,7 +58,6 @@ urlpatterns = [
     url(r'^contact$', views.contact),
     url(r'^gyms$', views.gyms),
     url(r'^careers$', views.careers),
-
 
     url(r'^logout$', views.logout),
 

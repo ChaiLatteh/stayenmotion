@@ -4,56 +4,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/navbar.css">
     <meta charset="utf-8">
     <title>Meetups page</title>
-    <style>
-      .sidebar{
-        height:100%;
-        position:fixed;
-        left:0;
-        overflow-y:scroll;
-        width:210px;
-      }
-      .header{
-        position:fixed;
-        margin-left:230px;
-        background-color:white;
-        width:100%;
-        display:block;
-        top:55px;
-        /*margin-left:230px;
-        top:50;
-        width:auto;
-        height:100px;
-        background-color:orange;*/
-      }
-      .content{
-        margin-left:230px;
-        margin-top:40px;
-        width:auto;
-        /*background-color:yellow;*/
-      }
-      .footer{
-        /*position:fixed;*/
-        /*bottom:0px;*/
-        margin-left:230px;
-        /*margin-top:0;
-        margin-left: 230px;*/
-        width:100%;
-        background-color:white;
-      }
-    </style>
+    <link rel="stylesheet" href="../../static/css/meetups.css">
   </head>
   <body>
-    {% if messages %}
-      {% for message in messages %}
-        {{message}}
-      {% endfor %}
-    {% endif %}
-
-
     <div class="navbar">
-      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#1a1a1a; color:#e4e4e4;">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -64,60 +22,108 @@
             </button>
           </div>
           <div id="navbar" class="collapse navbar-collapse">
-            <h3 style="vertical-align:top; display:inline-block;">Welcome {{request.session.first_name}}!</h3>
+            <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{request.session.first_name}}</a>!</h3>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/" style="color:#e4e4e4;">Home</a></li>
               <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
               <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
               <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
               <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
-              <li><a href="/logout" style="color:skyblue;">Logout</a></li>
+              <li>
+                <div class="dropdown">
+                  {% if this_user.image %}
+                    <img class="dropbtn" src="{{this_user.image.url}}" alt="">
+                  {% else %}
+                    <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                  {% endif %}
+                  <div class="dropdown-content">
+                    <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                    <a href="#">My Deals</a>
+                    <a href="#">Bookmarks</a>
+                    <a href="/logout">Log Out</a>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
 
-    <div class="sidebar">
+    <!-- <div class="sidebar">
       <h3 style="color:blue;">HIHIASHFISDIHF</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </div>
+      <p>
 
-    <div class="header">
-      <form action="/meetups/search" style="display:inline-table;" method="GET">
-        {% csrf_token %}
-        <input placeholder="search..." name="search_box" type="text" required minlength="1">
-        <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
-      </form>
-      <button><a href="/meetups/new">Create Meetup</a></button>
+      </p> -->
+    <!-- </div> -->
+
+    <div class="searchbar">
+      <div class="searcharea">
+        <form action="/meetups/search" method="GET" class="searchbarform">
+          {% csrf_token %}
+          <input placeholder="search..." name="search_box" type="text" required minlength="1">
+          <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
+        </form>
+        <button><a href="/meetups/new">Create Meetup</a></button>
+        <div class="dropdown">
+          <p class="dropbtn">Sort</p>
+          <div class="dropdown-content">
+            <a href="/users/{{request.session.user_id}}">by:Members Going</a>
+            <a href="#">by: Interest</a>
+            <a href="#">Views</a>
+          </div>
+        </div>
+
+      </div>
       <!-- <a onClick="javascript:history.go(-1);" href="#">Previous Page</a> -->
     </div>
 
     <div class="content">
       <ul class="meetups_list" style="list-style:none;">
         {% for meetup in search_list %}
+
+        <div class="meetupdiv">
           <li>
-            <p>{{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
+            <p>Date of Meetup: {{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
           </li>
+          <p class="going">members going: 15</p>
+          <p class="interested">Interested Members: 8</p>
+        </div>
+          <div class="overlay">
+        </div>
+
         {% endfor %}
       </ul>
     </div>
+
     <div class="footer">
-      <div class="back_to_top" style="display:inline-table;">
-        <a onclick="document.body.scrollTop = 0;" href="#">Back to top</a>
+      <div class="conatiner">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="footerheader">Company</h5>
+              <a class="linkcont" href="/aboutus">About us</a>
+              <a class="linkcont" href="/careers">Careers</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Support</h4>
+              <a class="linkcont" href="/contact">Contact</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Partners</h4>
+              <a  class="linkcont" href="gyms">Gyms</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Community</h4>
+              <a class="linkcont" href="Blog">Blog</a>
+            </div>
+          </div>
+        </div>
+        <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+        <div class="appstorelink">
+          <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+        </div>
+
       </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
 
   </body>
 </html>

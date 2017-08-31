@@ -24,21 +24,11 @@
               <h3 style="color:#18233E; vertical-align:top; display:inline-block;">GymFinder</h3>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/" style="color:#18233E;">Why GymFinder</a></li>
-                <li><a href="/meetups" style="color:#18233E;">Explore</a></li>
                 <li><a href="/messageboard" style="color:#18233E;">How it work</a></li>
                 <li><a href="/social" style="color:#18233E;">Social Mention</a></li>
-                <li><a href="/deals" style="color:#18233E;">Community</a></li>
-                <li><a class="join" href="/"><span class="jointext">Join</span></a></li>
-                <!-- <li><div class="dropdown">
-                      <img class="dropbtn" src="../../static/images/portrait.png" alt="">
-                      <div class="dropdown-content">
-                        <a href="#">Account Overview</a>
-                        <a href="#">My Deals</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Log Out</a>
-                      </div>
-                    </div>
-                </li> -->
+                <li><a href="/prospectmeetups" style="color:#18233E;">Community</a></li>
+                <li><a class="join" href="/register"><span class="jointext">Join</span></a></li>
+                <li class="login"><a href="#login"><span class="logintext">Login</span></a></li>
               </ul>
             </div>
           </div>
@@ -120,6 +110,34 @@
       </div>
       <A style="margin-left:46%;position:relative; top:10px; width:30px; height:30px;" href="#top">Back to top</A>
     </div>
+  </div>
+  <div class="loginform">
+    <A NAME="login"></A>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <form class="user" action="/user_login" method="post">
+            <h1>User Login</h1>
+            {% csrf_token %}
+            <input type="text" name="user_login_email" placeholder="Email">
+            <input type="password" name="user_login_password" placeholder="Password">
+            <input type="submit" value="Login">
+          </form>
+        </div>
+        <div class="col-md-2 leftform">
+          <form class="business" action="/business_login" method="post">
+            <h1>Business Login</h1>
+            {% csrf_token %}
+            <input type="text" name="business_login_email" placeholder="Email">
+            <input type="password" name="business_login_password" placeholder="Password">
+            <input type="submit" value="Login">
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+
   </div>
   <div class="footer">
     <div class="conatiner">
