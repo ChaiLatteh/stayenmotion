@@ -215,6 +215,7 @@ class BusinessManager(models.Manager):
             'errors_list':None,
             }
 
+<<<<<<< HEAD
     def reset_password(self, data):
         errors = []
         this_business = data['this_business']
@@ -236,6 +237,43 @@ class BusinessManager(models.Manager):
             'errors_list':None,
             }
 
+=======
+class DealManager(models.Manager):
+    def creation(self,data):
+        errors=[]
+        if data['title']=="":
+            errors.append("Title may not be blank")
+        if len(data['address'])<3:
+            errors.append("address must but more than 3 characters")
+        if data['city'] == "":
+            errors.append("city cannot be blank")
+        if data['price'] == "":
+            errors.append("price cannot be blank")
+        if data['fine_print']=="":
+            errors.append("Fine Print cannot be blank")
+        if data['deal_type']=="":
+            errors.append("Deal type cannot be blank")
+        if data['contact_email']=="":
+            errors.append("Contact email cannot be blank")
+        if data['start_date']=="":
+            errors.append("Start date cannot be blank")
+        if data['end_date']=="":
+            errors.append("End date cannot be blank")
+        if len(data['details'])<5:
+            errors.append("details cannot be less than 5 characters")
+
+        if len(errors)>0:
+            return{
+            'new':None,
+            'errors_list':errors,
+            }
+        else:
+            new_deal=Deal.objects.create(business=data['business'], address=data['address'], city=data['city'], state=data['state'], deal_type=data['deal_type'], contact_email=data['contact_email'], title=data['title'], details=data['details'], fine_print=data['fine_print'], start_date=data['start_date'], price=data['price'], end_date=data['end_date'])
+            return{
+            'new':new_deal,
+            'errors_list':None
+            }
+>>>>>>> 4e182a47cdbb29e99593a64f8375134eae5a4579
 
 class MessageboardManager(models.Manager):
     def post(self, data):
@@ -413,18 +451,20 @@ class Messageboard_Message_View(models.Model):
 
 class Deal(models.Model):
     business=models.ForeignKey(Business, related_name="deals")
-    user=models.ForeignKey(User, related_name="deals")
-
+    address=models.CharField(max_length=255)
+    city=models.CharField(max_length=255)
+    state=models.CharField(max_length=255)
     deal_type=models.CharField(max_length=255)
     contact_email=models.CharField(max_length=255)
     title=models.CharField(max_length=255)
+    details=models.CharField(max_length=255)
     fine_print=models.CharField(max_length=255)
     price=models.IntegerField(null=False)
     start_date=models.CharField(max_length=255)
     end_date=models.CharField(max_length=255)
-
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+    objects=DealManager()
 
 
 

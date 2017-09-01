@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
-from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark
+from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark,Deal
 from .forms import UploadFileForm, Messageboard_MessageForm
 import datetime, random, requests, json
 from yelp.client import Client
@@ -490,7 +490,12 @@ def new_message_process(request):
             print "FAIL"
             form = Messageboard_MessageForm()
             return redirect('/messageboard/new')
-
+def deal_details(request, deal_id):
+    this_deal=Deal.objects.get(id=deal_id)
+    data={
+        'deal':this_deal,
+    }
+    return render(request, 'APPNAME/thisdeal.html', data)
 def show_message(request, message_id):
     this_message=Messageboard_Message.objects.get(id=message_id)
     Messageboard_Message_View.objects.create(messageboard_message=this_message)
@@ -751,17 +756,71 @@ def search_meetup(request):
         else:
             return redirect('/')
 
+<<<<<<< HEAD
+=======
+def index(request):
+    meetups_list=[]
+    messages_list=[]
+    deals_list=[]
+
+    for deal in Deal.objects.all().order_by('-created_at'):
+        print deal
+        deals_list.append(deal)
+    for message in Messageboard_Message.objects.all().order_by('-created_at'):
+        messages_list.append(message)
+    for meetup in Meetup.objects.all():
+        meetups_list.append(meetup)
+
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        data={
+        "this_user":this_user,
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        "deals_list":deals_list,
+        }
+        return render(request, 'APPNAME/home.html', data)
+
+    elif 'business_id' in request.session:
+        this_business = Business.objects.get(id=request.session['business_id'])
+        data={
+        "this_business":this_business,
+        "messages_list":messages_list,
+        "meetups_list":meetups_list,
+        "deals_list":deals_list,
+        }
+        return render(request, 'APPNAME/home.html', data)
+
+
+        # random.shuffle(meetupname)
+        # try:
+        # this_user=User.objects.get(id=request.session['user_id'])
+
+        # for like in Messageboard_Message_Like.objects.all():
+        #     likes_list.append(like)
+
+    else:
+        return render(request, 'APPNAME/landing.html')
+
+>>>>>>> 4e182a47cdbb29e99593a64f8375134eae5a4579
 
 def deals(request):
+    deals_list=[]
+
+    for deal in Deal.objects.all().order_by('-created_at'):
+        deals_list.append(deal)
+
     if 'user_id' in request.session:
         data={
         "this_user":User.objects.get(id=request.session['user_id']),
+        "deals_list":deals_list,
         }
         return render(request, 'APPNAME/deals.html', data)
 
     elif 'business_id' in request.session:
         data={
         "this_business":Business.objects.get(id=request.session['business_id']),
+        "deals_list":deals_list,
         }
         return render(request, 'APPNAME/deals.html', data)
     else:
@@ -837,7 +896,6 @@ def form(request):
     return render(request, 'APPNAME/form.html', data)
 
 def prospectmeetups(request):
-
     meetups_list=[]
     for meetup in Meetup.objects.all():
         meetups_list.append(meetup)
@@ -848,6 +906,31 @@ def prospectmeetups(request):
     }
     return render(request, 'APPNAME/prospectmeetups.html', data)
 
+def savingnewdeal(request):
+    data={
+    'title':request.POST['title'],
+    'address':request.POST['address'],
+    'city':request.POST['city'],
+    'state':request.POST['state'],
+    'price':request.POST['price'],
+    'fine_print':request.POST['fine_print'],
+    'deal_type':request.POST['deal_type'],
+    'contact_email':request.POST['contact_email'],
+    'start_date':request.POST['start_date'],
+    'end_date':request.POST['end_date'],
+    'details':request.POST['details'],
+    'business': Business.objects.get(id=request.session['business_id'])
+    }
+
+    new_deal=Deal.objects.creation(data)
+
+    if new_deal['errors_list']:
+        for error in new_deal['errors_list']:
+            messages.add_message(request, messages.ERROR, error)
+        return redirect('/form')
+    else:
+        messages.add_message(request,messages.ERROR, "Successfully created a deal!")
+        return redirect('/deals')
 #NO LONGER IN USE
 # def messageboard(request):
 #     this_user=User.objects.get(id=request.session['user_id'])
