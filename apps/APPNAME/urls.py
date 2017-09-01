@@ -12,10 +12,8 @@ urlpatterns = [
 
     url(r'^business_register$', views.business_register),
     url(r'^business_login$', views.business_login),
-
     url(r'^$',views.index),
     url(r'^prospectmeetups$',views.prospectmeetups),
-
     url(r'^users/(?P<user_id>\d+)$', views.show_user),
 
     url(r'^businesses/(?P<business_id>\d+)$', views.show_business),
@@ -47,7 +45,8 @@ urlpatterns = [
     url(r'^messageboard/(?P<message_id>\d+)/comment/process$', views.new_comment_process),
     url(r'^messageboard/(?P<message_id>\d+)/bookmark_process$', views.bookmark_message_process),
     url(r'^messageboard/(?P<message_id>\d+)/unbookmark_process$', views.unbookmark_message_process),
-
+    url(r'^deal/(?P<deal_id>\d+)$',views.deal_details),
+    url(r'^savingnewdeal$', views.savingnewdeal),
     url(r'^deals$', views.deals),
     url(r'^createdeal$', views.createdeal),
     url(r'^getting$', views.getting),

@@ -36,7 +36,19 @@
         </div>
       </nav>
     </div>
-
+    <section class="probootstrap-section-bg overlay" style="background-image: url(../../static/images/surfing.jpg);" data-stellar-background-ratio="0.5" data-section="specialties">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center probootstrap-animate">
+            <div class="probootstrap-heading">
+              <h2 class="primary-heading">View</h2>
+              <h3 class="secondary-heading">Our Deals</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="dealscollage">
     {% if request.session.business_id %}
       <form class="createbutt" action="/createdeal" method="post">
         {% csrf_token %}
@@ -44,16 +56,23 @@
       </form>
     {% endif %}
       <div class="">
-        <h1>This is Deals Template</h1>
         <div class="container">
           <div class="row">
+            {% for deal in deals_list %}
             <!-- for loop through content -->
-            <div class="col-md-3">
-              <h1></h1>
+            <div class="col-md-4 dealsection">
+              <h4>{{deal.title}}</h4>
+              <p>{{deal.deal_type}}</p>
+              <p>{{deal.end_date}}</p>
+              <p>{{deal.price}}</p>
+              <p>{{deal.business.name}}</p>
+              <a href="/deal/{{deal.id}}">More details</a>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>
+    </div>
 
     <div class="footer">
       <div class="conatiner">
