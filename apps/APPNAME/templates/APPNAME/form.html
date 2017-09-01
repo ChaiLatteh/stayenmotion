@@ -51,16 +51,17 @@
         <h5 class="titledesc">Market your business to a wide range of fitness enthusiasts.</h5>
       </div>
       <p class="toptext">Do you have a great deal to offer our members?  This is a great way for you to reach many indivduals that value fitness.  Our users love to spread the word on great businesses, add a deal today to to reach our users.</p>
-      <form class="form" action="index.html" method="post">
+      <form class="form" action="/savingnewdeal" method="post">
 
         <img class="businessimage" src="{{theimage}}" alt="">
       <div class="container">
         <div class="row" style="width:100%;">
           <div class="form_left bothforms">
           <div class="col-md-2">
-              <label for="name">Name: </label>
+              <label for="businessname">Business Name: </label>
               <br>
-              <input type="text" name="name" value="{{ name }}">
+                {% csrf_token %}
+              <input type="text" name="businessname" value="{{ name }}">
               <label for="address">Address:</label>
               <input type="text" name="address" value="{{ address }}">
               <label for="city">City:</label>
@@ -72,14 +73,14 @@
               <input type="title" name="title" value="">
               <label for="price">Price:</label>
               <input type="text" name="price" value=""placeholder="ex:10.00">
-              <label for="fineprint">Fine Print: </label>
-              <textarea name="fineprint" rows="8" cols="40" placeholder="FinePrint Here"></textarea>
+              <label for="fine_print">Fine Print: </label>
+              <textarea name="fine_print" rows="8" cols="40" placeholder="FinePrint Here"></textarea>
             </div>
           <div class="col-md-2">
             <div class="form_right bothforms">
               <label for="dealtype">Deal Type: </label>
               <br>
-              <select name="dealtype">
+              <select name="deal_type">
                 <option value="trial">Trial</option>
                 <option value="coupon">Coupon</option>
                 <option value="rebate">Rebate</option>
@@ -98,7 +99,7 @@
               <input type="date" name="end_date">
               <br>
               <label for="details">Deal details: </label>
-              <textarea name="description" rows="8" cols="40" placeholder="Deal details"></textarea>
+              <textarea name="details" rows="8" cols="40" placeholder="Deal details"></textarea>
               <br>
             </div>
           </div>

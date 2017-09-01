@@ -1,13 +1,14 @@
 .footer{
-    position: fixed;
+    position: relative;
     bottom: 0px;
     width: 100%;
-    height: 300px;
+    height:10%;
     background-color: #151E35;
+    margin-top: 300px;
   }
   .row{
     margin-left: 7%;
-  
+
   }
   .footerheader{
     color: white;
@@ -24,3 +25,407 @@
     height: 45px;
     margin-left: 8%
   }
+  .dealsection{
+    background:grey;
+    max-height: 300px;
+  }
+  .probootstrap-section {
+    padding: 5em 0;
+  }
+
+  .probootstrap-section.probootstrap-border-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .probootstrap-section.probootstrap-border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .probootstrap-section > .container.probootstrap-border-top {
+    padding-top: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .probootstrap-section.probootstrap-bg-white {
+    background: #ffffff;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-section {
+      padding: 3em 0;
+    }
+  }
+
+  .probootstrap-section-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 7em 0;
+    position: relative;
+    height: 300px;
+    margin-top: -50px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-section-bg {
+      padding: 3em 0;
+      height: 300px;
+    }
+  }
+
+  .probootstrap-section-bg.overlay:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .probootstrap-section-bg .probootstrap-heading {
+    margin-top: 250px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-section-bg .probootstrap-heading {
+      margin-top: 50px;
+    }
+  }
+
+  .container-fluid .navbar-brand {
+    margin-left: 15px;
+  }
+
+  .container-fluid .dropdown-submenu {
+    position: relative;
+  }
+
+  .container-fluid .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: auto;
+    right: 100%;
+    margin-top: -1px;
+  }
+
+  @media screen and (max-width: 480px) {
+    .container-fluid .dropdown-submenu:hover > .dropdown-menu {
+      display: block;
+    }
+  }
+  .probootstrap-hero > .container {
+    position: relative;
+    z-index: 2;
+  }
+  .probootstrap-section > .container.probootstrap-border-top {
+    padding-top: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-next i,
+  .owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-prev i {
+    color: #ffffff;
+  }
+
+  .owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-next:hover i,
+  .owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-prev:hover i {
+    color: #ffffff;
+  }
+  .probootstrap-cell-retro {
+    width: 100%;
+    float: left;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: -13%;
+    position: relative;
+  }
+
+  .probootstrap-cell-retro .half {
+    width: 50%;
+    float: left;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-cell-retro .half {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+  .probootstrap-cell-retro .half {
+    width: 50%;
+    float: left;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-cell-retro .half {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+  .probootstrap-cell {
+    background: #ffffff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .probootstrap-cell .image, .probootstrap-cell .text {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 992px) {
+    .probootstrap-cell .image, .probootstrap-cell .text {
+      width: 100%;
+    }
+  }
+
+  .probootstrap-cell .image {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  @media screen and (max-width: 992px) {
+    .probootstrap-cell .image {
+      height: 200px;
+    }
+  }
+
+  .probootstrap-cell .text {
+    padding: 40px;
+    position: relative;
+  }
+
+  .probootstrap-cell .text h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .probootstrap-cell .text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .probootstrap-cell .text p.price {
+    font-size: 20px;
+    color: #FFA33E;
+  }
+
+  .probootstrap-cell .text:before {
+    z-index: 22;
+    right: 100%;
+    top: 15%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 225, 255, 0);
+    border-right-color: #ffffff;
+    border-width: 12px;
+    margin-top: -12px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-cell .text:before {
+      display: none;
+    }
+  }
+
+  .probootstrap-cell.reverse .image {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    min-height: 100%;
+  }
+
+  @media screen and (max-width: 992px) {
+    .probootstrap-cell.reverse .image {
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .probootstrap-cell.reverse .text:before {
+    z-index: 22;
+    left: 100%;
+    top: 15%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 225, 255, 0);
+    border-left-color: #ffffff;
+    border-width: 12px;
+    margin-top: -12px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-cell.reverse .text:before {
+      display: none;
+    }
+  }
+  .probootstrap-animate {
+    opacity: 1;
+  }
+  .text-center {
+      text-align: center;
+      height: 250px;
+  }
+  .probootstrap-section-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 7em 0;
+    position: relative;
+    height: 600px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-section-bg {
+      padding: 3em 0;
+      height: 300px;
+    }
+  }
+
+  .probootstrap-section-bg.overlay:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .probootstrap-section-bg .probootstrap-heading {
+    margin-top: 250px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-section-bg .probootstrap-heading {
+      margin-top: 50px;
+    }
+  }
+  .probootstrap-hero > .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  .probootstrap-section-bg.overlay:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .flexslider .slides > li.overlay:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  @media screen and (max-width: 768px) {
+    .probootstrap-section-bg .probootstrap-heading {
+      margin-top: 50px;
+    }
+  }
+  .probootstrap-heading .primary-heading {
+    font-family: "Pinyon Script", serif;
+    font-style: italic;
+    color: #FFA33E;
+    margin: 0;
+    padding: 0;
+    font-size: 80px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-heading .primary-heading {
+      font-size: 70px;
+    }
+  }
+
+  .probootstrap-heading .secondary-heading {
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    letter-spacing: .05em;
+    font-size: 50px;
+    position: relative;
+    top: -50px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-heading .secondary-heading {
+      font-size: 40px;
+    }
+  }
+
+  .probootstrap-heading.dark .secondary-heading {
+    color: #000000;
+  }
+
+  .probootstrap-heading .seperator {
+    display: block;
+    margin: 0 auto 10px auto;
+    color: #ccc;
+    font-weight: 300;
+  }
+  .probootstrap-heading .primary-heading {
+    font-family: "Pinyon Script", serif;
+    color: #FFA33E;
+    margin: 0;
+    padding: 0;
+    font-size: 80px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-heading .primary-heading {
+      font-size: 70px;
+    }
+  }
+  .probootstrap-heading .secondary-heading {
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    letter-spacing: .05em;
+    font-size: 50px;
+    position: relative;
+    top: -50px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .probootstrap-heading .secondary-heading {
+      font-size: 40px;
+    }
+  }
+
+  .probootstrap-heading.dark .secondary-heading {
+    color: #000000;
+    margin-top: 50px;
+  }
+body{
+  background-color: black;
+}
