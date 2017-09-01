@@ -9,28 +9,20 @@ from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 
 # Create your views here.
-def register(request):
+def index(request):
     meetups_list=[]
     messages_list=[]
-
     for message in Messageboard_Message.objects.all().order_by('-created_at'):
         messages_list.append(message)
     for meetup in Meetup.objects.all():
         meetups_list.append(meetup)
 
-
-
     if 'user_id' in request.session:
         this_user = User.objects.get(id=request.session['user_id'])
-        liked_messages_list=[]
-        for like in Messageboard_Message_Like.objects.filter(user=this_user).order_by('-created_at'):
-            liked_messages_list.append(Messageboard_Message.objects.get(id=like.messageboard_message.id))
-        liked_messages_list=liked_messages_list[:3]
         data={
         "this_user":this_user,
         "messages_list":messages_list,
         "meetups_list":meetups_list,
-        "liked_messages_list":liked_messages_list,
         }
         return render(request, 'APPNAME/home.html', data)
 
@@ -51,9 +43,19 @@ def register(request):
         # for like in Messageboard_Message_Like.objects.all():
         #     likes_list.append(like)
 
-
     else:
-        return render(request, 'APPNAME/index.html')
+        return render(request, 'APPNAME/landing.html')
+
+
+def register(request):
+    if 'user_id' in request.session:
+        return redirect('/')
+    elif 'business_id' in request.session:
+        return redirect('/')
+    else:
+        return render(request, 'APPNAME/register.html')
+
+
 
 def user_register(request):
     data = {
@@ -62,12 +64,16 @@ def user_register(request):
     'email':request.POST['user_reg_email'],
     'password':request.POST['user_reg_password'],
     'confirm_password':request.POST['user_reg_confirm_password'],
+    'question1':request.POST['user_reg_question1'],
+    'answer1':request.POST['user_reg_answer1'].lower(),
+    'question2':request.POST['user_reg_question2'],
+    'answer2':request.POST['user_reg_answer2'].lower(),
     }
     new_user = User.objects.register(data)
     if new_user['errors_list']:
         for error in new_user['errors_list']:
             messages.add_message(request, messages.ERROR, error)
-        return redirect('/')
+        return redirect('/register')
     else:
         messages.add_message(request, messages.ERROR, "Successfully Registered!")
         return redirect('/')
@@ -81,10 +87,9 @@ def user_login(request):
     if user['errors_list']:
         for error in user['errors_list']:
             messages.add_message(request, messages.ERROR, error)
-        return redirect('/')
     else:
         request.session['user_id']=user['logged_user'].id
-        return redirect('/')
+    return redirect('/')
 
 def business_register(request):
     data = {
@@ -96,14 +101,18 @@ def business_register(request):
     'email':request.POST['business_reg_email'],
     'password':request.POST['business_reg_password'],
     'confirm_password':request.POST['business_reg_confirm_password'],
+    'question1':request.POST['business_reg_question1'],
+    'answer1':request.POST['business_reg_answer1'].lower(),
+    'question2':request.POST['business_reg_question2'],
+    'answer2':request.POST['business_reg_answer2'].lower(),
     }
     new_business = Business.objects.register(data)
     if new_business['errors_list']:
         for error in new_business['errors_list']:
             messages.add_message(request, messages.ERROR, error)
-        return redirect('/')
+        return redirect('/register')
     else:
-        messages.add_message(request, messages.ERROR, "Successfully Registered!")
+        messages.add_message(request, messages.ERROR, "Successfully Registered! Please log in to continue.")
         return redirect('/')
 
 def business_login(request):
@@ -115,10 +124,99 @@ def business_login(request):
     if business['errors_list']:
         for error in business['errors_list']:
             messages.add_message(request, messages.ERROR, error)
-        return redirect('/')
+        return redirect('/register')
     else:
         request.session['business_id']=business['logged_business'].id
         return redirect('/')
+
+def findpassword(request):
+    request.session.clear()
+    return render(request, 'APPNAME/findpassword.html')
+
+def findpassword2(request):
+    try:
+        found_email = User.objects.get(email=request.POST['email'])
+    except:
+        try:
+            found_email = Business.objects.get(email=request.POST['email'])
+        except:
+            if 'found_email_address' not in request.session:
+                messages.add_message(request, messages.ERROR, "Email does not exist")
+            return redirect('/findpassword')
+    data = {
+    'found_email':found_email,
+    }
+    request.session['found_email_address']=found_email.email
+    return render(request, 'APPNAME/findpassword2.html', data)
+
+def findpassword3(request):
+    try:
+        found_email = User.objects.get(email=request.session['found_email_address'])
+    except:
+        found_email = Business.objects.get(email=request.session['found_email_address'])
+    if found_email.answer1.lower()==request.POST['answer1'].lower() and found_email.answer2.lower()==request.POST['answer2'].lower():
+        request.session['token']=found_email.email
+        return redirect('/resetpassword')
+    else:
+        request.session['token']=""
+        messages.add_message(request, messages.ERROR, "Wrong answer(s)")
+        data={
+        'found_email':found_email,
+        }
+        return render(request, 'APPNAME/findpassword2.html', data)
+
+def resetpassword(request):
+    if 'found_email_address' and 'token' in request.session:
+        if request.session['found_email_address']==request.session['token']:
+            try:
+                found_email = User.objects.get(email=request.session['found_email_address'])
+            except:
+                found_email = Business.objects.get(email=request.session['found_email_address'])
+            return render(request, 'APPNAME/resetpassword.html')
+        else:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+            return redirect('/findpassword')
+    else:
+        return redirect('/findpassword')
+
+def resetpassword_process(request):
+    if request.session['found_email_address']==request.session['token']:
+        try:
+            this_user = User.objects.get(email=request.session['found_email_address'])
+            data={
+            'this_user':this_user,
+            'password':request.POST['password'],
+            'confirm_password':request.POST['confirm_password'],
+            }
+            user = User.objects.reset_password(data)
+            if user['errors_list']:
+                for error in user['errors_list']:
+                    messages.add_message(request, messages.ERROR, error)
+                return redirect('/resetpassword')
+            else:
+                messages.add_message(request, messages.ERROR, "Password has been reset.")
+                request.session.clear()
+                return redirect('/')
+        except:
+            this_business = Business.objects.get(email=request.session['found_email_address'])
+            data={
+            'this_business':this_business,
+            'password':request.POST['password'],
+            'confirm_password':request.POST['confirm_password'],
+            }
+            business = Business.objects.reset_password(data)
+            if business['errors_list']:
+                for error in business['errors_list']:
+                    messages.add_message(request, messages.ERROR, error)
+                return redirect('/resetpassword')
+            else:
+                messages.add_message(request, messages.ERROR, "Password has been reset.")
+                request.session.clear()
+                return redirect('/')
+
+    else:
+        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/findpassword')
 
 def show_user(request, user_id):
     a_user = User.objects.get(id=user_id)
@@ -658,6 +756,8 @@ def search_meetup(request):
         else:
             return redirect('/')
 
+<<<<<<< HEAD
+=======
 def index(request):
     meetups_list=[]
     messages_list=[]
@@ -702,6 +802,7 @@ def index(request):
     else:
         return render(request, 'APPNAME/landing.html')
 
+>>>>>>> 4e182a47cdbb29e99593a64f8375134eae5a4579
 
 def deals(request):
     deals_list=[]

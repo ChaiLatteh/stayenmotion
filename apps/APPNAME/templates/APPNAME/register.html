@@ -8,7 +8,10 @@
       border-collapse:collapse;
 
       border:1px solid black;
-
+    }
+    td{
+      width:50%;
+      vertical-align: top;
     }
     form{
       padding:10px;
@@ -41,9 +44,20 @@
             <br>
             <input id="user_reg_password" type="password" placeholder="Password" name="user_reg_password" required minlength="8">
             <input id="user_reg_confirm_password" type="password" placeholder="Re-enter password" name="user_reg_confirm_password" required minlength="8">
+            <br>
+            <br>
+            <input type="text" name="user_reg_question1" placeholder="Security question 1" required minlength=1> (used for finding password)
+            <br>
+            <input type="text" name="user_reg_answer1" placeholder="Answer" required minlength=1>
+            <br>
+            <input type="text" name="user_reg_question2" placeholder="Security question 2" required minlength=1>
+            <br>
+            <input type="text" name="user_reg_answer2" placeholder="Answer" required minlength=1>
+            <br>
             <input type="submit" value="Register">
           </form>
         </td>
+
         <td>
           <form class="business" action="/business_register" method="post">
             <h1>Business Register</h1>
@@ -112,11 +126,21 @@
             <br>
             <input type="password" name="business_reg_password" placeholder="Password" required minlength="8">
             <input type="password" name="business_reg_confirm_password" placeholder="Re-enter password" required minlength="8">
+            <br>
+            <br>
+            <input type="text" name="business_reg_question1" placeholder="Security question 1" required minlength="1"> (used for finding password)
+            <br>
+            <input type="text" name="business_reg_answer1" placeholder="Answer" required minlength="1">
+            <br>
+            <input type="text" name="business_reg_question2" placeholder="Security question 2" required minlength="1">
+            <br>
+            <input type="text" name="business_reg_answer2" placeholder="Answer" required minlength="1">
+            <br>
             <input type="submit" value="Register">
           </form>
         </td>
       </tr>
-      
+
     </table>
   </body>
 </html>
