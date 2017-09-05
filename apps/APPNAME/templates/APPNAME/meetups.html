@@ -55,6 +55,7 @@
       </p> -->
     <!-- </div> -->
 
+
     <div class="searchbar">
       <div class="searcharea">
         <form action="/meetups/search" method="GET" class="searchbarform">
@@ -62,17 +63,13 @@
           <input placeholder="search..." name="search_box" type="text" required minlength="1">
           <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
         </form>
+        {% if request.session.user_id %}
         <button><a href="/meetups/new">Create Meetup</a></button>
-        <div class="dropdown">
-          <p class="dropbtn">Sort</p>
-          <div class="dropdown-content">
-            <a href="/users/{{request.session.user_id}}">by:Members Going</a>
-            <a href="#">by: Interest</a>
-            <a href="#">Views</a>
-          </div>
+        {% endif %}
         </div>
 
       </div>
+    </div>
 
     <!-- <div class="header">
       <form action="/meetups/search" style="display:inline-table;" method="GET">
@@ -107,7 +104,6 @@
 
 
 
-    </div>
     <div class="footer">
       <div class="conatiner">
         <div class="row">

@@ -9,44 +9,6 @@ from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 
 # Create your views here.
-def index(request):
-    meetups_list=[]
-    messages_list=[]
-    for message in Messageboard_Message.objects.all().order_by('-created_at'):
-        messages_list.append(message)
-    for meetup in Meetup.objects.all():
-        meetups_list.append(meetup)
-
-    if 'user_id' in request.session:
-        this_user = User.objects.get(id=request.session['user_id'])
-        data={
-        "this_user":this_user,
-        "messages_list":messages_list,
-        "meetups_list":meetups_list,
-        }
-        return render(request, 'APPNAME/home.html', data)
-
-    elif 'business_id' in request.session:
-        this_business = Business.objects.get(id=request.session['business_id'])
-        data={
-        "this_business":this_business,
-        "messages_list":messages_list,
-        "meetups_list":meetups_list,
-        }
-        return render(request, 'APPNAME/home.html', data)
-
-
-        # random.shuffle(meetupname)
-        # try:
-        # this_user=User.objects.get(id=request.session['user_id'])
-
-        # for like in Messageboard_Message_Like.objects.all():
-        #     likes_list.append(like)
-
-    else:
-        return render(request, 'APPNAME/landing.html')
-
-
 def register(request):
     if 'user_id' in request.session:
         return redirect('/')
@@ -756,8 +718,6 @@ def search_meetup(request):
         else:
             return redirect('/')
 
-<<<<<<< HEAD
-=======
 def index(request):
     meetups_list=[]
     messages_list=[]
@@ -801,8 +761,6 @@ def index(request):
 
     else:
         return render(request, 'APPNAME/landing.html')
-
->>>>>>> 4e182a47cdbb29e99593a64f8375134eae5a4579
 
 def deals(request):
     deals_list=[]
@@ -908,6 +866,7 @@ def prospectmeetups(request):
 
 def savingnewdeal(request):
     data={
+    'name':request.POST['businessname'],
     'title':request.POST['title'],
     'address':request.POST['address'],
     'city':request.POST['city'],
@@ -927,7 +886,7 @@ def savingnewdeal(request):
     if new_deal['errors_list']:
         for error in new_deal['errors_list']:
             messages.add_message(request, messages.ERROR, error)
-        return redirect('/form')
+        return redirect('/createdeal')
     else:
         messages.add_message(request,messages.ERROR, "Successfully created a deal!")
         return redirect('/deals')

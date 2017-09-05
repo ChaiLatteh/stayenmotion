@@ -48,6 +48,14 @@
         </div>
       </nav>
     </div>
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endfor %}
+    {% endif %}
+
     <h2>Please add the details of your business below and select from the following page</h2>
         <form class="" action="/pickbusiness" method="post">
           {% csrf_token %}
