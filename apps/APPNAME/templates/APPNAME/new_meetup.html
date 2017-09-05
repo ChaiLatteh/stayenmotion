@@ -16,12 +16,7 @@
     </style>
   </head>
   <body>
-    
-    {% if messages %}
-      {% for message in messages %}
-        <p style="color:red;">{{message}}</p>
-      {% endfor %}
-    {% endif %}
+
 
     <div class="navbar">
         <nav class="navbar navbar-default navbar-fixed-top thenav">
@@ -78,6 +73,13 @@
           </div>
         </nav>
       </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <p style="color:red;">{{message}}</p>
+      {% endfor %}
+    {% endif %}
+
 
     <h4>Create New Meetup</h4>
     <form action="/meetups/new/process" method="post">

@@ -64,6 +64,19 @@
             </div>
           </nav>
         </div>
+<<<<<<< HEAD
+      </nav>
+    </div>
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endfor %}
+    {% endif %}
+
+=======
+>>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
     <h2>Please add the details of your business below and select from the following page</h2>
         <form class="" action="/pickbusiness" method="post">
           {% csrf_token %}

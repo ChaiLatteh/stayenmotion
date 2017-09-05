@@ -91,7 +91,7 @@
         <a class="dealslink" href="/deals">View all deals</a>
         <div class="row dealssub">
           <div class="dealscontent">
-            
+
               <div class="col-md-3 thesecs">
                 <div class="imageicon">
                   {% if deals_list.0.business.image %}
@@ -255,7 +255,9 @@
                 <p>{{meetups_list.0.description}}</p>
                 <p>{{meetups_list.0.location}}</p>
                 <p>{{meetups_list.0.date}}</p>
-                <a href="/meetups/{{meetups_list.0.id}}">more details</a>
+                {% if meetups_list.0 %}
+                  <a href="/meetups/{{meetups_list.0.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
@@ -270,7 +272,9 @@
                 <p>{{meetups_list.1.description}}</p>
                 <p>{{meetups_list.1.location}}</p>
                 <p>{{meetups_list.1.date}}</p>
-                <a href="/meetups/{{meetups_list.1.id}}">more details</a>
+                {% if meetups_list.1 %}
+                  <a href="/meetups/{{meetups_list.1.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
@@ -285,7 +289,9 @@
                 <p>{{meetups_list.2.description}}</p>
                 <p>{{meetups_list.2.location}}</p>
                 <p>{{meetups_list.2.date}}</p>
-                <a href="/meetups/{{meetups_list.2.id}}">more details</a>
+                {% if meetups_list.2 %}
+                  <a href="/meetups/{{meetups_list.2.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
 
@@ -304,7 +310,9 @@
                 <p>{{meetups_list.3.description}}</p>
                 <p>{{meetups_list.3.location}}</p>
                 <p>{{meetups_list.3.date}}</p>
-                <a href="/meetups/{{meetups_list.3.id}}">more details</a>
+                {% if meetups_list.3 %}
+                  <a href="/meetups/{{meetups_list.3.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
@@ -319,7 +327,9 @@
                 <p>{{meetups_list.4.description}}</p>
                 <p>{{meetups_list.4.location}}</p>
                 <p>{{meetups_list.4.date}}</p>
-                <a href="/meetups/{{meetups_list.4.id}}">more details</a>
+                {% if meetups_list.4 %}
+                  <a href="/meetups/{{meetups_list.4.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
@@ -334,7 +344,9 @@
                 <p>{{meetups_list.5.description}}</p>
                 <p>{{meetups_list.5.location}}</p>
                 <p>{{meetups_list.5.date}}</p>
-                <a href="/meetups/{{meetups_list.5.id}}">more details</a>
+                {% if meetups_list.5 %}
+                  <a href="/meetups/{{meetups_list.5.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
 
