@@ -9,6 +9,11 @@ urlpatterns = [
     url(r'^register$', views.register),
     url(r'^user_register$', views.user_register),
     url(r'^user_login$', views.user_login),
+    url(r'^findpassword$', views.findpassword),
+    url(r'^findpassword2$', views.findpassword2),
+    url(r'^findpassword3$', views.findpassword3),
+    url(r'^resetpassword$', views.resetpassword),
+    url(r'^resetpassword_process$', views.resetpassword_process),
 
     url(r'^business_register$', views.business_register),
     url(r'^business_login$', views.business_login),

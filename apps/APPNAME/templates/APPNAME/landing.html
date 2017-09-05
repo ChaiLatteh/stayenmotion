@@ -9,6 +9,14 @@
     <title></title>
   </head>
   <body>
+    {% if messages %}
+      {% for message in messages %}
+      <script>
+        alert('{{message}}');
+      </script>
+      {% endfor %}
+    {% endif %}
+
     <div class="top_image" style="margin-bottom:0;">
       <div class="navbar" style="background-color:#FFFFFF; border:none;">
         <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#FFFFFF; color:#e4e4e4;">
@@ -124,6 +132,7 @@
             <input type="password" name="user_login_password" placeholder="Password">
             <input type="submit" value="Login">
           </form>
+          <a href="/findpassword">Forgot password?</a>
         </div>
         <div class="col-md-2 leftform">
           <form class="business" action="/business_login" method="post">
@@ -133,6 +142,7 @@
             <input type="password" name="business_login_password" placeholder="Password">
             <input type="submit" value="Login">
           </form>
+          <a href="/findpassword">Forgot password?</a>
         </div>
 
       </div>

@@ -19,6 +19,14 @@ class UserManager(models.Manager):
             errors.append("Last name must be only letters.")
         if data['email']=="":
             errors.append("Email address may not be blank.")
+        if data['question1']=="":
+            errors.append("Security question 1 may not be blank.")
+        if data['answer1']=="":
+            errors.append("Answer for security question 1 may not be blank.")
+        if data['question2']=="":
+            errors.append("Security question 2 may not be blank.")
+        if data['answer2']=="":
+            errors.append("Answer for security question 2 may not be blank.")
         try:
             User.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
@@ -43,7 +51,7 @@ class UserManager(models.Manager):
             }
         else:
             data['password']=bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
-            new_user=User.objects.create(first_name=data['first_name'], last_name=data['last_name'], email=data['email'], password=data['password'])
+            new_user=User.objects.create(first_name=data['first_name'], last_name=data['last_name'], email=data['email'], password=data['password'], question1=data['question1'], answer1=data['answer1'], question2=data['question2'], answer2=data['answer2'])
             return{
             'new':new_user,
             'errors_list':None,
@@ -91,6 +99,26 @@ class UserManager(models.Manager):
             'user':this_user,
             'errors_list':None,
             }
+    def reset_password(self, data):
+        errors = []
+        this_user = data['this_user']
+        if len(data['password'])<8:
+            errors.append("Password must be at least 8 characters long.")
+        if data['password']!=data['confirm_password']:
+            errors.append("New password and confirm password do not match.")
+
+        if len(errors)>0:
+            return {
+            'user':None,
+            'errors_list':errors,
+            }
+        else:
+            this_user.password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
+            this_user.save()
+            return {
+            'user':this_user,
+            'errors_list':None,
+            }
 
 class BusinessManager(models.Manager):
     def register(self, data):
@@ -107,6 +135,14 @@ class BusinessManager(models.Manager):
             errors.append("Zip code may not be blank.")
         if data['email']=="":
             errors.append("Email address may not be blank.")
+        if data['question1']=="":
+            errors.append("Security question 1 may not be blank.")
+        if data['answer1']=="":
+            errors.append("Answer for security question 1 may not be blank.")
+        if data['question2']=="":
+            errors.append("Security question 2 may not be blank.")
+        if data['answer2']=="":
+            errors.append("Answer for security question 2 may not be blank.")
         try:
             User.objects.get(email=data['email'])
             errors.append("Entered email already exists.")
@@ -130,9 +166,8 @@ class BusinessManager(models.Manager):
             'errors_list':errors,
             }
         else:
-            print data['address']
             data['password']=bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
-            new_business=Business.objects.create(name=data['name'], address=data['address'], city=data['city'], state=data['state'], zipcode=data['zipcode'], email=data['email'], password=data['password'])
+            new_business=Business.objects.create(name=data['name'], address=data['address'], city=data['city'], state=data['state'], zipcode=data['zipcode'], email=data['email'], password=data['password'], question1=data['question1'], answer1=data['answer1'], question2=data['question2'], answer2=data['answer2'])
             return{
             'new':new_business,
             'errors_list':None,
@@ -179,6 +214,29 @@ class BusinessManager(models.Manager):
             'business':this_business,
             'errors_list':None,
             }
+    def reset_password(self, data):
+        errors = []
+        this_business = data['this_business']
+        if len(data['password'])<8:
+            errors.append("Password must be at least 8 characters long.")
+        if data['password']!=data['confirm_password']:
+            errors.append("New password and confirm password do not match.")
+
+        if len(errors)>0:
+            return {
+            'business':None,
+            'errors_list':errors,
+            }
+        else:
+            this_business.password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
+            this_business.save()
+            return {
+            'business':this_business,
+            'errors_list':None,
+            }
+
+
+
 
 class DealManager(models.Manager):
     def creation(self,data):
@@ -292,6 +350,10 @@ class User(models.Model):
     last_name=models.CharField(max_length=255)
     email=models.CharField(max_length=255)
     password=models.CharField(max_length=255)
+    question1=models.CharField(max_length=255)
+    answer1=models.CharField(max_length=255)
+    question2=models.CharField(max_length=255)
+    answer2=models.CharField(max_length=255)
     image=models.FileField(upload_to="profile_picture", null=True, blank=False)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -305,6 +367,10 @@ class Business(models.Model):
     zipcode = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    question1 = models.CharField(max_length=255)
+    answer1 = models.CharField(max_length=255)
+    question2 = models.CharField(max_length=255)
+    answer2 = models.CharField(max_length=255)
     image=models.FileField(upload_to="business_picture", null=True, blank=False)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
