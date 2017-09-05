@@ -31,8 +31,8 @@
                 <li><a class="navlinks" href="/">Home</a></li>
                 <li><a class="navlinks" href="/meetups">Meetups</a></li>
                 <li><a class="navlinks" href="/messageboard">Message Board</a></li>
-                <li><a class="navlinks" href="/social">Social</a></li>
-                <li><a class="navlinks" href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <!-- <li><a class="navlinks" href="/social">Social</a></li> -->
+                <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
                 <li>
                   <div class="dropdown">
                     {% if request.session.user_id %}
@@ -54,8 +54,8 @@
                       {% elif request.session.business_id %}
                         <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                       {% endif %}
-                      <a href="#">My Deals</a>
-                      <a href="#">Settings</a>
+                      <a href="/bookmarks">My Bookmarks</a>
+                      <a href="updateprofile">Edit Profile</a>
                       <a href="/logout">Log Out</a>
                     </div>
                   </div>
