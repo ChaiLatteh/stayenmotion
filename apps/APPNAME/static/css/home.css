@@ -340,6 +340,7 @@ height:750px;
 }
 .boardtitle{
   margin:0;
+  color: white;
 }
 .meetupsbackground{
   background-color: #586b5b;
@@ -349,7 +350,12 @@ height:750px;
   margin: none;
 }
 .image{
-  width: 100%
+  width: 100%;
+  height:250px;
+}
+.messageimage{
+  width: 100%;
+  height:100px;
 }
 .message_details{
   display: block;
@@ -393,6 +399,7 @@ height:750px;
   padding: 7em 0;
   position: relative;
   height: 300px;
+
 }
 
 @media screen and (max-width: 768px) {
@@ -608,6 +615,7 @@ height:750px;
 }
 .text-center {
     text-align: center;
+    height: 250px;
 }
 .probootstrap-section-bg {
   background-size: cover;

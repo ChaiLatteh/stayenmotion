@@ -18,25 +18,6 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span><!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-		<!-- BASICS -->
-        <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Amoeba free one page responsive bootstrap site template</title>
-        <meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
-		<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/bootstrap-theme.css">
-        <link rel="stylesheet" href="css/style.css">
-		<!-- skin -->
-		<link rel="stylesheet" href="skin/default.css">
-    </head>
                 <span class="icon-bar"></span>
               </button>
             </div>
@@ -50,8 +31,8 @@
                 <li><a class="navlinks" href="/">Home</a></li>
                 <li><a class="navlinks" href="/meetups">Meetups</a></li>
                 <li><a class="navlinks" href="/messageboard">Message Board</a></li>
-                <li><a class="navlinks" href="/social">Social</a></li>
-                <li><a class="navlinks" href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <!-- <li><a class="navlinks" href="/social">Social</a></li> -->
+                <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
                 <li>
                   <div class="dropdown">
                     {% if request.session.user_id %}
@@ -73,8 +54,8 @@
                       {% elif request.session.business_id %}
                         <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                       {% endif %}
-                      <a href="#">My Deals</a>
-                      <a href="#">Settings</a>
+                      <a href="/bookmarks">My Bookmarks</a>
+                      <a href="updateprofile">Edit Profile</a>
                       <a href="/logout">Log Out</a>
                     </div>
                   </div>
@@ -107,44 +88,63 @@
     <div class="dealsback">
       <div class="container dealscontains">
         <h3 class="dealsheader">Deals</h3>
-        <a class="dealslink" href="/meetups">View all Meetups</a>
+        <a class="dealslink" href="/deals">View all deals</a>
         <div class="row dealssub">
           <div class="dealscontent">
+            
+              <div class="col-md-3 thesecs">
+                <div class="imageicon">
+                  {% if deals_list.0.business.image %}
+                  <img src="{{deals_list.0.business.image.url}}" alt="">
+                  {% else %}
+                  <img src="../../static/images/wierdladyportrait.png" alt="">
+                  {% endif %}
+                </div>
+                <div class="overlay1">
+                  <h1 class="detailscont">{{deals_list.0.business.name}}</h1>
+                  <a class="detailsbutt" href="deal/{{deals_list.0.business.id}}"></a>
+                </div>
+                {{deals_list}}
+                <h4 class="eventname">{{deals_list.0.business.name}}</h4>
+                <p class ="eventlocation">Type: {{deals_list.0.deal_type}}</p>
+                <p class="description">Price: {{deals_list.0.price}}</p>
+                <p class="details">Expires: {{ deals_list.0.end_date }}</p>
+              </div>
 
               <div class="col-md-3 thesecs">
                 <div class="imageicon">
+                  {% if deals_list.1.business.image %}
+                  <img src="{{deals_list.1.business.image.url}}" alt="">
+                  {% else %}
                   <img src="../../static/images/wierdladyportrait.png" alt="">
+                  {% endif %}
                 </div>
                 <div class="overlay1">
-                  <h1 class="deatilscont">Details</h1>
-                  <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
+                  <h1 class="detailscont">{{deals_list.1.business.name}}</h1>
+                  <a class="detailsbutt" href="deal/{{deals_list.1.business.id}}"></a>
                 </div>
-                <h4 class="eventname">{{meetups.0.eventname}}</h4>
-                <p class ="eventlocation">Location: {{ meetups.0.location }}</p>
-                <p class="description">Description: {{ meetups.0.description }}</p>
-                <p class="details">Details: {{ meetup.0.details }}</p>
+                <h4 class="eventname">{{deals_list.1.business.name}}</h4>
+                <p class ="eventlocation">Location: {{deals_list.1.deal_type}}</p>
+                <p class="description">Price: {{deals_list.1.price}}</p>
+                <p class="details">Expires: {{ deals_list.1.end_date }}</p>
               </div>
-
-            <div class="col-md-3 thesecs">
-              <div class="overlay1">
-                <h1>Details</h1>
-                <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
-              </div>
-              <h4 class="eventname">{{meetups.1.eventname}}</h4>
-              <p class ="eventlocation">Location: {{ meetups.1.location }}</p>
-              <p class="description">Description: {{ meetups.1.description }}</p>
-              <p class="details">Details: {{ meetup.1.details }}</p>
-            </div>
 
               <div class="col-md-3 thesecs">
-                <div class="overlay1">
-                  <h1>Details</h1>
-                  <a class="detailsbutt" href="meetups/{{meetups.0.id}}"></a>
+                <div class="imageicon">
+                  {% if deals_list.2.business.image %}
+                  <img src="{{deals_list.2.business.image.url}}" alt="">
+                  {% else %}
+                  <img src="../../static/images/wierdladyportrait.png" alt="">
+                  {% endif %}
                 </div>
-                <h4 class="eventname">{{meetups.2.eventname}}</h4>
-                <p class ="eventlocation">Location: {{ meetups.2.location }}</p>
-                <p class="description">Description: {{ meetups.2.description }}</p>
-                <p class="details">Details: {{ meetup.2.details }}</p>
+                <div class="overlay1">
+                  <h1 class="detailscont">{{deals_list.2.business.name}}</h1>
+                  <a class="detailsbutt" href="deal/{{deals_list.2.business.id}}"></a>
+                </div>
+                <h4 class="eventname">{{deals_list.2.business.name}}</h4>
+                <p class ="eventlocation">Location: {{deals_list.2.deal_type}}</p>
+                <p class="description">Price: {{deals_list.2.price}}</p>
+                <p class="details">Expires: {{ deals_list.2.end_date }}</p>
               </div>
           </div>
         </div>
@@ -159,50 +159,63 @@
           <!-- <div class="container"> -->
             <div class="themessage">
              <div class="col-md-2">
-               <img class="image" src="../../static/images/blankpic.jpg" alt="">
+               {% if messages_list.0.image %}
+               <img class="messageimage" src="{{messsages_list.0.image.url}}" alt="">
+               {% else %}
+               <img class="messageimage" src="../../static/images/blankpic.jpg" alt="">
+                {% endif %}
              </div>
              <div class="col-md-3">
-               <span class="message_details">Title here</span>
-               <span class="message_details">Author</span>
-               <span class="message_details">Creation Date</span>
+               <span class="message_details">{{messages_list.0.title}}</span>
+               <span class="message_details">{{messages_list.0.user.first_name}}</span>
+               <span class="message_details">{{messages_list.0.created_at}}</span>
              </div>
              <div class="col-md-2">
-               <span>views:#</span>
+               <span>views:{{messages_list.0.messageboard_message_views.count}}</span>
              </div>
              <div class="col-md-5">
-               <span>message content</span>
+               <span>{{messages_list.0.message}}</span>
              </div>
            </div>
            <div class="themessage">
-            <div class="col-md-2">
-              <img class="image" src="../../static/images/blankpic.jpg" alt="">
-            </div>
+             <div class="col-md-2">
+               {% if messages_list.0.image %}
+               <img class="messageimage" src="{{messsages_list.2.image.url}}" alt="">
+               {% else %}
+               <img class="messageimage" src="../../static/images/blankpic.jpg" alt="">
+                {% endif %}
+             </div>
             <div class="col-md-3">
-              <span class="message_details">Title here</span>
-              <span class="message_details">Author</span>
-              <span class="message_details">Creation Date</span>
+              <span class="message_details">{{messages_list.1.title}}</span>
+              <span class="message_details">{{messages_list.1.user.first_name}}</span>
+              <span class="message_details">{{messages_list.1.created_at}}</span>
             </div>
             <div class="col-md-2">
-              <span>views:#</span>
+              <span>views:{{messages_list.1.messageboard_message_views.count}}</span>
             </div>
             <div class="col-md-5">
-              <span>message content</span>
+              <span>{{messages_list.1.message}}</span>
             </div>
           </div>
           <div class="themessage">
-           <div class="col-md-2">
-             <img class="image" src="../../static/images/blankpic.jpg" alt="">
-           </div>
+            <div class="col-md-2">
+              <!-- {{messages_list.2.image}} -->
+              {% if messages_list.2.image %}
+              <img class="messageimage" src="{{messages_list.2.image.url}}" alt="">
+              {% else %}
+              <img class="messageimage" src="../../static/images/blankpic.jpg" alt="">
+               {% endif %}
+            </div>
            <div class="col-md-3">
-             <span class="message_details">Title here</span>
-             <span class="message_details">Author</span>
-             <span class="message_details">Creation Date</span>
+             <span class="message_details">{{messages_list.2.title}}</span>
+             <span class="message_details">{{messages_list.2.user.first_name}}</span>
+             <span class="message_details">{{messages_list.0.created_at}}</span>
            </div>
            <div class="col-md-2">
-             <span>views:#</span>
+             <span>views:{{messages_list.1.messageboard_message_views.count}}</span>
            </div>
            <div class="col-md-5">
-             <span>message content</span>
+             <span>{{messages_list.2.message}}</span>
            </div>
          </div>
 
@@ -212,7 +225,7 @@
      </div>
    </div>
  </div>
- <section class="probootstrap-section-bg overlay" style="background-image: url(../../assets/images/snails.jpg);" data-stellar-background-ratio="0.5" data-section="specialties">
+ <section class="probootstrap-section-bg overlay" style="background-image: url(../../static/images/baseball.jpg);" data-stellar-background-ratio="0.5" data-section="specialties">
    <div class="container">
      <div class="row">
        <div class="col-md-12 text-center probootstrap-animate">
@@ -231,8 +244,12 @@
           <div class="half">
 
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
-              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% if meetups_list.1.user.image %}
+                <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
+              {% else %}
+              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.0.eventname}}</h3>
                 <p>{{meetups_list.0.description}}</p>
@@ -242,24 +259,33 @@
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
+              {% if meetups_list.1.user.image %}
+                <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
+              {% else %}
+                <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}
               <div class="text text-center">
-                  <h3>topPosts[1].name</h3>
-                  <p>topPosts[1].description</p>
-                  <p>by: topPosts[1].user.username</p>
-                  <p>topPosts[1].filename|json</p>
-                  <a href="/postview/meetups[1].id">more details</a>
+                <h3>{{meetups_list.1.eventname}}</h3>
+                <p>{{meetups_list.1.description}}</p>
+                <p>{{meetups_list.1.location}}</p>
+                <p>{{meetups_list.1.date}}</p>
+                <a href="/meetups/{{meetups_list.1.id}}">more details</a>
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
-              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% if meetups_list.2.user.image %}
+                <div class="image" style="background-image:url({{meetups_list.2.user.image}})"></div>
+              {% else %}
+                <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}              <!-- "./../../assets/images/{{post.filename}}" -->
               <div class="text text-center">
-                <h3>topPosts[2].name</h3>
-                <p>topPosts[2].description</p>
-                <p>by:topPosts[2].user.username</p>
-                <p>topPosts[2].filename|json</p>
-                <a href="/postview/topPosts[2]._id">more details</a>
+                <h3>{{meetups_list.2.eventname}}</h3>
+                <p>{{meetups_list.2.description}}</p>
+                <p>{{meetups_list.2.location}}</p>
+                <p>{{meetups_list.2.date}}</p>
+                <a href="/meetups/{{meetups_list.2.id}}">more details</a>
               </div>
             </div>
 
@@ -267,36 +293,48 @@
           <div class="half">
 
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
-              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% if meetups_list.3.user.image %}
+                <div class="image" style="backgroud-image:url(meetups_list.3.user.image)"></div>
+              {% else %}
+              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}
               <div class="text text-center">
-                <h3>topPosts[3].name</h3>
-                <p>topPosts[3].description</p>
-                <p>by:topPosts[3].user.username</p>
-                <p>topPosts[3].filename</p>
-                <a href="/postview/topPosts[3]._id">more details</a>
+                <h3>{{meetups_list.3.eventname}}</h3>
+                <p>{{meetups_list.3.description}}</p>
+                <p>{{meetups_list.3.location}}</p>
+                <p>{{meetups_list.3.date}}</p>
+                <a href="/meetups/{{meetups_list.3.id}}">more details</a>
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
-              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% if meetups_list.4.user.image %}
+                <div class="image" style="backgroud-image:url(meetups_list.4.user.image)"></div>
+              {% else %}
+              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}
               <div class="text text-center">
-                <h3>topPosts[4].name</h3>
-                <p>topPosts[4].description</p>
-                <p>by:topPosts[4].user.username</p>
-                <p>topPosts[4].filename|json</p>
-                <a href="/postview/topPosts[4]._id">more details</a>
+                <h3>{{meetups_list.4.eventname}}</h3>
+                <p>{{meetups_list.4.description}}</p>
+                <p>{{meetups_list.4.location}}</p>
+                <p>{{meetups_list.4.date}}</p>
+                <a href="/meetups/{{meetups_list.4.id}}">more details</a>
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="image" style="background:url(../../static/images/blankpic.jpg)"></div>
-              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% if meetups_list.5.user.image %}
+                <div class="image" style="backgroud-image:url(meetups_list.5.user.image)"></div>
+              {% else %}
+              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <!-- "./../../assets/images/{{post.filename}}" -->
+                {% endif %}
               <div class="text text-center">
-                <h3>topPosts[5].name</h3>
-                <p>topPosts[5].description</p>
-                <p>by:topPosts[5].user.username</p>
-                <p>topPosts[5].filename|json</p>
-                <a href="/postview/topPosts[5]._id}}">more details</a>
+                <h3>{{meetups_list.5.eventname}}</h3>
+                <p>{{meetups_list.5.description}}</p>
+                <p>{{meetups_list.5.location}}</p>
+                <p>{{meetups_list.5.date}}</p>
+                <a href="/meetups/{{meetups_list.5.id}}">more details</a>
               </div>
             </div>
 

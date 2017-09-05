@@ -10,44 +10,61 @@
     <link rel="stylesheet" href="../../static/css/meetups.css">
   </head>
   <body>
-    <div class="navbar">
-      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{request.session.first_name}}</a>!</h3>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
-              <li><a href="/meetups" style="color:#e4e4e4;">Meetups</a></li>
-              <li><a href="/messageboard" style="color:#e4e4e4;">Message Board</a></li>
-              <li><a href="/social" style="color:#e4e4e4;">Social</a></li>
-              <li><a href="/deals" style="color:#e4e4e4;">Deals</a></li>
-              <li>
-                <div class="dropdown">
-                  {% if this_user.image %}
-                    <img class="dropbtn" src="{{this_user.image.url}}" alt="">
-                  {% else %}
-                    <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
-                  {% endif %}
-                  <div class="dropdown-content">
-                    <a href="/users/{{request.session.user_id}}">Account Overview</a>
-                    <a href="/register">register</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+      <div class="navbar">
+          <nav class="navbar navbar-default navbar-fixed-top thenav">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span><!DOCTYPE html>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div id="navbar" class="collapse navbar-collapse">
+                {% if request.session.user_id %}
+                  <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:skyblue;">{{this_user.first_name}}</a>!</h3>
+                {% elif request.session.business_id %}
+                  <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:skyblue;">{{this_business.name}}</a>!</h3>
+                {% endif %}
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a class="navlinks" href="/">Home</a></li>
+                  <li><a class="navlinks" href="/meetups">Meetups</a></li>
+                  <li><a class="navlinks" href="/messageboard">Message Board</a></li>
+                  <!-- <li><a class="navlinks" href="/social">Social</a></li> -->
+                  <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
+                  <li>
+                    <div class="dropdown">
+                      {% if request.session.user_id %}
+                        {% if this_user.image %}
+                          <img class="dropbtn" src="{{this_user.image.url}}" alt="">
+                        {% else %}
+                          <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                        {% endif %}
+                      {% elif request.session.business_id %}
+                        {% if this_business.image %}
+                          <img class="dropbtn" src="{{this_business.image.url}}" alt="">
+                        {% else %}
+                          <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                        {% endif %}
+                      {% endif %}
+                      <div class="dropdown-content">
+                        {% if request.session.user_id %}
+                          <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                        {% elif request.session.business_id %}
+                          <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
+                        {% endif %}
+                        <a href="/bookmarks">My Bookmarks</a>
+                        <a href="updateprofile">Edit Profile</a>
+                        <a href="/logout">Log Out</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
-      </nav>
-    </div>
-
     <!-- <div class="sidebar">
       <h3 style="color:blue;">HIHIASHFISDIHF</h3>
       <p>
@@ -104,8 +121,10 @@
         {% endfor %}
       </ul>
     </div>
-  </div>
 
+
+
+    </div>
     <div class="footer">
       <div class="conatiner">
         <div class="row">
@@ -132,7 +151,6 @@
         <div class="appstorelink">
           <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
         </div>
-
       </div>
 
   </body>
