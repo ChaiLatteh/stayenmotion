@@ -18,25 +18,6 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span><!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-		<!-- BASICS -->
-        <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Amoeba free one page responsive bootstrap site template</title>
-        <meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
-		<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/bootstrap-theme.css">
-        <link rel="stylesheet" href="css/style.css">
-		<!-- skin -->
-		<link rel="stylesheet" href="skin/default.css">
-    </head>
                 <span class="icon-bar"></span>
               </button>
             </div>
@@ -50,8 +31,8 @@
                 <li><a class="navlinks" href="/">Home</a></li>
                 <li><a class="navlinks" href="/meetups">Meetups</a></li>
                 <li><a class="navlinks" href="/messageboard">Message Board</a></li>
-                <li><a class="navlinks" href="/social">Social</a></li>
-                <li><a class="navlinks" href="/deals" style="color:#e4e4e4;">Deals</a></li>
+                <!-- <li><a class="navlinks" href="/social">Social</a></li> -->
+                <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
                 <li>
                   <div class="dropdown">
                     {% if request.session.user_id %}
@@ -73,8 +54,8 @@
                       {% elif request.session.business_id %}
                         <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                       {% endif %}
-                      <a href="#">My Deals</a>
-                      <a href="#">Settings</a>
+                      <a href="/bookmarks">My Bookmarks</a>
+                      <a href="updateprofile">Edit Profile</a>
                       <a href="/logout">Log Out</a>
                     </div>
                   </div>

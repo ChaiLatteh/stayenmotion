@@ -410,7 +410,7 @@ def show_message(request, message_id):
 
     elif 'business_id' in request.session:
         data={
-        "this_Business":Business.objects.get(id=request.session['business_id']),
+        "this_business":Business.objects.get(id=request.session['business_id']),
         "this_message":this_message,
         }
         return render(request, 'APPNAME/show_message.html', data)
