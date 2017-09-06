@@ -236,8 +236,6 @@ class BusinessManager(models.Manager):
             }
 
 
-
-
     def reset_password(self, data):
         errors = []
         this_business = data['this_business']
@@ -258,7 +256,6 @@ class BusinessManager(models.Manager):
             'business':this_business,
             'errors_list':None,
             }
-
 
 class DealManager(models.Manager):
     def creation(self,data):
