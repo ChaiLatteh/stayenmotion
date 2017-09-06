@@ -6,20 +6,18 @@
   width:210px;
 }
 .searchbar{
+  background-color:#f0f5f8;
   position:fixed;
-  background-color:silver;
   width:100%;
   display:block;
   top:55px;
   z-index: 1;
-
 }
 .content{
-  background-color:silver;
+  background-color:#f0f5f8;
   margin-top:75px;
   width:auto;
   min-height:700px;
-  /*background-color:yellow;*/
 }
 .wrapper{
   margin-left:20px;
@@ -58,14 +56,6 @@
 }
 .linkcont{
   color: #A3A7B2;
-}
-.appstorehead{
-  color: white;
-}
-.appstore{
-  width: 100px;
-  height: 45px;
-  margin-left: 8%
 }
 .meetupdiv{
   width: 80%;

@@ -755,7 +755,6 @@ def index(request):
     deals_list=[]
 
     for deal in Deal.objects.all().order_by('-created_at'):
-        print deal
         deals_list.append(deal)
     for message in Messageboard_Message.objects.all().order_by('-created_at'):
         messages_list.append(message)
