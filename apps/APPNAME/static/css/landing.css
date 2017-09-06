@@ -151,9 +151,9 @@ color: white;
 
 }
 .dealsimg{
-  background: url("../images/deals.png");
-  width: 500px;
-  height: 200px;
+  background: url("../images/viewdeals.png");
+  width: 400px;
+  height: 300px;
   margin-left: 10%;
 }
 .meetups{
@@ -167,9 +167,9 @@ color: white;
   top: 150px;
 }
 .meetupsimg{
-  background:url("../images/meetupspage.png");
-  height: 40%;
-  width: 24%;
+  background:url("../images/Meetups.png");
+  width: 400px;
+  height: 200px;
   margin-left: 60%
 }
 .footer{
