@@ -71,7 +71,10 @@
   width: 80%;
   height: 20%;
   border: solid;
-
+  margin-bottom:5px;
+}
+.title{
+  font-size:30px;
 }
 .dropdown-content{
   background-color: white;

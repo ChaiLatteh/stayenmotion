@@ -222,8 +222,6 @@ class BusinessManager(models.Manager):
         if data['password']!=data['confirm_password']:
             errors.append("New password and confirm password do not match.")
 
-<<<<<<< HEAD
-=======
         if len(errors)>0:
             return {
             'business':None,
@@ -240,10 +238,6 @@ class BusinessManager(models.Manager):
 
 
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
     def reset_password(self, data):
         errors = []
         this_business = data['this_business']
@@ -265,11 +259,7 @@ class BusinessManager(models.Manager):
             'errors_list':None,
             }
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 88707a38065e045f5fe25f5977e56cab5833a016
->>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
+
 class DealManager(models.Manager):
     def creation(self,data):
         errors=[]

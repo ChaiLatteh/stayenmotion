@@ -31,7 +31,6 @@
                   <li><a class="navlinks" href="/">Home</a></li>
                   <li><a class="navlinks" href="/meetups">Meetups</a></li>
                   <li><a class="navlinks" href="/messageboard">Message Board</a></li>
-                  <!-- <li><a class="navlinks" href="/social">Social</a></li> -->
                   <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
                   <li>
                     <div class="dropdown">
@@ -55,7 +54,7 @@
                           <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                         {% endif %}
                         <a href="/bookmarks">My Bookmarks</a>
-                        <a href="updateprofile">Edit Profile</a>
+                        <a href="/updateprofile">Edit Profile</a>
                         <a href="/logout">Log Out</a>
                       </div>
                     </div>
@@ -65,12 +64,14 @@
             </div>
           </nav>
         </div>
-    <!-- <div class="sidebar">
-      <h3 style="color:blue;">HIHIASHFISDIHF</h3>
-      <p>
 
-      </p> -->
-    <!-- </div> -->
+        {% if messages %}
+          {% for message in messages %}
+          <script>
+            alert('{{message}}');
+          </script>
+          {% endfor %}
+        {% endif %}
 
 
     <div class="searchbar">
@@ -88,18 +89,6 @@
       </div>
     </div>
 
-    <!-- <div class="header">
-      <form action="/meetups/search" style="display:inline-table;" method="GET">
-        {% csrf_token %}
-        <input placeholder="search..." name="search_box" type="text" required minlength="1">
-        <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
-      </form>
-
-      {% if request.session.user_id %}
-        <a href="/meetups/new"><button>Create Meetup</button></a>
-      {% endif %}
-      <a onClick="javascript:history.go(-1);" href="#">Previous Page</a>
-    </div> -->
 
     <div class="content">
       <ul class="meetups_list" style="list-style:none;">
@@ -107,14 +96,14 @@
 
         <div class="meetupdiv">
           <li>
-            <p>Date of Meetup: {{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
+            <a class="title" href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a>
+            <p>When: {{meetup.date}}</p>
+            <p>Where: ({{meetup.location}})</p>
+            <p>Hosted By: <a href="/users/{{meetup.user.id}}">{{meetup.user.first_name}} {{meetup.user.last_name}}</a></p>
           </li>
-          <p class="going">members going: 15</p>
-          <p class="interested">Interested Members: 8</p>
+          <!-- <p class="going">members going: 15</p>
+          <p class="interested">Interested Members: 8</p> -->
         </div>
-          <!-- <div class="overlay">
-        </div> -->
-
         {% endfor %}
       </ul>
     </div>
