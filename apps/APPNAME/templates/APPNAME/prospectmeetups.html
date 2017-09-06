@@ -51,12 +51,14 @@
       </nav>
     </div>
 
-    <!-- <div class="sidebar">
-      <h3 style="color:blue;">HIHIASHFISDIHF</h3>
-      <p>
+    {% if messages %}
+      {% for message in messages %}
+      <script>
+        alert('{{message}}');
+      </script>
+      {% endfor %}
+    {% endif %}
 
-      </p> -->
-    <!-- </div> -->
 
     <div class="searchbar">
       <div class="searcharea">
@@ -76,7 +78,6 @@
         </div>
 
       </div>
-      <!-- <a onClick="javascript:history.go(-1);" href="#">Previous Page</a> -->
     </div>
 
     <div class="content">

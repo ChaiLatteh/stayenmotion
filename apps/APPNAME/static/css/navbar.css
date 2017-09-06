@@ -47,8 +47,6 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-<<<<<<< HEAD
-=======
 .footer{
   bottom: 0;
   width: 100%;
@@ -163,4 +161,9 @@ color:#e4e4e4;
 .detailscont{
 color: white;
 }
->>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
+
+@media screen and (max-width: 991px) {
+  .footer{
+    height:500px;
+  }
+}
