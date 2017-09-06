@@ -5,18 +5,10 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../static/css/landing.css">
-    
+
     <title></title>
   </head>
   <body>
-    {% if messages %}
-      {% for message in messages %}
-      <script>
-        alert('{{message}}');
-      </script>
-      {% endfor %}
-    {% endif %}
-
     <div class="top_image" style="margin-bottom:0;">
       <div class="navbar" style="background-color:#FFFFFF; border:none;">
         <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#FFFFFF; color:#e4e4e4;">
@@ -32,9 +24,14 @@
             <div id="navbar" class="collapse navbar-collapse" style="background-color: #FFFFFF;">
               <h3 style="color:#18233E; vertical-align:top; display:inline-block;">GymFinder</h3>
               <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
                 <li><a href="#intro1" style="color:#18233E;">Why GymFinder</a></li>
                 <!-- <li><a href="#" style="color:#18233E;">How it work</a></li> -->
                 <!-- <li><a href="/social" style="color:#18233E;">Social Mention</a></li> -->
+=======
+                <li><a href="/" style="color:#18233E;">Why GymFinder</a></li>
+                <li><a href="/messageboard" style="color:#18233E;">How it work</a></li>
+>>>>>>> d86b7111cad1fbdc2a0ecacea422a4427309d4ec
                 <li><a href="/prospectmeetups" style="color:#18233E;">Community</a></li>
                 <li><a class="join" href="/register"><span class="jointext">Join</span></a></li>
                 <li class="login"><a href="#login"><span class="logintext">Login</span></a></li>
@@ -43,6 +40,16 @@
           </div>
         </nav>
       </div>
+
+      {% if messages %}
+        {% for message in messages %}
+        <script>
+          alert('{{message}}');
+        </script>
+        {% endfor %}
+      {% endif %}
+
+
       <div class="intro">
         <A NAME="top"></A>
         <h3>Fitness under your finger</h3>

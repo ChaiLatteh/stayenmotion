@@ -37,7 +37,7 @@ def user_register(request):
             messages.add_message(request, messages.ERROR, error)
         return redirect('/register')
     else:
-        messages.add_message(request, messages.ERROR, "Successfully Registered!")
+        messages.add_message(request, messages.ERROR, "Successfully Registered! Please log in to continue.")
         return redirect('/')
 
 def user_login(request):
@@ -219,9 +219,18 @@ def show_business(request, business_id):
 
 def upload_picture(request):
     form = UploadFileForm()
-    data = {
-    "form":form,
-    }
+    if 'user_id' in request.session:
+        data = {
+        "form":form,
+        "this_user":User.objects.get(id=request.session['user_id']),
+        }
+    elif 'business_id' in request.session:
+        data = {
+        "form":form,
+        "this_business":Business.objects.get(id=request.session['business_id']),
+        }
+    else:
+        return redirect('/')
     return render(request, 'APPNAME/upload_picture.html', data)
 
 def upload_picture_process(request):
@@ -314,7 +323,17 @@ def updateprofile_process(request):
         return redirect('/')
 
 def changepassword(request):
-    return render(request, 'APPNAME/changepassword.html')
+    if 'user_id' in request.session:
+        data={
+        'this_user':User.objects.get(id=request.session['user_id'])
+        }
+    elif 'business_id' in request.session:
+        data={
+        'this_business':Business.objects.get(id=request.session['business_id'])
+        }
+    else:
+        return redirect('/')
+    return render(request, 'APPNAME/changepassword.html', data)
 
 def changepassword_process(request):
     if 'user_id' in request.session:
@@ -430,6 +449,7 @@ def new_message(request):
 
     form = Messageboard_MessageForm()
     data = {
+        "this_user":User.objects.get(id=request.session['user_id']),
         "form":form,
     }
     return render(request, 'APPNAME/new_message.html', data)
@@ -454,9 +474,20 @@ def new_message_process(request):
             return redirect('/messageboard/new')
 def deal_details(request, deal_id):
     this_deal=Deal.objects.get(id=deal_id)
-    data={
+    if 'user_id' in request.session:
+        data={
+        'this_user':User.objects.get(id=request.session['user_id']),
         'deal':this_deal,
-    }
+        }
+
+    elif 'business_id' in request.session:
+        data={
+        'this_business':Business.objects.get(id=request.session['business_id']),
+        'deal':this_deal,
+        }
+
+    else:
+        return redirect('/')
     return render(request, 'APPNAME/thisdeal.html', data)
 def show_message(request, message_id):
     this_message=Messageboard_Message.objects.get(id=message_id)
@@ -819,9 +850,18 @@ def pickbusiness(request):
     # print response_data
     # for business in response_data['businesses']:
     #     print business['name']
-    data={
-    "thedata":response_data
-    }
+    if 'user_id' in request.session:
+        data={
+        'this_user':User.objects.get(id=request.session['user_id']),
+        "thedata":response_data,
+        }
+    elif 'business_id' in request.session:
+        data={
+        'this_business':Business.objects.get(id=request.session['business_id']),
+        "thedata":response_data,
+        }
+    else:
+        return redirect('/')
     return render(request, 'APPNAME/pickbusiness.html', data)
 
 def aboutus(request):
@@ -844,13 +884,28 @@ def logout(request):
     return redirect('/')
 
 def form(request):
-    data={
-    'name':request.POST['name'],
-    'address':request.POST['address1'],
-    'city':request.POST['city'],
-    'state':request.POST['state'],
-    'theimage':request.POST['image']
-    }
+    if 'user_id' in request.session:
+        data={
+        'this_user':User.objects.get(id=request.session['user_id']),
+        'name':request.POST['name'],
+        'address':request.POST['address1'],
+        'city':request.POST['city'],
+        'state':request.POST['state'],
+        'theimage':request.POST['image']
+        }
+    if 'business_id' in request.session:
+        data={
+        'this_business':Business.objects.get(id=request.session['business_id']),
+        'name':request.POST['name'],
+        'address':request.POST['address1'],
+        'city':request.POST['city'],
+        'state':request.POST['state'],
+        'theimage':request.POST['image']
+        }
+
+    else:
+        return redirect('/')
+
     return render(request, 'APPNAME/form.html', data)
 
 def prospectmeetups(request):
@@ -890,75 +945,3 @@ def savingnewdeal(request):
     else:
         messages.add_message(request,messages.ERROR, "Successfully created a deal!")
         return redirect('/deals')
-#NO LONGER IN USE
-# def messageboard(request):
-#     this_user=User.objects.get(id=request.session['user_id'])
-#     messages_list=[]
-#     comments_list=[]
-#     likes_list=[]
-    # for message in Messageboard_Message.objects.all().order_by('-created_at'):
-    #     messages_list.append(message)
-#     for comment in Messageboard_Comment.objects.all():
-#         comments_list.append(comment)
-#     for like in Messageboard_Message_Like.objects.all():
-#         likes_list.append(like)
-#     data = {
-#     "this_user":this_user,
-#     "messages_list":messages_list,
-#     "comments_list":comments_list,
-#     "likes_list":likes_list,
-#     }
-#     return render(request, 'APPNAME/messageboard.html', data);
-#
-#
-# def new_message_process(request):
-#     this_user = User.objects.get(id=request.session['user_id'])
-#     data = {
-#     'message':request.POST['message'],
-#     'this_user':this_user,
-#     }
-#     new_message=Messageboard_Message.objects.message(data)
-#     if new_message['errors_list']:
-#         for error in new_message['errors_list']:
-#             messages.add_message(request, messages.ERROR, error)
-#         return redirect('/messageboard')
-#     else:
-#         messages.add_message(request, messages.ERROR, "Posted!")
-#         return redirect('/messageboard')
-#
-#
-# def home_like_message(request, message_id):
-#     this_user=User.objects.get(id=request.session['user_id'])
-#     this_message=Messageboard_Message.objects.get(id=message_id)
-#     try:
-#         Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user)
-#         messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-#     except:
-#         Messageboard_Message_Like.objects.create(messageboard_message=this_message, user=this_user)
-#     return redirect('/')
-#
-# def home_unlike_message(request, message_id):
-#     this_user=User.objects.get(id=request.session['user_id'])
-#     this_message=Messageboard_Message.objects.get(id=message_id)
-#     try:
-#         Messageboard_Message_Like.objects.get(messageboard_message=this_message, user=this_user).delete()
-#     except:
-#         messages.add_message(request, messages.ERROR, "INVALID APPROACH")
-#     return redirect('/')
-#
-# def new_comment_process(request, message_id):
-#     this_user = User.objects.get(id=request.session['user_id'])
-#     this_message = Messageboard_Message.objects.get(id=message_id)
-#     data = {
-#     'comment':request.POST['comment'],
-#     'this_user':this_user,
-#     'this_message':this_message,
-#     }
-#     new_comment=Messageboard_Comment.objects.comment(data)
-#     if new_comment['errors_list']:
-#         for error in new_comment['errors_list']:
-#             messages.add_message(request, messages.ERROR, error)
-#         return redirect('/messageboard')
-#     else:
-#         messages.add_message(request, messages.ERROR, "Commented!")
-#         return redirect('/messageboard')

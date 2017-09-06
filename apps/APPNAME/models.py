@@ -221,6 +221,7 @@ class BusinessManager(models.Manager):
             errors.append("Password must be at least 8 characters long.")
         if data['password']!=data['confirm_password']:
             errors.append("New password and confirm password do not match.")
+
         if len(errors)>0:
             return {
             'business':None,
@@ -233,6 +234,7 @@ class BusinessManager(models.Manager):
             'business':this_business,
             'errors_list':None,
             }
+
 
     def reset_password(self, data):
         errors = []
