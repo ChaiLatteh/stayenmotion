@@ -12,44 +12,43 @@
   </head>
   <body>
     <div class="navbar">
-      <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#348fe5; color:#e4e4e4;">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/users/{{request.session.user_id}}" style="color:darkblue;">{{request.session.first_name}}</a>!</h3>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/" style="color:#e4e4e4;">Home</a></li>
-              <li><a href="/register" style="color:#e4e4e4;">Meetups</a></li>
-              <li><a href="/register" style="color:#e4e4e4;">Message Board</a></li>
-              <!-- <li><a href="/register" style="color:#e4e4e4;">Social</a></li> -->
-              <li><a href="/register" style="color:#e4e4e4;">Deals</a></li>
-              <li>
-                <div class="dropdown">
-                  {% if this_user.image %}
-                    <img class="dropbtn" src="{{this_user.image.url}}" alt="">
-                  {% else %}
+        <nav class="navbar navbar-default navbar-fixed-top thenav">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span><!DOCTYPE html>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <h3 style="vertical-align:top; display:inline-block;">Welcome Future User!</h3>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a class="navlinks" href="/">Home</a></li>
+                <li><a class="navlinks" href="/">Meetups</a></li>
+                <li><a class="navlinks" href="/">Message Board</a></li>
+                <li><a class="navlinks" href="/" style="color:#e4e4e4; opacity:1;">Deals</a></li>
+                <li>
+                  <div class="dropdown">
                     <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
-                  {% endif %}
-                  <div class="dropdown-content">
-                    <a href="/users/{{request.session.user_id}}">Account Overview</a>
-                    <a href="#">My Deals</a>
-                    <a href="#">Bookmarks</a>
-                    <a href="/logout">Log Out</a>
+                    <div class="dropdown-content">
+                      <a href="/">Account Overview</a>
+                      <a href="/">My Bookmarks</a>
+                      <a href="/">Edit Profile</a>
+                      <a href="/logout">Log Out</a>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
+      <script>
+        alert('Click "Home" button on the navigation panel to go back.');
+      </script>
+
 
     {% if messages %}
       {% for message in messages %}
@@ -67,14 +66,9 @@
           <input placeholder="search..." name="search_box" type="text" required minlength="1">
           <button type="submit" name="button"><img style="height:15px; width:15px;" src='../../static/images/search_button.jpg'></button>
         </form>
+        {% if request.session.user_id %}
         <button><a href="/meetups/new">Create Meetup</a></button>
-        <div class="dropdown">
-          <p class="dropbtn">Sort</p>
-          <div class="dropdown-content">
-            <a href="/users/{{request.session.user_id}}">by:Members Going</a>
-            <a href="#">by: Interest</a>
-            <a href="#">Views</a>
-          </div>
+        {% endif %}
         </div>
 
       </div>

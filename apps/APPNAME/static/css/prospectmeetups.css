@@ -6,20 +6,18 @@
   width:210px;
 }
 .searchbar{
+  background-color:#f0f5f8;
   position:fixed;
-  background-color:#111111;
   width:100%;
   display:block;
   top:55px;
-  opacity: 1;
   z-index: 1;
-
 }
 .content{
-  margin-left:230px;
-  margin-top:100px;
+  background-color:#f0f5f8;
+  margin-top:75px;
   width:auto;
-  /*background-color:yellow;*/
+  min-height:700px;
 }
 .wrapper{
   margin-left:20px;
@@ -73,6 +71,7 @@
   width: 80%;
   height: 20%;
   border: solid;
+  margin-bottom:5px;
 
 }
 .content{
@@ -101,6 +100,8 @@
 }
 .searcharea{
   text-align: center;
+  height:70px;
+  padding-top:16px;
 }
 .going{
   display: inline-block;
