@@ -55,7 +55,7 @@
                         <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                       {% endif %}
                       <a href="/bookmarks">My Bookmarks</a>
-                      <a href="updateprofile">Edit Profile</a>
+                      <a href="/updateprofile">Edit Profile</a>
                       <a href="/logout">Log Out</a>
                     </div>
                   </div>
@@ -66,32 +66,24 @@
         </nav>
       </div>
 
+      {% if messages %}
+        {% for message in messages %}
+        <script>
+          alert('{{message}}');
+        </script>
+        {% endfor %}
+      {% endif %}
+
       <h1 style="font-weight:bold; font-size:140px; color:white; text-align:center; margin-top:50px;">YOUR ONLY LIMIT IS YOU</h1>
     </div>
-   <!-- <div id="image">
-     <div>
-     </div>
-   </div>
-  <script>
-    var images = ["<img src='../../static/images/gym0.jpg'>", "<img src='../../static/images/gym1.jpg'>", "<img src='../../static/images/gym2.jpg'>", "<img src='../../static/images/gym3.jpg'>", "<img src='../../static/images/gym4.jpg'>"];
-    el = document.getElementById('image');
-    image_counter = 0;
-    function updateImage(){
-      el.innerHTML = images[image_counter++];
-      if(image_counter == images.length){
-        image_counter = 0;
-      }
-    }
-    updateImage();
-    setInterval(updateImage, 5000);
-  </script> -->
+
     <div class="dealsback">
       <div class="container dealscontains">
         <h3 class="dealsheader">Deals</h3>
         <a class="dealslink" href="/deals">View all deals</a>
         <div class="row dealssub">
           <div class="dealscontent">
-            
+
               <div class="col-md-3 thesecs">
                 <div class="imageicon">
                   {% if deals_list.0.business.image %}
@@ -156,7 +148,6 @@
 
         <div class="messarea">
           <h3 class="boardtitle">Message Board</h3>
-          <!-- <div class="container"> -->
             <div class="themessage">
              <div class="col-md-2">
                {% if messages_list.0.image %}
@@ -199,7 +190,6 @@
           </div>
           <div class="themessage">
             <div class="col-md-2">
-              <!-- {{messages_list.2.image}} -->
               {% if messages_list.2.image %}
               <img class="messageimage" src="{{messages_list.2.image.url}}" alt="">
               {% else %}
@@ -219,7 +209,6 @@
            </div>
          </div>
 
-       <!-- </div> -->
 
 
      </div>
@@ -248,14 +237,16 @@
                 <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
               {% else %}
               <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
+
                 {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.0.eventname}}</h3>
                 <p>{{meetups_list.0.description}}</p>
                 <p>{{meetups_list.0.location}}</p>
                 <p>{{meetups_list.0.date}}</p>
-                <a href="/meetups/{{meetups_list.0.id}}">more details</a>
+                {% if meetups_list.0 %}
+                  <a href="/meetups/{{meetups_list.0.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
@@ -263,14 +254,15 @@
                 <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
               {% else %}
                 <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
                 {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.1.eventname}}</h3>
                 <p>{{meetups_list.1.description}}</p>
                 <p>{{meetups_list.1.location}}</p>
                 <p>{{meetups_list.1.date}}</p>
-                <a href="/meetups/{{meetups_list.1.id}}">more details</a>
+                {% if meetups_list.1 %}
+                  <a href="/meetups/{{meetups_list.1.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
@@ -278,14 +270,15 @@
                 <div class="image" style="background-image:url({{meetups_list.2.user.image}})"></div>
               {% else %}
                 <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
-                {% endif %}              <!-- "./../../assets/images/{{post.filename}}" -->
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.2.eventname}}</h3>
                 <p>{{meetups_list.2.description}}</p>
                 <p>{{meetups_list.2.location}}</p>
                 <p>{{meetups_list.2.date}}</p>
-                <a href="/meetups/{{meetups_list.2.id}}">more details</a>
+                {% if meetups_list.2 %}
+                  <a href="/meetups/{{meetups_list.2.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
 
@@ -297,14 +290,15 @@
                 <div class="image" style="backgroud-image:url(meetups_list.3.user.image)"></div>
               {% else %}
               <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
                 {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.3.eventname}}</h3>
                 <p>{{meetups_list.3.description}}</p>
                 <p>{{meetups_list.3.location}}</p>
                 <p>{{meetups_list.3.date}}</p>
-                <a href="/meetups/{{meetups_list.3.id}}">more details</a>
+                {% if meetups_list.3 %}
+                  <a href="/meetups/{{meetups_list.3.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
@@ -312,14 +306,15 @@
                 <div class="image" style="backgroud-image:url(meetups_list.4.user.image)"></div>
               {% else %}
               <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
                 {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.4.eventname}}</h3>
                 <p>{{meetups_list.4.description}}</p>
                 <p>{{meetups_list.4.location}}</p>
                 <p>{{meetups_list.4.date}}</p>
-                <a href="/meetups/{{meetups_list.4.id}}">more details</a>
+                {% if meetups_list.4 %}
+                  <a href="/meetups/{{meetups_list.4.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
@@ -327,14 +322,15 @@
                 <div class="image" style="backgroud-image:url(meetups_list.5.user.image)"></div>
               {% else %}
               <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                <!-- "./../../assets/images/{{post.filename}}" -->
                 {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.5.eventname}}</h3>
                 <p>{{meetups_list.5.description}}</p>
                 <p>{{meetups_list.5.location}}</p>
                 <p>{{meetups_list.5.date}}</p>
-                <a href="/meetups/{{meetups_list.5.id}}">more details</a>
+                {% if meetups_list.5 %}
+                  <a href="/meetups/{{meetups_list.5.id}}">more details</a>
+                {% endif %}
               </div>
             </div>
 
@@ -343,48 +339,39 @@
       </div>
     </div>
   </section>
-   <!-- <div class="meetupsbackground">
-     <div class="meetuparea">
-       <p class="meetuptext">Meetups</p>
-       <div class="meetup">
-        <p class="meetuptitle">title</p>
-        <p class=""></p>
-       </div>
-     </div>
-   </div> -->
 
-   <div class="footer">
-     <div class="conatiner">
-       <div class="row">
-         <div class="col-md-3">
-           <h4 class="footerheader">Company</h5>
-             <a class="linkcont" href="/aboutus">About us</a>
-             <a class="linkcont" href="/careers">Careers</a>
-           </div>
-           <div class="col-md-3">
-             <h4 class="footerheader">Support</h4>
-             <a class="linkcont" href="/contact">Contact</a>
-           </div>
-           <div class="col-md-3">
-             <h4 class="footerheader">Partners</h4>
-             <a  class="linkcont" href="gyms">Gyms</a>
-           </div>
-           <div class="col-md-3">
-             <h4 class="footerheader">Community</h4>
-             <a class="linkcont" href="Blog">Blog</a>
-           </div>
-           <div class="col-md-3">
-            <h4 class="footerheader">Community</h4>
-            <a class="linkcont" href="Blog">Blog</a>
+  <div class="footer" style="margin-top:10%;">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3">
+            <h4 class="footerheader">Company</h5>
+              <a class="linkcont" href="/aboutus">About us</a>
+              <a class="linkcont" href="/careers">Careers</a>
+            </div>
+
+            <div class="col-md-3">
+              <h4 class="footerheader">Support</h4>
+              <a class="linkcont" href="/contact">Contact</a>
+            </div>
+
+            <div class="col-md-3">
+              <h4 class="footerheader">Partners</h4>
+              <a  class="linkcont" href="gyms">Gyms</a>
+            </div>
+
+            <div class="col-md-3">
+              <h4 class="footerheader">Community</h4>
+              <a class="linkcont" href="Blog">Blog</a>
+            </div>
+
           </div>
-         </div>
-       </div>
-       <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
-       <div class="appstorelink">
-         <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
-       </div>
-
-     </div>
+        </div>
+        <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+        <div class="appstorelink">
+          <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+        </div>
+      </div>
 
 
   </body>

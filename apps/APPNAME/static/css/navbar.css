@@ -161,3 +161,9 @@ color:#e4e4e4;
 .detailscont{
 color: white;
 }
+
+@media screen and (max-width: 991px) {
+  .footer{
+    height:500px;
+  }
+}

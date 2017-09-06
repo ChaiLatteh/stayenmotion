@@ -236,11 +236,6 @@ class BusinessManager(models.Manager):
             }
 
 
-
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     def reset_password(self, data):
         errors = []
         this_business = data['this_business']
@@ -262,8 +257,6 @@ class BusinessManager(models.Manager):
             'errors_list':None,
             }
 
-=======
->>>>>>> 88707a38065e045f5fe25f5977e56cab5833a016
 class DealManager(models.Manager):
     def creation(self,data):
         errors=[]
@@ -299,10 +292,6 @@ class DealManager(models.Manager):
             'new':new_deal,
             'errors_list':None
             }
-<<<<<<< HEAD
-=======
->>>>>>> 4e182a47cdbb29e99593a64f8375134eae5a4579
->>>>>>> 88707a38065e045f5fe25f5977e56cab5833a016
 
 class MessageboardManager(models.Manager):
     def post(self, data):
