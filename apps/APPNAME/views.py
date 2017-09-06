@@ -718,14 +718,6 @@ def search_meetup(request):
         else:
             return redirect('/')
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 88707a38065e045f5fe25f5977e56cab5833a016
->>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
 def index(request):
     meetups_list=[]
     messages_list=[]
@@ -770,10 +762,6 @@ def index(request):
     else:
         return render(request, 'APPNAME/landing.html')
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d592264f23fb1383318ef18854a1beacd3be1d6c
 def deals(request):
     deals_list=[]
 
