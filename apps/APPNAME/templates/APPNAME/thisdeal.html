@@ -55,7 +55,7 @@
                           <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                         {% endif %}
                         <a href="/bookmarks">My Bookmarks</a>
-                        <a href="updateprofile">Edit Profile</a>
+                        <a href="/updateprofile">Edit Profile</a>
                         <a href="/logout">Log Out</a>
                       </div>
                     </div>
@@ -65,16 +65,53 @@
             </div>
           </nav>
         </div>
-    
+
+        {% if messages %}
+          {% for message in messages %}
+          <script>
+            alert('{{message}}');
+          </script>
+          {% endfor %}
+        {% endif %}
+
+
 
     <h1>{{deal.business.name}}</h1>
     <h2>{{deal.title}}</h2>
-    <h3>{{deal.address}} {{deal.city}}{{deal.state}}</h3>
-    <p>{{deal.deal_type}}</p>
-    <p>{{deal.details}}</p>
-    <p>${{deal.price}}</p>
-    <p>{{deal.start_date}}</p>
-    <p>{{deal.end_date}}</p>
-    <p>{{deal.fine_print}}</p>
+    <h3>Address: {{deal.address}} {{deal.city}}, {{deal.state}}</h3>
+    <p>Type: {{deal.deal_type}}</p>
+    <p>Details: {{deal.details}}</p>
+    <p>Price: ${{deal.price}}</p>
+    <p>Date: {{deal.start_date}} - {{deal.end_date}}</p>
+    <p>Fine Print: {{deal.fine_print}}</p>
+
+    <div class="footer" style="margin-top:10%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="footerheader">Company</h5>
+              <a class="linkcont" href="/aboutus">About us</a>
+              <a class="linkcont" href="/careers">Careers</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Support</h4>
+              <a class="linkcont" href="/contact">Contact</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Partners</h4>
+              <a  class="linkcont" href="gyms">Gyms</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Community</h4>
+              <a class="linkcont" href="Blog">Blog</a>
+            </div>
+          </div>
+        </div>
+        <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+        <div class="appstorelink">
+          <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+        </div>
+      </div>
+
   </body>
 </html>

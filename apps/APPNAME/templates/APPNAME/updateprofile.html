@@ -6,7 +6,6 @@
       <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <meta charset="utf-8">
     <title>Update Profile</title>
-    <link rel="stylesheet" href="../../static/css/deals.css">
     <link rel="stylesheet" href="../../static/css/navbar.css">
 
   </head>
@@ -56,7 +55,7 @@
                           <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                         {% endif %}
                         <a href="/bookmarks">My Bookmarks</a>
-                        <a href="updateprofile">Edit Profile</a>
+                        <a href="/updateprofile">Edit Profile</a>
                         <a href="/logout">Log Out</a>
                       </div>
                     </div>
@@ -66,6 +65,17 @@
             </div>
           </nav>
         </div>
+
+        {% if messages %}
+          {% for message in messages %}
+          <script>
+            alert('{{message}}');
+          </script>
+          {% endfor %}
+        {% endif %}
+
+
+
     {% if messages and request.session.business_id %}
       <h3>Please note:</h3>
       <p>Business Name may not be empty.</p>
@@ -155,5 +165,34 @@
       </form>
 
     {% endif %}
+
+    <div class="footer" style="margin-top:10%;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="footerheader">Company</h5>
+              <a class="linkcont" href="/aboutus">About us</a>
+              <a class="linkcont" href="/careers">Careers</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Support</h4>
+              <a class="linkcont" href="/contact">Contact</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Partners</h4>
+              <a  class="linkcont" href="gyms">Gyms</a>
+            </div>
+            <div class="col-md-3">
+              <h4 class="footerheader">Community</h4>
+              <a class="linkcont" href="Blog">Blog</a>
+            </div>
+          </div>
+        </div>
+        <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
+        <div class="appstorelink">
+          <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
+        </div>
+      </div>
+
   </body>
 </html>

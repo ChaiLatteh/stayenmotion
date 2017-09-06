@@ -5,18 +5,10 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../static/css/landing.css">
-    
+
     <title></title>
   </head>
   <body>
-    {% if messages %}
-      {% for message in messages %}
-      <script>
-        alert('{{message}}');
-      </script>
-      {% endfor %}
-    {% endif %}
-
     <div class="top_image" style="margin-bottom:0;">
       <div class="navbar" style="background-color:#FFFFFF; border:none;">
         <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#FFFFFF; color:#e4e4e4;">
@@ -32,9 +24,7 @@
             <div id="navbar" class="collapse navbar-collapse" style="background-color: #FFFFFF;">
               <h3 style="color:#18233E; vertical-align:top; display:inline-block;">GymFinder</h3>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/" style="color:#18233E;">Why GymFinder</a></li>
-                <li><a href="/messageboard" style="color:#18233E;">How it work</a></li>
-                <li><a href="/social" style="color:#18233E;">Social Mention</a></li>
+                <li><a href="#intro1" style="color:#18233E;">Why GymFinder</a></li>
                 <li><a href="/prospectmeetups" style="color:#18233E;">Community</a></li>
                 <li><a class="join" href="/register"><span class="jointext">Join</span></a></li>
                 <li class="login"><a href="#login"><span class="logintext">Login</span></a></li>
@@ -43,6 +33,16 @@
           </div>
         </nav>
       </div>
+
+      {% if messages %}
+        {% for message in messages %}
+        <script>
+          alert('{{message}}');
+        </script>
+        {% endfor %}
+      {% endif %}
+
+
       <div class="intro">
         <A NAME="top"></A>
         <h3>Fitness under your finger</h3>
@@ -53,8 +53,34 @@
         </form>
       </div>
 
-        <div class="downarrow">
-          <A style="transform: rotate();"href="#intro1"><img style="margin-left:12%;margin-top:30%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+      <div class="container firsthotlink">
+          <div class="row">
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+                <A href="#intro1"><img style="width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+          </div>
         </div>
         <A NAME="intro1"></A>
     </div>
@@ -62,14 +88,40 @@
 
       <div class="intro2desc" style="margin-top:0">
         <h4>Find workout groups near you!</h4>
-        <p>90% of Americans want to be more active, we are here to help!</p>
+        <p>Nearly 90% of Americans want to be more active, we are here to help!</p>
       </div>
       <div class="introimage">
       </div>
-      <div class="downarrow">
-        <A href="#intro2"><img style="margin-left:12%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
-      </div>
-      <A NAME="intro2"></A>
+      <div class="container">
+          <div class="row">
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+            </div>
+            <div class="col-md-1 downarrow">
+                <A href="#intro2"><img style="width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+                <A NAME="intro2"></A>
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+             <div class="col-md-1 downarrow">
+             </div>
+          </div>
+        </div>
     </div>
 
     <div class="whyjoin">
@@ -81,9 +133,35 @@
           <div class="jointhecomm">
             <h4>Join the community and access all the goodies GymFinder can offer you! From meetups to deals on some of the hottest fitness centers, we put the ball in your court.</h1>
           </div>
-          <div class="downarrow">
-            <A href="#intro3"><img style="margin-left:12%;margin-top:25%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
-          </div>
+          <div class="container">
+              <div class="row">
+                <div class="col-md-1 downarrow">
+                </div>
+                <div class="col-md-1 downarrow">
+                </div>
+                <div class="col-md-1 downarrow">
+                </div>
+                <div class="col-md-1 downarrow">
+                </div>
+                <div class="col-md-1 downarrow">
+                </div>
+                <div class="col-md-1 downarrow">
+                    <A href="#intro3"><img style="margin-left:12%;margin-top:5%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+                 <div class="col-md-1 downarrow">
+                 </div>
+              </div>
+            </div>
         </div>
         <A NAME="intro3"></A>
         <div class="messboard">
@@ -93,8 +171,34 @@
           </div>
           <div class="messageimage">
           </div>
-          <div class="downarrow">
-            <A href="#intro4"><img style="margin-left:12%;margin-top:5%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-1 downarrow">
+              </div>
+              <div class="col-md-1 downarrow">
+              </div>
+              <div class="col-md-1 downarrow">
+              </div>
+              <div class="col-md-1 downarrow">
+              </div>
+              <div class="col-md-1 downarrow">
+              </div>
+              <div class="col-md-1 downarrow">
+                  <A href="#intro4"><img style="margin-left:12%;margin-top:5%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+               <div class="col-md-1 downarrow">
+               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -106,9 +210,7 @@
         </div>
         <div class="dealsimg">
         </div>
-        <div class="downarrow">
-          <A href="#intro4"><img style="margin-left:12%;margin-top:10%; width:30px; height:30px;"src="../../static/images/downarrow.png" alt=""></A>
-        </div>
+
       </div>
       <div class="meetups">
       <div class="meetupstext">
@@ -117,28 +219,44 @@
       </div>
       <div class="meetupsimg">
       </div>
-      <A style="margin-left:46%;position:relative; top:10px; width:30px; height:30px;" href="#top">Back to top</A>
+      <div class="container">
+          <div class="row">
+            <div class="col-md-2 downarrow">
+            </div>
+            <div class="col-md-2 downarrow">
+            </div>
+            <div class="col-md-2 downarrow">
+              <A style="margin-left:46%;position:relative; top:10px; width:30px; height:30px;" href="#top">Back to top</A>
+            </div>
+             <div class="col-md-2 downarrow">
+             </div>
+             <div class="col-md-2 downarrow">
+             </div>
+             <div class="col-md-2 downarrow">
+             </div>
+          </div>
+        </div>
     </div>
   </div>
   <div class="loginform">
     <A NAME="login"></A>
     <div class="container">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-6">
           <form class="user" action="/user_login" method="post">
             <h1>User Login</h1>
             {% csrf_token %}
-            <input type="text" name="user_login_email" placeholder="Email">
+            <input type="text" name="user_login_email" placeholder="Email"><br>
             <input type="password" name="user_login_password" placeholder="Password">
             <input type="submit" value="Login">
           </form>
           <a href="/findpassword">Forgot password?</a>
         </div>
-        <div class="col-md-2 leftform">
+        <div class="col-md-6 leftform">
           <form class="business" action="/business_login" method="post">
             <h1>Business Login</h1>
             {% csrf_token %}
-            <input type="text" name="business_login_email" placeholder="Email">
+            <input type="text" name="business_login_email" placeholder="Email"><br>
             <input type="password" name="business_login_password" placeholder="Password">
             <input type="submit" value="Login">
           </form>
@@ -147,7 +265,6 @@
 
       </div>
     </div>
-
 
   </div>
   <div class="footer">

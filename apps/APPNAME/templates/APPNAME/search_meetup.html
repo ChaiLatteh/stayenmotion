@@ -56,7 +56,7 @@
                           <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
                         {% endif %}
                         <a href="/bookmarks">My Bookmarks</a>
-                        <a href="updateprofile">Edit Profile</a>
+                        <a href="/updateprofile">Edit Profile</a>
                         <a href="/logout">Log Out</a>
                       </div>
                     </div>
@@ -66,12 +66,15 @@
             </div>
           </nav>
         </div>
-    <!-- <div class="sidebar">
-      <h3 style="color:blue;">HIHIASHFISDIHF</h3>
-      <p>
 
-      </p> -->
-    <!-- </div> -->
+        {% if messages %}
+          {% for message in messages %}
+          <script>
+            alert('{{message}}');
+          </script>
+          {% endfor %}
+        {% endif %}
+
 
     <div class="searchbar">
       <div class="searcharea">
@@ -138,8 +141,8 @@
         <div class="appstorelink">
           <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
         </div>
-
       </div>
+
 
   </body>
 </html>
