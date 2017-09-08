@@ -67,6 +67,7 @@ urlpatterns = [
     url(r'^careers$', views.careers),
 
     url(r'^logout$', views.logout),
+    url(r'^newlanding',views.newlanding),
 
     #no longer in use
     # url(r'^messageboard/$', views.messageboard),

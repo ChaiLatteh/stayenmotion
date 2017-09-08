@@ -155,7 +155,7 @@ color:#e4e4e4;
 color: teal;
 }
 .navbar-default .navbar-nav>li>a {
-color:#e4e4e4;
+/* color:#e4e4e4; */
 }
 
 .detailscont{
@@ -166,4 +166,24 @@ color: white;
   .footer{
     height:500px;
   }
+}
+body {
+  font-family: 'Varela Round', sans-serif;
+  color: #585858;
+  overflow-x: hidden;
+}
+.logo {
+  margin-top: 5px;
+}
+.logo {
+  font-weight: 500 !important;
+  font-size: 26px !important;
+  color: #ffffff !important;
+  font-family: 'Mitr', sans-serif !important;
+}
+.logo span {
+  color: #3853e9;
+}
+.navbar-header-white .logo {
+  color: #222328 !important;
 }
