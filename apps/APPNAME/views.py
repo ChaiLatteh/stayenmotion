@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark,Deal
 from .forms import UploadFileForm, Messageboard_MessageForm
 import datetime, random, requests, json
@@ -472,6 +473,43 @@ def new_message_process(request):
             print "FAIL"
             form = Messageboard_MessageForm()
             return redirect('/messageboard/new')
+def delete_message(request, message_id):
+    this_message=Messageboard_Message.objects.get(id=message_id)
+    if request.POST:
+        if this_message.user.id != request.session['user_id']:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+            return redirect('/messageboard')
+        else:
+            this_message.delete()
+            messages.add_message(request, messages.ERROR, "Deleted!")
+            return redirect('/messageboard')
+    else:
+        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/messageboard/'+message_id)
+
+def delete_comment(request, comment_id):
+    this_comment=Messageboard_Comment.objects.get(id=comment_id)
+    if 'user_id' in request.session:
+        if this_comment.user.id != request.session['user_id']:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            this_comment.delete()
+            messages.add_message(request, messages.ERROR, "Deleted!")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    elif 'business_id' in request.session:
+        if this_comment.business.id != request.session['business_id']:
+            messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            this_comment.delete()
+            messages.add_message(request, messages.ERROR, "Deleted!")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.add_message(request, messages.ERROR, "INVALID APPROACH")
+        return redirect('/')
+
+
 def deal_details(request, deal_id):
     this_deal=Deal.objects.get(id=deal_id)
     if 'user_id' in request.session:
@@ -781,18 +819,14 @@ def index(request):
         }
         return render(request, 'APPNAME/home.html', data)
 
-
-        # random.shuffle(meetupname)
-        # try:
-        # this_user=User.objects.get(id=request.session['user_id'])
-
-        # for like in Messageboard_Message_Like.objects.all():
-        #     likes_list.append(like)
-
     else:
         return render(request, 'APPNAME/landing.html')
 
 def deals(request):
+    for deal in Deal.objects.all():
+        if datetime.datetime.strptime(deal.start_date, '%Y-%m-%d') < datetime.datetime.now():
+            deal.delete()
+
     deals_list=[]
 
     for deal in Deal.objects.all().order_by('-created_at'):

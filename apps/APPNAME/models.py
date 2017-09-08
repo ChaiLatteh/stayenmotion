@@ -278,6 +278,8 @@ class DealManager(models.Manager):
             errors.append("Start date cannot be blank")
         if data['end_date']=="":
             errors.append("End date cannot be blank")
+        if datetime.datetime.strptime(data['end_date'], '%Y-%m-%d') < datetime.datetime.strptime(data['start_date'], '%Y-%m-%d'):
+            errors.append("End date cannot be a date prior to the start date.")
         if len(data['details'])<5:
             errors.append("details cannot be less than 5 characters")
 
