@@ -820,7 +820,10 @@ def index(request):
         return render(request, 'APPNAME/home.html', data)
 
     else:
-        return render(request, 'APPNAME/newlanding.html')
+        data={
+        "meetups_list":meetups_list,
+        }
+        return render(request, 'APPNAME/newlanding.html', data)
 
 def deals(request):
     for deal in Deal.objects.all():
