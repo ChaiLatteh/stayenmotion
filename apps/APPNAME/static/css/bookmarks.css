@@ -1,0 +1,20 @@
+.logo {
+    margin-top: 5px;
+  }
+  .logo {
+    font-weight: 500;
+    font-size: 26px;
+    color: #ffffff !important;
+    font-family: 'Mitr', sans-serif;
+  }
+  .logo span {
+    color: #3853e9;
+  }
+  .navbar-header-white .logo {
+    color: #222328 !important;
+  }
+  body {
+    font-family: 'Varela Round', sans-serif;
+    color: #585858;
+    overflow-x: hidden;
+  }
