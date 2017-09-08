@@ -62,7 +62,7 @@
                         <i class="ti-menu"></i>
                     </button>
                     <!-- LOGO -->
-                    <a class="navbar-brand logo" href="index.html">
+                    <a class="navbar-brand logo" href="/">
                         Stay<span>En</span>Motion
                     </a>
                 </div>
@@ -579,8 +579,8 @@
                     <div class="col-sm-12">
                         <div class="title-box text-center">
                             <i class="ti-announcement"></i>
-                            <p>From our Blog</p>
-                            <h2>News <span class="text-custom">and</span> Stories</h2>
+                            <p>From our Site</p>
+                            <h2>Meetups <span class="text-custom">and</span> Activities</h2>
                         </div>
                     </div>
                 </div>
@@ -596,7 +596,7 @@
                                 <p>{{meetups_list.0.description}}</p>
                             </div>
                             <div class="blog-box-footer text-center">
-                                <a href="#" class="btn btn-sm btn-custom"> Read more</a>
+                                <!-- <a href="#" class="btn btn-sm btn-custom"> Read more</a> -->
                             </div>
                         </div>
                     </div>
@@ -610,7 +610,7 @@
                                 <p>{{meetups_list.1.description}}</p>
                             </div>
                             <div class="blog-box-footer text-center">
-                                <a href="#" class="btn btn-sm btn-custom"> Read more</a>
+                                <!-- <a href="#" class="btn btn-sm btn-custom"> Read more</a> -->
                             </div>
                         </div>
                     </div>
@@ -618,13 +618,13 @@
                     <div class="col-sm-4">
                         <div class="blog-box">
                             <img class="img-responsive" src="images/blog/blog-3.jpg" alt="">
-                            <p class="blog-date">03 Jun 2016</p>
+                            <p class="blog-date">{{meetups_list.1.date}}</p>
                             <div class="blog-box-content">
-                                <h4 class="blog-grid-title-md"><a href="#">Architecto beatae vitae dicta sunt explicabo</a></h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel sapien et lacus tempus varius. In finibus lorem vel.</p>
+                                <h4 class="blog-grid-title-md"><a href="#">{{meetups_list.1.eventname}}</a></h4>
+                                <p>{{meetups_list.1.description}}</p>
                             </div>
                             <div class="blog-box-footer text-center">
-                                <a href="#" class="btn btn-sm btn-custom"> Read more</a>
+                                <!-- <a href="#" class="btn btn-sm btn-custom"> Read more</a> -->
                             </div>
                         </div>
                     </div>
@@ -758,15 +758,15 @@
 
                     <div class="col-md-4 col-sm-12">
                         <h4 class="logo">Stay<span>En</span>Motion</h4>
-                        <p>Architecto beatae vitae dicta sunt explicabo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel sapien et lacus tempus varius. In finibus lorem vel.</p>
+                        <p>We believe that people exercise should not be difficult.  We want to create a easy to use resource for people of all walks of life to get out and exercise more.  Join today and get fit with us!</p>
 
                         <ul class="list-inline social">
                             <li>
                                 <a href="javascript:void(0);" class="bg-twitter"><i class="ti-twitter-alt"></i></a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="javascript:void(0);" class="bg-dribbble"><i class="ti-dribbble"></i></a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="javascript:void(0);" class="bg-linkedin"><i class="ti-linkedin"></i></a>
                             </li>
@@ -780,24 +780,24 @@
                     </div>
 
                     <div class="col-md-3 col-sm-6 col-md-offset-2">
-                        <h5>Solutions</h5>
+                        <h5>All About Us</h5>
                         <ul class="list-unstyled footer-list">
-                            <li><a href="">Web Design</a></li>
-                            <li><a href="">Graphic Design</a></li>
-                            <li><a href="">Power & Energy</a></li>
-                            <li><a href="">Solar Power</a></li>
-                            <li><a href="">Green energy</a></li>
+                            <li><a href="/aboutus">About Us</a></li>
+                            <li><a href="/careers">Careers</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/messageboard">Blog</a></li>
+                            <!-- <li><a href="">Green energy</a></li> -->
                         </ul>
                     </div>
 
                     <div class="col-md-3 col-sm-6">
                         <h5>Useful Links</h5>
                         <ul class="list-unstyled footer-list">
-                            <li><a href="">About Us</a></li>
-                            <li><a href="">Help &amp; Support</a></li>
+                            <!-- <li><a href="">About Us</a></li> -->
+                            <!-- <li><a href="">Help &amp; Support</a></li> -->
                             <li><a href="">Privacy Policy</a></li>
-                            <li><a href="">Terms &amp; Conditions</a></li>
-                            <li><a href="">FAQ</a></li>
+                            <!-- <li><a href="">Terms &amp; Conditions</a></li> -->
+                            <!-- <li><a href="">FAQ</a></li> -->
                         </ul>
                     </div>
 
@@ -811,7 +811,7 @@
 
         <!-- COPYRIGHT -->
         <div class="footer-alt bg-dark">
-            <p class="copy-rights">2016 © Aneria. All Rights Reserved</p>
+            <p class="copy-rights">2016 © StayEnMotion. All Rights Reserved</p>
         </div>
 
 
