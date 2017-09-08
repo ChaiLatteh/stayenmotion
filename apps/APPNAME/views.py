@@ -790,7 +790,7 @@ def index(request):
         #     likes_list.append(like)
 
     else:
-        return render(request, 'APPNAME/landing.html')
+        return render(request, 'APPNAME/newlanding.html')
 
 def deals(request):
     deals_list=[]
@@ -944,3 +944,5 @@ def savingnewdeal(request):
     else:
         messages.add_message(request,messages.ERROR, "Successfully created a deal!")
         return redirect('/deals')
+def newlanding(request):
+    return render(request, 'APPNAME/newlanding.html')
