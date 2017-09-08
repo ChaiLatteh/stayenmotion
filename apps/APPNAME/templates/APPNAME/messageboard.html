@@ -35,7 +35,7 @@
                 {% elif request.session.business_id %}
                   <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:skyblue;">{{this_business.name}}</a>!</h3>
                 {% endif %} -->
-                <a class="navbar-brand logo" href="index.html">
+                <a class="navbar-brand logo" href="/">
                     Stay<span>En</span>Motion
                 </a>
                 <ul class="nav navbar-nav navbar-right">
@@ -127,38 +127,66 @@
 
       </div>
     </div>
-
-    <div class="footer" style="margin-top:10%;">
-        <div class="container">
+    <footer class="bg-dark footer">
+      <div class="container">
           <div class="row">
 
-            <div class="col-md-3">
-              <h4 class="footerheader">Company</h5>
-                <a class="linkcont" href="/aboutus">About us</a>
-                <a class="linkcont" href="/careers">Careers</a>
+              <div class="col-md-4 col-sm-12">
+                  <h4 class="logo">Stay<span>En</span>Motion</h4>
+                  <p>We believe that people exercise should not be difficult.  We want to create a easy to use resource for people of all walks of life to get out and exercise more.  Join today and get fit with us!</p>
+
+                  <ul class="list-inline social">
+                      <li>
+                          <a href="javascript:void(0);" class="bg-twitter"><i class="ti-twitter-alt"></i></a>
+                      </li>
+                      <!-- <li>
+                          <a href="javascript:void(0);" class="bg-dribbble"><i class="ti-dribbble"></i></a>
+                      </li> -->
+                      <li>
+                          <a href="javascript:void(0);" class="bg-linkedin"><i class="ti-linkedin"></i></a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);" class="bg-googleplus"><i class="ti-google"></i></a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);" class="bg-facebook"><i class="ti-facebook"></i></a>
+                      </li>
+                  </ul>
               </div>
 
-              <div class="col-md-3">
-                <h4 class="footerheader">Support</h4>
-                <a class="linkcont" href="/contact">Contact</a>
+              <div class="col-md-3 col-sm-6 col-md-offset-2">
+                  <h5>All About Us</h5>
+                  <ul class="list-unstyled footer-list">
+                      <li><a href="/aboutus">About Us</a></li>
+                      <li><a href="/careers">Careers</a></li>
+                      <li><a href="/contact">Contact</a></li>
+                      <li><a href="/messageboard">Blog</a></li>
+                      <!-- <li><a href="">Green energy</a></li> -->
+                  </ul>
               </div>
 
-              <div class="col-md-3">
-                <h4 class="footerheader">Partners</h4>
-                <a  class="linkcont" href="gyms">Gyms</a>
+              <div class="col-md-3 col-sm-6">
+                  <h5>Useful Links</h5>
+                  <ul class="list-unstyled footer-list">
+                      <!-- <li><a href="">About Us</a></li> -->
+                      <!-- <li><a href="">Help &amp; Support</a></li> -->
+                      <li><a href="">Privacy Policy</a></li>
+                      <!-- <li><a href="">Terms &amp; Conditions</a></li> -->
+                      <!-- <li><a href="">FAQ</a></li> -->
+                  </ul>
               </div>
 
-              <div class="col-md-3">
-                <h4 class="footerheader">Community</h4>
-                <a class="linkcont" href="Blog">Blog</a>
-              </div>
+          </div> <!-- end row -->
 
-            </div>
-          </div>
-          <h4 class="appstorehead" style="color:white; margin-left:8%; margin-top:5%">Enjoy GymFinder on the go!</h4>
-          <div class="appstorelink">
-            <a href="/appstore"><img class="appstore" src="../../static/images/appstorelink.png" alt=""></a>
-          </div>
-        </div>
+
+      </div> <!-- end container -->
+  </footer>
+  <!-- end FOOTER -->
+
+
+  <!-- COPYRIGHT -->
+  <div class="footer-alt bg-dark">
+      <p class="copy-rights">2016 © StayEnMotion. All Rights Reserved</p>
+  </div>
   </body>
 </html>

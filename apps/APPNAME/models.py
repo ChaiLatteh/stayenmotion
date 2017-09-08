@@ -402,7 +402,7 @@ class Business(models.Model):
 
 class Meetup(models.Model):
     eventname=models.CharField(max_length=255)
-    description=models.CharField(max_length=255)
+    description=models.CharField(max_length=55)
     details=models.CharField(max_length=255)
     location=models.CharField(max_length=255)
     date=models.CharField(max_length=255)
