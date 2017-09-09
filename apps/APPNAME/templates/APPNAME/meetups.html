@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>      
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <link rel="stylesheet" href="../../static/css/navbar.css">
@@ -30,14 +30,14 @@
                 {% elif request.session.business_id %}
                   <h3 style="vertical-align:top; display:inline-block;">Welcome <a href="/businesses/{{request.session.business_id}}" style="color:skyblue;">{{this_business.name}}</a>!</h3>
                 {% endif %} -->
-                <a class="navbar-brand logo" href="/">
+                <a class="navbar-brand logo" href="index.html">
                     Stay<span>En</span>Motion
                 </a>
                 <ul class="nav navbar-nav navbar-right">
                   <li><a class="navlinks" href="/">Home</a></li>
                   <li><a class="navlinks" href="/meetups">Meetups</a></li>
                   <li><a class="navlinks" href="/messageboard">Message Board</a></li>
-                  <li><a class="navlinks" href="/deals" opacity:1;">Deals</a></li>
+                  <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
                   <li>
                     <div class="dropdown">
                       {% if request.session.user_id %}
@@ -101,7 +101,7 @@
         {% for meetup in meetups_list %}
 
         <div class="meetupdiv">
-          <li>
+          <li style="margin-left:5px;">
             <a class="title" href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a>
             <p>When: {{meetup.date}}</p>
             <p>Where: ({{meetup.location}})</p>
@@ -113,6 +113,7 @@
         {% endfor %}
       </ul>
     </div>
+
 
 
     <footer class="bg-dark footer">

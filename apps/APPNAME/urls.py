@@ -67,7 +67,8 @@ urlpatterns = [
     url(r'^careers$', views.careers),
 
     url(r'^logout$', views.logout),
-    url(r'^newlanding',views.newlanding),
+
+    url(r'^admin$', views.admin),
 
 ]
  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

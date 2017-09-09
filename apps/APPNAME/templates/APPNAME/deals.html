@@ -98,6 +98,8 @@
         {% csrf_token %}
         <input type="submit" name="deal" value="create deal">
       </form>
+    {% elif request.session.user_id %}
+      <button type="button" name="button" onclick="alert('Only business users can create deals')">create deal</button>
     {% endif %}
       <div class="">
         <div class="container">

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../../static/css/navbar.css">
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar">
+      <nav class="navbar navbar-default navbar-fixed-top thenav">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span><!DOCTYPE html>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <a class="navbar-brand logo" href="/">
+              Stay<span>En</span>Motion
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="navlinks" href="/">Home</a></li>
+              <li><a class="navlinks" href="/meetups">Meetups</a></li>
+              <li><a class="navlinks" href="/messageboard">Message Board</a></li>
+              <li><a class="navlinks" href="/deals" style="color:#e4e4e4; opacity:1;">Deals</a></li>
+              <li>
+                <div class="dropdown">
+                  {% if request.session.user_id %}
+                    {% if this_user.image %}
+                      <img class="dropbtn" src="{{this_user.image.url}}" alt="">
+                    {% else %}
+                      <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                    {% endif %}
+                  {% elif request.session.business_id %}
+                    {% if this_business.image %}
+                      <img class="dropbtn" src="{{this_business.image.url}}" alt="">
+                    {% else %}
+                      <img class="dropbtn" src="../../static/images/blankpic.jpg" alt="">
+                    {% endif %}
+                  {% endif %}
+                  <div class="dropdown-content">
+                    {% if request.session.user_id %}
+                      <a href="/users/{{request.session.user_id}}">Account Overview</a>
+                    {% elif request.session.business_id %}
+                      <a href="/businesses/{{request.session.business_id}}">Account Overview</a>
+                    {% endif %}
+                    <a href="/bookmarks">My Bookmarks</a>
+                    <a href="/updateprofile">Edit Profile</a>
+                    <a href="/logout">Log Out</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    {% if messages %}
+      {% for message in messages %}
+      <script>
+        alert('{{message}}');
+      </script>
+      {% endfor %}
+    {% endif %}
+
+    <h1>View Count: {{viewcount.count}}</h1>
+    <h3>Users Count: {{users.count}}</h3>
+    <h3>Businesses Count: {{businesses.count}}</h3>
+    <br>
+    <h4>Messages Count: {{messages.count}}</h4>
+    <h4>Comments Count: {{comments.count}}</h4>
+    <h4>Meetups Count: {{meetups.count}}</h4>
+    <h4>Deals Count: {{deals.count}}</h4>
+
+
+
+
+
+    <footer class="bg-dark footer">
+      <div class="container">
+          <div class="row">
+
+              <div class="col-md-4 col-sm-12">
+                  <h4 class="logo">Stay<span>En</span>Motion</h4>
+                  <p>We believe that people exercise should not be difficult.  We want to create a easy to use resource for people of all walks of life to get out and exercise more.  Join today and get fit with us!</p>
+
+                  <ul class="list-inline social">
+                      <li>
+                          <a href="javascript:void(0);" class="bg-twitter"><i class="ti-twitter-alt"></i></a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);" class="bg-linkedin"><i class="ti-linkedin"></i></a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);" class="bg-googleplus"><i class="ti-google"></i></a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);" class="bg-facebook"><i class="ti-facebook"></i></a>
+                      </li>
+                  </ul>
+              </div>
+
+              <div class="col-md-3 col-sm-6 col-md-offset-2">
+                  <h5>All About Us</h5>
+                  <ul class="list-unstyled footer-list">
+                      <li><a href="/aboutus">About Us</a></li>
+                      <li><a href="/careers">Careers</a></li>
+                      <li><a href="/contact">Contact</a></li>
+                      <li><a href="/messageboard">Blog</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-md-3 col-sm-6">
+                  <h5>Useful Links</h5>
+                  <ul class="list-unstyled footer-list">
+                      <li><a href="">Privacy Policy</a></li>
+                  </ul>
+              </div>
+          </div> <!-- end row -->
+      </div> <!-- end container -->
+  </footer>
+  <!-- end FOOTER -->
+
+
+  <!-- COPYRIGHT -->
+  <div class="footer-alt bg-dark">
+      <p class="copy-rights">2016 © StayEnMotion. All Rights Reserved</p>
+  </div>
+
+  </body>
+</html>

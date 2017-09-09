@@ -59,13 +59,8 @@
 .linkcont{
   color: #A3A7B2;
 }
-.appstorehead{
-  color: white;
-}
-.appstore{
-  width: 100px;
-  height: 45px;
-  margin-left: 8%
+.title{
+  font-size:30px;
 }
 .meetupdiv{
   width: 80%;
@@ -102,12 +97,4 @@
   text-align: center;
   height:70px;
   padding-top:16px;
-}
-.going{
-  display: inline-block;
-  margin-left: 2%
-}
-.interested{
-  display: inline-block;
-  margin-left: 5%;
 }

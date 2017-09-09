@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>      
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
@@ -85,14 +85,16 @@
         {% for meetup in meetups_list %}
 
         <div class="meetupdiv">
-          <li>
-            <p>Date of Meetup: {{meetup.date}} <a href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a> ({{meetup.location}})</p>
+          <li style="margin-left:5px;">
+            <a class="title" href="/meetups/{{meetup.id}}">{{meetup.eventname}}</a>
+            <p>When: {{meetup.date}}</p>
+            <p>Where: ({{meetup.location}})</p>
+            <p>Hosted By: <a href="/users/{{meetup.user.id}}">{{meetup.user.first_name}} {{meetup.user.last_name}}</a></p>
           </li>
-          <p class="going">members going: 15</p>
-          <p class="interested">Interested Members: 8</p>
+          <!-- <p class="going">members going: 15</p>
+          <p class="interested">Interested Members: 8</p> -->
         </div>
-          <div class="overlay">
-        </div>
+        <div class="overlay"></div>
 
         {% endfor %}
       </ul>

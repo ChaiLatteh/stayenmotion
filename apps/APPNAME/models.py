@@ -368,6 +368,10 @@ class MeetupManager(models.Manager):
             'errors_list':None,
             }
 
+class ViewCount(models.Model):
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
 class User(models.Model):
     first_name=models.CharField(max_length=255)
     last_name=models.CharField(max_length=255)

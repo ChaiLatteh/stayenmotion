@@ -3,13 +3,38 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark,Deal
+from .models import User, UserManager, Business, BusinessManager, Messageboard_Message, Messageboard_Comment, Messageboard_Message_Like, Messageboard_Message_Bookmark, Messageboard_Message_View, MessageboardManager, Meetup, MeetupManager, Meetup_Bookmark, Deal, ViewCount
 from .forms import UploadFileForm, Messageboard_MessageForm
 import datetime, random, requests, json
 from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 
 # Create your views here.
+def admin(request):
+    try:
+        this_user = User.objects.get(id=request.session['user_id'])
+    except:
+        messages.add_message(request, messages.ERROR, "You have no access to this page.")
+        return redirect('/')
+
+
+    if this_user.email == "caesarshia@gmail.com" or this_user.email == "wkdcodns100@gmail.com":
+        data={
+        "users":User.objects.all(),
+        "businesses":Business.objects.all(),
+        "viewcount":ViewCount.objects.all(),
+        "messages":Messageboard_Message.objects.all(),
+        "comments":Messageboard_Comment.objects.all(),
+        "meetups":Meetup.objects.all(),
+        "deals":Deal.objects.all(),
+        }
+        return render(request, 'APPNAME/admin.html', data)
+
+
+    else:
+        messages.add_message(request, messages.ERROR, "You have no access to this page.")
+        return redirect('/')
+
 def register(request):
     if 'user_id' in request.session:
         return redirect('/')
@@ -799,6 +824,7 @@ def index(request):
     for meetup in Meetup.objects.all():
         meetups_list.append(meetup)
 
+
     if 'user_id' in request.session:
         this_user = User.objects.get(id=request.session['user_id'])
         data={
@@ -820,8 +846,16 @@ def index(request):
         return render(request, 'APPNAME/home.html', data)
 
     else:
+        ViewCount.objects.create()
+        all_users_count=0
+        for user in User.objects.all():
+            all_users_count=all_users_count+1
+        for business in Business.objects.all():
+            all_users_count=all_users_count+1
+        print all_users_count
         data={
         "meetups_list":meetups_list,
+        "all_users_count":all_users_count,
         }
         return render(request, 'APPNAME/newlanding.html', data)
 
@@ -950,7 +984,6 @@ def prospectmeetups(request):
         meetups_list.append(meetup)
 
     data={
-
     "meetups_list":meetups_list,
     }
     return render(request, 'APPNAME/prospectmeetups.html', data)
@@ -981,5 +1014,3 @@ def savingnewdeal(request):
     else:
         messages.add_message(request,messages.ERROR, "Successfully created a deal!")
         return redirect('/deals')
-def newlanding(request):
-    return render(request, 'APPNAME/newlanding.html')
