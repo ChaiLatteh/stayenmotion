@@ -864,7 +864,7 @@ def getting(request):
 
     return render(request, 'APPNAME/createdeal.html', data)
 def pickbusiness(request):
-    r = requests.post('https://api.yelp.com/oauth2/token', data={'grant_type':"client_credentials", "client_id":"YFwchaLGlVSnFPeQXIEvjQ","client_secret":"RoVIIt9dAifYUKD1a8GyIMwKdzqGHrHqHsiACGh5BLEwuMa2xLo4hYvEoB2rdtfG"})
+    r = requests.post('https://api.yelp.com/oauth2/token', data={'grant_type':"client_credentials", "client_id":"","client_secret":""})
 
     tokendata = json.loads(r.text)
     print(tokendata, "**************")

@@ -100,9 +100,8 @@
                 </div>
                 <div class="overlay1">
                   <h1 class="detailscont">{{deals_list.0.business.name}}</h1>
-                  <a class="detailsbutt" href="deal/{{deals_list.0.business.id}}"></a>
+                  <a class="detailsbutt" href="deal/{{deals_list.0.id}}"></a>
                 </div>
-                {{deals_list}}
                 <h4 class="eventname">{{deals_list.0.business.name}}</h4>
                 <p class ="eventlocation">Type: {{deals_list.0.deal_type}}</p>
                 <p class="description">Price: {{deals_list.0.price}}</p>
@@ -119,7 +118,7 @@
                 </div>
                 <div class="overlay1">
                   <h1 class="detailscont">{{deals_list.1.business.name}}</h1>
-                  <a class="detailsbutt" href="deal/{{deals_list.1.business.id}}"></a>
+                  <a class="detailsbutt" href="deal/{{deals_list.1.id}}"></a>
                 </div>
                 <h4 class="eventname">{{deals_list.1.business.name}}</h4>
                 <p class ="eventlocation">Location: {{deals_list.1.deal_type}}</p>
@@ -137,7 +136,7 @@
                 </div>
                 <div class="overlay1">
                   <h1 class="detailscont">{{deals_list.2.business.name}}</h1>
-                  <a class="detailsbutt" href="deal/{{deals_list.2.business.id}}"></a>
+                  <a class="detailsbutt" href="deal/{{deals_list.2.id}}"></a>
                 </div>
                 <h4 class="eventname">{{deals_list.2.business.name}}</h4>
                 <p class ="eventlocation">Location: {{deals_list.2.deal_type}}</p>
@@ -163,9 +162,9 @@
               {% endif %}
              </div>
              <div class="col-md-3">
-               <span class="message_details">{{messages_list.0.title}}</span>
-               <span class="message_details">{{messages_list.0.user.first_name}}</span>
+               <span class="message_details" style="font-size:18px;"><a href="/messageboard/{{messages_list.0.id}}">{{messages_list.0.title}}</a></span>
                <span class="message_details">{{messages_list.0.created_at}}</span>
+               <span class="message_details"><a href="/users/{{messages_list.0.user.id}}">{{messages_list.0.user.first_name}} {{messages_list.0.user.last_name}}</a></span>
              </div>
              <div class="col-md-2">
                <span>views:{{messages_list.0.messageboard_message_views.count}}</span>
@@ -183,9 +182,9 @@
                 {% endif %}
              </div>
             <div class="col-md-3">
-              <span class="message_details">{{messages_list.1.title}}</span>
-              <span class="message_details">{{messages_list.1.user.first_name}}</span>
+              <span class="message_details" style="font-size:18px;"><a href="/messageboard/{{messages_list.1.id}}">{{messages_list.1.title}}</a></span>
               <span class="message_details">{{messages_list.1.created_at}}</span>
+              <span class="message_details"><a href="/users/{{messages_list.1.user.id}}">{{messages_list.1.user.first_name}} {{messages_list.1.user.last_name}}</a></span>
             </div>
             <div class="col-md-2">
               <span>views:{{messages_list.1.messageboard_message_views.count}}</span>
@@ -203,9 +202,9 @@
                {% endif %}
             </div>
            <div class="col-md-3">
-             <span class="message_details">{{messages_list.2.title}}</span>
-             <span class="message_details">{{messages_list.2.user.first_name}}</span>
+             <span class="message_details" style="font-size:18px;"><a href="/messageboard/{{messages_list.2.id}}">{{messages_list.2.title}}</a></span>
              <span class="message_details">{{messages_list.2.created_at}}</span>
+             <span class="message_details"><a href="/users/{{messages_list.2.user.id}}">{{messages_list.2.user.first_name}} {{messages_list.2.user.last_name}}</a></span>
            </div>
            <div class="col-md-2">
              <span>views:{{messages_list.1.messageboard_message_views.count}}</span>

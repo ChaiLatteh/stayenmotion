@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>      
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <title>Pick Business page</title>
     <link rel="stylesheet" href="../../static/css/form.css">
@@ -95,14 +95,17 @@
               <br>
                 {% csrf_token %}
               <p name="businessname">{{name}}</p>
+              <input type="hidden" name="businessname" value="{{name}}">
               <label for="address">Address:</label>
               <p name="address">{{address}}</p>
+              <input type="hidden" name="address" value="{{address}}">
               <label for="city">City:</label>
               <p name="city">{{ city }}</p>
+              <input type="hidden" name="city" value="{{city}}">
               <!-- <input type="text" name="city" value="{{ city }}" required minlength="1"> -->
-              <br>
               <label for="state">State:</label>
               <p name="state">{{state}}</p>
+              <input type="hidden" name="state" value="{{state}}">
               <!-- <input type="text" name="state" value="{{ state }}"> -->
               <label for="title">Title: </label>
               <input type="title" name="title" required minlength="1">

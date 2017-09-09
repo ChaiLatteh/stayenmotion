@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>      
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
@@ -110,7 +110,7 @@
               <p>{{deal.end_date}}</p>
               <p>{{deal.price}}</p>
               <p>{{deal.business.name}}</p>
-              <a href="/deal/{{deal.id}}">More details</a>
+              <a class="more_details" href="/deal/{{deal.id}}">More details</a>
             </div>
             {% endfor %}
           </div>

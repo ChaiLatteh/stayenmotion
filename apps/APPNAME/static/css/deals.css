@@ -17,6 +17,9 @@
   .linkcont{
     color: #A3A7B2;
   }
+  .more_details{
+    color:blue !important;
+  }
   .appstorehead{
     color: white;
   }
@@ -26,6 +29,7 @@
     margin-left: 8%
   }
   .dealsection{
+    color:black !important;
     background:grey;
     max-height: 300px;
   }
