@@ -50,6 +50,9 @@ urlpatterns = [
     url(r'^messageboard/(?P<message_id>\d+)/comment/process$', views.new_comment_process),
     url(r'^messageboard/(?P<message_id>\d+)/bookmark_process$', views.bookmark_message_process),
     url(r'^messageboard/(?P<message_id>\d+)/unbookmark_process$', views.unbookmark_message_process),
+    url(r'^messageboard/(?P<message_id>\d+)/delete$', views.delete_message),
+    url(r'^messageboard/comments/(?P<comment_id>\d+)/delete$', views.delete_comment),
+
     url(r'^deal/(?P<deal_id>\d+)$',views.deal_details),
     url(r'^savingnewdeal$', views.savingnewdeal),
     url(r'^deals$', views.deals),
@@ -66,10 +69,5 @@ urlpatterns = [
     url(r'^logout$', views.logout),
     url(r'^newlanding',views.newlanding),
 
-    #no longer in use
-    # url(r'^messageboard/$', views.messageboard),
-    # url(r'^messageboard/message/add_message$', views.new_message_process),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/like$', views.like_message),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/unlike$', views.unlike_message),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/add_comment$', views.new_comment_process),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+ # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

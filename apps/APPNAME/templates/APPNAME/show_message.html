@@ -87,6 +87,12 @@
           <a id="unlike_button" href="/messageboard/{{this_message.id}}/unlike_process"><button>Unlike</button></a>
           <a id="bookmark_button" href="/messageboard/{{this_message.id}}/bookmark_process"><button>Bookmark</button></a>
           <a id="unbookmark_button" href="/messageboard/{{this_message.id}}/unbookmark_process"><button>Remove Bookmark</button></a>
+          {% if this_message.user.id == request.session.user_id %}
+            <form style="display:inline-block;" class="user_control" action="/messageboard/{{this_message.id}}/delete" method="post">
+              {% csrf_token %}
+              <input style="color:#337ab7;" type="submit" value="Delete">
+            </form>
+          {% endif %}
           <script>
             var my_like=0;
             var my_bookmark=0;
@@ -168,6 +174,11 @@
                 <img src="../../static/images/blankpic.jpg" style="height:30px; width:30px;">
               {% endif %}
               <a href="/users/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a> - {{comment.created_at}}
+              {% if request.session.user_id %}
+                {% if comment.user.id == request.session.user_id %}
+                  <a href="/messageboard/comments/{{comment.id}}/delete">delete</a>
+                {% endif %}
+              {% endif %}
             </div>
           </div>
         {% elif comment.business %}
@@ -180,6 +191,11 @@
               <img src="../../static/images/blankpic.jpg" style="height:30px; width:30px;">
             {% endif %}
             <a href="/businesses/{{comment.business.id}}">{{comment.business.name}}</a> - {{comment.created_at}}
+            {% if request.session.business_id %}
+              {% if comment.business.id == request.session.business_id %}
+                <a href="/messageboard/comments/{{comment.id}}/delete">delete</a>
+              {% endif %}
+            {% endif %}
           </div>
         </div>
         {% endif %}
