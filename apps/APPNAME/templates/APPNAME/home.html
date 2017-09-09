@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>      
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Mitr:500" rel="stylesheet">
@@ -157,10 +157,10 @@
             <div class="themessage">
              <div class="col-md-2">
                {% if messages_list.0.image %}
-               <img class="messageimage" src="{{messsages_list.0.image.url}}" alt="">
+               <img class="messageimage" src="{{messages_list.0.image.url}}" alt="">
                {% else %}
                <img class="messageimage" src="../../static/images/blankpic.jpg" alt="">
-                {% endif %}
+              {% endif %}
              </div>
              <div class="col-md-3">
                <span class="message_details">{{messages_list.0.title}}</span>
@@ -176,8 +176,8 @@
            </div>
            <div class="themessage">
              <div class="col-md-2">
-               {% if messages_list.0.image %}
-               <img class="messageimage" src="{{messsages_list.2.image.url}}" alt="">
+               {% if messages_list.1.image %}
+               <img class="messageimage" src="{{messages_list.1.image.url}}" alt="">
                {% else %}
                <img class="messageimage" src="../../static/images/blankpic.jpg" alt="">
                 {% endif %}
@@ -205,7 +205,7 @@
            <div class="col-md-3">
              <span class="message_details">{{messages_list.2.title}}</span>
              <span class="message_details">{{messages_list.2.user.first_name}}</span>
-             <span class="message_details">{{messages_list.0.created_at}}</span>
+             <span class="message_details">{{messages_list.2.created_at}}</span>
            </div>
            <div class="col-md-2">
              <span>views:{{messages_list.1.messageboard_message_views.count}}</span>
@@ -239,12 +239,11 @@
           <div class="half">
 
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
-              {% if meetups_list.1.user.image %}
-                <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
+              {% if meetups_list.0.user.image %}
+                <img class="image" src="{{meetups_list.0.user.image.url}}" alt="">
               {% else %}
-              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-
-                {% endif %}
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.0.eventname}}</h3>
                 <p>{{meetups_list.0.description}}</p>
@@ -257,10 +256,10 @@
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
               {% if meetups_list.1.user.image %}
-                <div class="image" style="backgroud-image:url({{meetups_list.1.user.image}})"></div>
+                <img class="image" src="{{meetups_list.1.user.image.url}}" alt="">
               {% else %}
-                <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                {% endif %}
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.1.eventname}}</h3>
                 <p>{{meetups_list.1.description}}</p>
@@ -273,9 +272,9 @@
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
               {% if meetups_list.2.user.image %}
-                <div class="image" style="background-image:url({{meetups_list.2.user.image}})"></div>
+                <img class="image" src="{{meetups_list.2.user.image.url}}" alt="">
               {% else %}
-                <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
               {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.2.eventname}}</h3>
@@ -293,10 +292,10 @@
 
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
               {% if meetups_list.3.user.image %}
-                <div class="image" style="backgroud-image:url(meetups_list.3.user.image)"></div>
+                <img class="image" src="{{meetups_list.3.user.image.url}}" alt="">
               {% else %}
-              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                {% endif %}
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.3.eventname}}</h3>
                 <p>{{meetups_list.3.description}}</p>
@@ -309,10 +308,10 @@
             </div>
             <div class="probootstrap-cell reverse probootstrap-animate" data-animate-effect="fadeIn">
               {% if meetups_list.4.user.image %}
-                <div class="image" style="backgroud-image:url(meetups_list.4.user.image)"></div>
+                <img class="image" src="{{meetups_list.4.user.image.url}}" alt="">
               {% else %}
-              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                {% endif %}
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.4.eventname}}</h3>
                 <p>{{meetups_list.4.description}}</p>
@@ -325,10 +324,10 @@
             </div>
             <div class="probootstrap-cell probootstrap-animate" data-animate-effect="fadeIn">
               {% if meetups_list.5.user.image %}
-                <div class="image" style="backgroud-image:url(meetups_list.5.user.image)"></div>
+                <img class="image" src="{{meetups_list.5.user.image.url}}" alt="">
               {% else %}
-              <div class="image" style="background-image:url(../../static/images/blankpic.jpg)"></div>
-                {% endif %}
+                <img class="image" src="../../static/images/blankpic.jpg" alt="">
+              {% endif %}
               <div class="text text-center">
                 <h3>{{meetups_list.5.eventname}}</h3>
                 <p>{{meetups_list.5.description}}</p>

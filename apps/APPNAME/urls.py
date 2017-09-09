@@ -69,10 +69,5 @@ urlpatterns = [
     url(r'^logout$', views.logout),
     url(r'^newlanding',views.newlanding),
 
-    #no longer in use
-    # url(r'^messageboard/$', views.messageboard),
-    # url(r'^messageboard/message/add_message$', views.new_message_process),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/like$', views.like_message),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/unlike$', views.unlike_message),
-    # url(r'^messageboard/message/(?P<message_id>\d+)/add_comment$', views.new_comment_process),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+ # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
